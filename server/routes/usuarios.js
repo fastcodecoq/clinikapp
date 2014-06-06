@@ -57,7 +57,7 @@ var usuarios = function(router){
 
          router.delete('/usuarios/:id', function (req, res) {
          	   	 
-         	   	 var id = req.params.id;
+         	   	 var id = req.params.id || req.body.id;
 
 
          		if( ! ctrl.eliminar( id, function (err, rs){
@@ -110,7 +110,9 @@ var usuarios = function(router){
 			var sanitizar = require('../helpers/sanitizar.js');
 					
 
-			var datos = req.params;
+			var datos = req.body;
+
+			console.log(datos)
 
 
 			// ... recorremos el objeto this que contiene las variables a enviar. 
@@ -146,9 +148,7 @@ var usuarios = function(router){
 
          router.delete('/usuarios', function (req, res) {
          	   	 
-         	   	 var id = req.params.id;
-
-         	   	 console.log(id);
+         	   	 var id = req.body.id || req.params;
 
          		if( ! ctrl.eliminarTodos(function (err, rs){
 
