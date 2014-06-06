@@ -22,7 +22,7 @@ Para correr el app contamos con los siguientes comandos:
 * $ npm __debug-app (inicia la aplicación en modo depuración o consola)
 
 
-Recursos:
+**Recursos.**
 
 
 * [Uso de Passport](http://scotch.io/tutorials/javascript/easy-node-authentication-setup-and-local)
