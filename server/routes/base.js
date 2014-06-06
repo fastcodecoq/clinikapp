@@ -18,6 +18,12 @@ var base = function(router){
 			  res.json({error:false, message:"Bienvenid@ a nuestra API " + nombre});         
 			
 			});
+
+			router.get('*', function(req, res) {
+  			   	
+			  res.json({error:true, message:"La petición no es valida"});           			   	
+
+            });
 			
 			return router;
 
