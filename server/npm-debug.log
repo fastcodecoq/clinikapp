@@ -3,24 +3,671 @@
 2 info using npm@1.4.9
 3 info using node@v0.10.28
 4 verbose node symlink /usr/bin/node
-5 error install Couldn't read dependencies
-6 error Error: Invalid version: "Beta v0.0.1"
-6 error     at Object.module.exports.fixVersionField (/usr/lib/node_modules/npm/node_modules/read-package-json/node_modules/normalize-package-data/lib/fixer.js:183:13)
-6 error     at /usr/lib/node_modules/npm/node_modules/read-package-json/node_modules/normalize-package-data/lib/normalize.js:30:38
-6 error     at Array.forEach (native)
-6 error     at normalize (/usr/lib/node_modules/npm/node_modules/read-package-json/node_modules/normalize-package-data/lib/normalize.js:29:15)
-6 error     at final (/usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:342:33)
-6 error     at then (/usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:126:33)
-6 error     at /usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:316:48
-6 error     at fs.js:207:20
-6 error     at OpenReq.Req.done (/usr/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:144:5)
-6 error     at OpenReq.done (/usr/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:64:22)
-7 error If you need help, you may report this *entire* log,
-7 error including the npm and node versions, at:
-7 error     <http://github.com/npm/npm/issues>
-8 error System Linux 3.13.0-27-generic
-9 error command "/usr/bin/node" "/usr/bin/npm" "install"
-10 error cwd /home/gomosoft/dev/clinikapp/app/server
-11 error node -v v0.10.28
-12 error npm -v 1.4.9
-13 verbose exit [ 1, true ]
+5 warn package.json clinikapp@0.0.1b No description
+6 warn package.json clinikapp@0.0.1b No README data
+7 verbose readDependencies using package.json deps
+8 verbose install where, deps [ '/home/gomosoft/dev/clinikapp/app/server',
+8 verbose install   [ 'express',
+8 verbose install     'bower',
+8 verbose install     'numeral',
+8 verbose install     'i18n',
+8 verbose install     'mongoose',
+8 verbose install     'socket.io',
+8 verbose install     'passport',
+8 verbose install     'forever',
+8 verbose install     'body-parser',
+8 verbose install     'ejs-locals',
+8 verbose install     'gulpjs',
+8 verbose install     'nodewebkit',
+8 verbose install     'node-webkit-builder' ] ]
+9 info preinstall clinikapp@0.0.1-b
+10 verbose readDependencies using package.json deps
+11 verbose cache add [ 'express@~4.0.0', null ]
+12 verbose cache add name=undefined spec="express@~4.0.0" args=["express@~4.0.0",null]
+13 verbose parsed url { protocol: null,
+13 verbose parsed url   slashes: null,
+13 verbose parsed url   auth: null,
+13 verbose parsed url   host: null,
+13 verbose parsed url   port: null,
+13 verbose parsed url   hostname: null,
+13 verbose parsed url   hash: null,
+13 verbose parsed url   search: null,
+13 verbose parsed url   query: null,
+13 verbose parsed url   pathname: 'express@~4.0.0',
+13 verbose parsed url   path: 'express@~4.0.0',
+13 verbose parsed url   href: 'express@~4.0.0' }
+14 verbose cache add name="express" spec="~4.0.0" args=["express","~4.0.0"]
+15 verbose parsed url { protocol: null,
+15 verbose parsed url   slashes: null,
+15 verbose parsed url   auth: null,
+15 verbose parsed url   host: null,
+15 verbose parsed url   port: null,
+15 verbose parsed url   hostname: null,
+15 verbose parsed url   hash: null,
+15 verbose parsed url   search: null,
+15 verbose parsed url   query: null,
+15 verbose parsed url   pathname: '~4.0.0',
+15 verbose parsed url   path: '~4.0.0',
+15 verbose parsed url   href: '~4.0.0' }
+16 verbose addNamed [ 'express', '~4.0.0' ]
+17 verbose addNamed [ null, '>=4.0.0-0 <4.1.0-0' ]
+18 verbose cache add [ 'bower@latest', null ]
+19 verbose cache add name=undefined spec="bower@latest" args=["bower@latest",null]
+20 verbose parsed url { protocol: null,
+20 verbose parsed url   slashes: null,
+20 verbose parsed url   auth: null,
+20 verbose parsed url   host: null,
+20 verbose parsed url   port: null,
+20 verbose parsed url   hostname: null,
+20 verbose parsed url   hash: null,
+20 verbose parsed url   search: null,
+20 verbose parsed url   query: null,
+20 verbose parsed url   pathname: 'bower@latest',
+20 verbose parsed url   path: 'bower@latest',
+20 verbose parsed url   href: 'bower@latest' }
+21 verbose cache add name="bower" spec="latest" args=["bower","latest"]
+22 verbose parsed url { protocol: null,
+22 verbose parsed url   slashes: null,
+22 verbose parsed url   auth: null,
+22 verbose parsed url   host: null,
+22 verbose parsed url   port: null,
+22 verbose parsed url   hostname: null,
+22 verbose parsed url   hash: null,
+22 verbose parsed url   search: null,
+22 verbose parsed url   query: null,
+22 verbose parsed url   pathname: 'latest',
+22 verbose parsed url   path: 'latest',
+22 verbose parsed url   href: 'latest' }
+23 verbose addNamed [ 'bower', 'latest' ]
+24 verbose addNamed [ null, null ]
+25 verbose cache add [ 'numeral@latest', null ]
+26 verbose cache add name=undefined spec="numeral@latest" args=["numeral@latest",null]
+27 verbose parsed url { protocol: null,
+27 verbose parsed url   slashes: null,
+27 verbose parsed url   auth: null,
+27 verbose parsed url   host: null,
+27 verbose parsed url   port: null,
+27 verbose parsed url   hostname: null,
+27 verbose parsed url   hash: null,
+27 verbose parsed url   search: null,
+27 verbose parsed url   query: null,
+27 verbose parsed url   pathname: 'numeral@latest',
+27 verbose parsed url   path: 'numeral@latest',
+27 verbose parsed url   href: 'numeral@latest' }
+28 verbose cache add name="numeral" spec="latest" args=["numeral","latest"]
+29 verbose parsed url { protocol: null,
+29 verbose parsed url   slashes: null,
+29 verbose parsed url   auth: null,
+29 verbose parsed url   host: null,
+29 verbose parsed url   port: null,
+29 verbose parsed url   hostname: null,
+29 verbose parsed url   hash: null,
+29 verbose parsed url   search: null,
+29 verbose parsed url   query: null,
+29 verbose parsed url   pathname: 'latest',
+29 verbose parsed url   path: 'latest',
+29 verbose parsed url   href: 'latest' }
+30 verbose addNamed [ 'numeral', 'latest' ]
+31 verbose addNamed [ null, null ]
+32 verbose cache add [ 'mongoose@latest', null ]
+33 verbose cache add name=undefined spec="mongoose@latest" args=["mongoose@latest",null]
+34 verbose parsed url { protocol: null,
+34 verbose parsed url   slashes: null,
+34 verbose parsed url   auth: null,
+34 verbose parsed url   host: null,
+34 verbose parsed url   port: null,
+34 verbose parsed url   hostname: null,
+34 verbose parsed url   hash: null,
+34 verbose parsed url   search: null,
+34 verbose parsed url   query: null,
+34 verbose parsed url   pathname: 'mongoose@latest',
+34 verbose parsed url   path: 'mongoose@latest',
+34 verbose parsed url   href: 'mongoose@latest' }
+35 verbose cache add name="mongoose" spec="latest" args=["mongoose","latest"]
+36 verbose parsed url { protocol: null,
+36 verbose parsed url   slashes: null,
+36 verbose parsed url   auth: null,
+36 verbose parsed url   host: null,
+36 verbose parsed url   port: null,
+36 verbose parsed url   hostname: null,
+36 verbose parsed url   hash: null,
+36 verbose parsed url   search: null,
+36 verbose parsed url   query: null,
+36 verbose parsed url   pathname: 'latest',
+36 verbose parsed url   path: 'latest',
+36 verbose parsed url   href: 'latest' }
+37 verbose addNamed [ 'mongoose', 'latest' ]
+38 verbose addNamed [ null, null ]
+39 verbose cache add [ 'socket.io@latest', null ]
+40 verbose cache add name=undefined spec="socket.io@latest" args=["socket.io@latest",null]
+41 verbose parsed url { protocol: null,
+41 verbose parsed url   slashes: null,
+41 verbose parsed url   auth: null,
+41 verbose parsed url   host: null,
+41 verbose parsed url   port: null,
+41 verbose parsed url   hostname: null,
+41 verbose parsed url   hash: null,
+41 verbose parsed url   search: null,
+41 verbose parsed url   query: null,
+41 verbose parsed url   pathname: 'socket.io@latest',
+41 verbose parsed url   path: 'socket.io@latest',
+41 verbose parsed url   href: 'socket.io@latest' }
+42 verbose cache add name="socket.io" spec="latest" args=["socket.io","latest"]
+43 verbose parsed url { protocol: null,
+43 verbose parsed url   slashes: null,
+43 verbose parsed url   auth: null,
+43 verbose parsed url   host: null,
+43 verbose parsed url   port: null,
+43 verbose parsed url   hostname: null,
+43 verbose parsed url   hash: null,
+43 verbose parsed url   search: null,
+43 verbose parsed url   query: null,
+43 verbose parsed url   pathname: 'latest',
+43 verbose parsed url   path: 'latest',
+43 verbose parsed url   href: 'latest' }
+44 verbose addNamed [ 'socket.io', 'latest' ]
+45 verbose addNamed [ null, null ]
+46 verbose cache add [ 'i18n@latest', null ]
+47 verbose cache add name=undefined spec="i18n@latest" args=["i18n@latest",null]
+48 verbose parsed url { protocol: null,
+48 verbose parsed url   slashes: null,
+48 verbose parsed url   auth: null,
+48 verbose parsed url   host: null,
+48 verbose parsed url   port: null,
+48 verbose parsed url   hostname: null,
+48 verbose parsed url   hash: null,
+48 verbose parsed url   search: null,
+48 verbose parsed url   query: null,
+48 verbose parsed url   pathname: 'i18n@latest',
+48 verbose parsed url   path: 'i18n@latest',
+48 verbose parsed url   href: 'i18n@latest' }
+49 verbose cache add name="i18n" spec="latest" args=["i18n","latest"]
+50 verbose parsed url { protocol: null,
+50 verbose parsed url   slashes: null,
+50 verbose parsed url   auth: null,
+50 verbose parsed url   host: null,
+50 verbose parsed url   port: null,
+50 verbose parsed url   hostname: null,
+50 verbose parsed url   hash: null,
+50 verbose parsed url   search: null,
+50 verbose parsed url   query: null,
+50 verbose parsed url   pathname: 'latest',
+50 verbose parsed url   path: 'latest',
+50 verbose parsed url   href: 'latest' }
+51 verbose addNamed [ 'i18n', 'latest' ]
+52 verbose addNamed [ null, null ]
+53 verbose cache add [ 'passport@latest', null ]
+54 verbose cache add name=undefined spec="passport@latest" args=["passport@latest",null]
+55 verbose parsed url { protocol: null,
+55 verbose parsed url   slashes: null,
+55 verbose parsed url   auth: null,
+55 verbose parsed url   host: null,
+55 verbose parsed url   port: null,
+55 verbose parsed url   hostname: null,
+55 verbose parsed url   hash: null,
+55 verbose parsed url   search: null,
+55 verbose parsed url   query: null,
+55 verbose parsed url   pathname: 'passport@latest',
+55 verbose parsed url   path: 'passport@latest',
+55 verbose parsed url   href: 'passport@latest' }
+56 verbose cache add name="passport" spec="latest" args=["passport","latest"]
+57 verbose parsed url { protocol: null,
+57 verbose parsed url   slashes: null,
+57 verbose parsed url   auth: null,
+57 verbose parsed url   host: null,
+57 verbose parsed url   port: null,
+57 verbose parsed url   hostname: null,
+57 verbose parsed url   hash: null,
+57 verbose parsed url   search: null,
+57 verbose parsed url   query: null,
+57 verbose parsed url   pathname: 'latest',
+57 verbose parsed url   path: 'latest',
+57 verbose parsed url   href: 'latest' }
+58 verbose addNamed [ 'passport', 'latest' ]
+59 verbose addNamed [ null, null ]
+60 verbose cache add [ 'forever@latest', null ]
+61 verbose cache add name=undefined spec="forever@latest" args=["forever@latest",null]
+62 verbose parsed url { protocol: null,
+62 verbose parsed url   slashes: null,
+62 verbose parsed url   auth: null,
+62 verbose parsed url   host: null,
+62 verbose parsed url   port: null,
+62 verbose parsed url   hostname: null,
+62 verbose parsed url   hash: null,
+62 verbose parsed url   search: null,
+62 verbose parsed url   query: null,
+62 verbose parsed url   pathname: 'forever@latest',
+62 verbose parsed url   path: 'forever@latest',
+62 verbose parsed url   href: 'forever@latest' }
+63 verbose cache add name="forever" spec="latest" args=["forever","latest"]
+64 verbose parsed url { protocol: null,
+64 verbose parsed url   slashes: null,
+64 verbose parsed url   auth: null,
+64 verbose parsed url   host: null,
+64 verbose parsed url   port: null,
+64 verbose parsed url   hostname: null,
+64 verbose parsed url   hash: null,
+64 verbose parsed url   search: null,
+64 verbose parsed url   query: null,
+64 verbose parsed url   pathname: 'latest',
+64 verbose parsed url   path: 'latest',
+64 verbose parsed url   href: 'latest' }
+65 verbose addNamed [ 'forever', 'latest' ]
+66 verbose addNamed [ null, null ]
+67 verbose cache add [ 'body-parser@latest', null ]
+68 verbose cache add name=undefined spec="body-parser@latest" args=["body-parser@latest",null]
+69 verbose parsed url { protocol: null,
+69 verbose parsed url   slashes: null,
+69 verbose parsed url   auth: null,
+69 verbose parsed url   host: null,
+69 verbose parsed url   port: null,
+69 verbose parsed url   hostname: null,
+69 verbose parsed url   hash: null,
+69 verbose parsed url   search: null,
+69 verbose parsed url   query: null,
+69 verbose parsed url   pathname: 'body-parser@latest',
+69 verbose parsed url   path: 'body-parser@latest',
+69 verbose parsed url   href: 'body-parser@latest' }
+70 verbose cache add name="body-parser" spec="latest" args=["body-parser","latest"]
+71 verbose parsed url { protocol: null,
+71 verbose parsed url   slashes: null,
+71 verbose parsed url   auth: null,
+71 verbose parsed url   host: null,
+71 verbose parsed url   port: null,
+71 verbose parsed url   hostname: null,
+71 verbose parsed url   hash: null,
+71 verbose parsed url   search: null,
+71 verbose parsed url   query: null,
+71 verbose parsed url   pathname: 'latest',
+71 verbose parsed url   path: 'latest',
+71 verbose parsed url   href: 'latest' }
+72 verbose addNamed [ 'body-parser', 'latest' ]
+73 verbose addNamed [ null, null ]
+74 verbose cache add [ 'ejs-locals@latest', null ]
+75 verbose cache add name=undefined spec="ejs-locals@latest" args=["ejs-locals@latest",null]
+76 verbose parsed url { protocol: null,
+76 verbose parsed url   slashes: null,
+76 verbose parsed url   auth: null,
+76 verbose parsed url   host: null,
+76 verbose parsed url   port: null,
+76 verbose parsed url   hostname: null,
+76 verbose parsed url   hash: null,
+76 verbose parsed url   search: null,
+76 verbose parsed url   query: null,
+76 verbose parsed url   pathname: 'ejs-locals@latest',
+76 verbose parsed url   path: 'ejs-locals@latest',
+76 verbose parsed url   href: 'ejs-locals@latest' }
+77 verbose cache add name="ejs-locals" spec="latest" args=["ejs-locals","latest"]
+78 verbose parsed url { protocol: null,
+78 verbose parsed url   slashes: null,
+78 verbose parsed url   auth: null,
+78 verbose parsed url   host: null,
+78 verbose parsed url   port: null,
+78 verbose parsed url   hostname: null,
+78 verbose parsed url   hash: null,
+78 verbose parsed url   search: null,
+78 verbose parsed url   query: null,
+78 verbose parsed url   pathname: 'latest',
+78 verbose parsed url   path: 'latest',
+78 verbose parsed url   href: 'latest' }
+79 verbose addNamed [ 'ejs-locals', 'latest' ]
+80 verbose addNamed [ null, null ]
+81 verbose cache add [ 'gulpjs@latest', null ]
+82 verbose cache add name=undefined spec="gulpjs@latest" args=["gulpjs@latest",null]
+83 verbose parsed url { protocol: null,
+83 verbose parsed url   slashes: null,
+83 verbose parsed url   auth: null,
+83 verbose parsed url   host: null,
+83 verbose parsed url   port: null,
+83 verbose parsed url   hostname: null,
+83 verbose parsed url   hash: null,
+83 verbose parsed url   search: null,
+83 verbose parsed url   query: null,
+83 verbose parsed url   pathname: 'gulpjs@latest',
+83 verbose parsed url   path: 'gulpjs@latest',
+83 verbose parsed url   href: 'gulpjs@latest' }
+84 verbose cache add name="gulpjs" spec="latest" args=["gulpjs","latest"]
+85 verbose parsed url { protocol: null,
+85 verbose parsed url   slashes: null,
+85 verbose parsed url   auth: null,
+85 verbose parsed url   host: null,
+85 verbose parsed url   port: null,
+85 verbose parsed url   hostname: null,
+85 verbose parsed url   hash: null,
+85 verbose parsed url   search: null,
+85 verbose parsed url   query: null,
+85 verbose parsed url   pathname: 'latest',
+85 verbose parsed url   path: 'latest',
+85 verbose parsed url   href: 'latest' }
+86 verbose addNamed [ 'gulpjs', 'latest' ]
+87 verbose addNamed [ null, null ]
+88 verbose cache add [ 'nodewebkit@latest', null ]
+89 verbose cache add name=undefined spec="nodewebkit@latest" args=["nodewebkit@latest",null]
+90 verbose parsed url { protocol: null,
+90 verbose parsed url   slashes: null,
+90 verbose parsed url   auth: null,
+90 verbose parsed url   host: null,
+90 verbose parsed url   port: null,
+90 verbose parsed url   hostname: null,
+90 verbose parsed url   hash: null,
+90 verbose parsed url   search: null,
+90 verbose parsed url   query: null,
+90 verbose parsed url   pathname: 'nodewebkit@latest',
+90 verbose parsed url   path: 'nodewebkit@latest',
+90 verbose parsed url   href: 'nodewebkit@latest' }
+91 verbose cache add name="nodewebkit" spec="latest" args=["nodewebkit","latest"]
+92 verbose parsed url { protocol: null,
+92 verbose parsed url   slashes: null,
+92 verbose parsed url   auth: null,
+92 verbose parsed url   host: null,
+92 verbose parsed url   port: null,
+92 verbose parsed url   hostname: null,
+92 verbose parsed url   hash: null,
+92 verbose parsed url   search: null,
+92 verbose parsed url   query: null,
+92 verbose parsed url   pathname: 'latest',
+92 verbose parsed url   path: 'latest',
+92 verbose parsed url   href: 'latest' }
+93 verbose addNamed [ 'nodewebkit', 'latest' ]
+94 verbose addNamed [ null, null ]
+95 verbose cache add [ 'node-webkit-builder@latest', null ]
+96 verbose cache add name=undefined spec="node-webkit-builder@latest" args=["node-webkit-builder@latest",null]
+97 verbose parsed url { protocol: null,
+97 verbose parsed url   slashes: null,
+97 verbose parsed url   auth: null,
+97 verbose parsed url   host: null,
+97 verbose parsed url   port: null,
+97 verbose parsed url   hostname: null,
+97 verbose parsed url   hash: null,
+97 verbose parsed url   search: null,
+97 verbose parsed url   query: null,
+97 verbose parsed url   pathname: 'node-webkit-builder@latest',
+97 verbose parsed url   path: 'node-webkit-builder@latest',
+97 verbose parsed url   href: 'node-webkit-builder@latest' }
+98 verbose cache add name="node-webkit-builder" spec="latest" args=["node-webkit-builder","latest"]
+99 verbose parsed url { protocol: null,
+99 verbose parsed url   slashes: null,
+99 verbose parsed url   auth: null,
+99 verbose parsed url   host: null,
+99 verbose parsed url   port: null,
+99 verbose parsed url   hostname: null,
+99 verbose parsed url   hash: null,
+99 verbose parsed url   search: null,
+99 verbose parsed url   query: null,
+99 verbose parsed url   pathname: 'latest',
+99 verbose parsed url   path: 'latest',
+99 verbose parsed url   href: 'latest' }
+100 verbose addNamed [ 'node-webkit-builder', 'latest' ]
+101 verbose addNamed [ null, null ]
+102 silly lockFile 09819b10-bower-latest bower@latest
+103 verbose lock bower@latest /home/gomosoft/.npm/09819b10-bower-latest.lock
+104 silly lockFile d01f6c55-socket-io-latest socket.io@latest
+105 verbose lock socket.io@latest /home/gomosoft/.npm/d01f6c55-socket-io-latest.lock
+106 silly lockFile cffce30b-i18n-latest i18n@latest
+107 verbose lock i18n@latest /home/gomosoft/.npm/cffce30b-i18n-latest.lock
+108 silly lockFile 771f2547-passport-latest passport@latest
+109 verbose lock passport@latest /home/gomosoft/.npm/771f2547-passport-latest.lock
+110 silly lockFile fac80c3d-forever-latest forever@latest
+111 verbose lock forever@latest /home/gomosoft/.npm/fac80c3d-forever-latest.lock
+112 silly lockFile f5b2be20-numeral-latest numeral@latest
+113 verbose lock numeral@latest /home/gomosoft/.npm/f5b2be20-numeral-latest.lock
+114 silly lockFile 73e949f4-mongoose-latest mongoose@latest
+115 verbose lock mongoose@latest /home/gomosoft/.npm/73e949f4-mongoose-latest.lock
+116 silly lockFile 9dcfb469-express-4-0-0 express@~4.0.0
+117 verbose lock express@~4.0.0 /home/gomosoft/.npm/9dcfb469-express-4-0-0.lock
+118 silly lockFile 88319797-body-parser-latest body-parser@latest
+119 verbose lock body-parser@latest /home/gomosoft/.npm/88319797-body-parser-latest.lock
+120 silly lockFile 51ead6c6-ejs-locals-latest ejs-locals@latest
+121 verbose lock ejs-locals@latest /home/gomosoft/.npm/51ead6c6-ejs-locals-latest.lock
+122 silly lockFile 27b968ed-gulpjs-latest gulpjs@latest
+123 verbose lock gulpjs@latest /home/gomosoft/.npm/27b968ed-gulpjs-latest.lock
+124 silly lockFile c69f237c-nodewebkit-latest nodewebkit@latest
+125 verbose lock nodewebkit@latest /home/gomosoft/.npm/c69f237c-nodewebkit-latest.lock
+126 silly lockFile 6466dc89-node-webkit-builder-latest node-webkit-builder@latest
+127 verbose lock node-webkit-builder@latest /home/gomosoft/.npm/6466dc89-node-webkit-builder-latest.lock
+128 info addNameTag [ 'bower', 'latest' ]
+129 info addNameTag [ 'socket.io', 'latest' ]
+130 info addNameTag [ 'i18n', 'latest' ]
+131 info addNameTag [ 'numeral', 'latest' ]
+132 info addNameTag [ 'mongoose', 'latest' ]
+133 info addNameTag [ 'body-parser', 'latest' ]
+134 info addNameTag [ 'passport', 'latest' ]
+135 info addNameTag [ 'ejs-locals', 'latest' ]
+136 info addNameTag [ 'forever', 'latest' ]
+137 info addNameTag [ 'nodewebkit', 'latest' ]
+138 verbose url raw socket.io
+139 verbose url resolving [ 'https://registry.npmjs.org/', './socket.io' ]
+140 verbose url resolved https://registry.npmjs.org/socket.io
+141 info trying registry request attempt 1 at 00:50:31
+142 http GET https://registry.npmjs.org/socket.io
+143 info addNameTag [ 'node-webkit-builder', 'latest' ]
+144 silly addNameRange { name: 'express', range: '>=4.0.0-0 <4.1.0-0', hasData: false }
+145 verbose url raw mongoose
+146 verbose url resolving [ 'https://registry.npmjs.org/', './mongoose' ]
+147 verbose url resolved https://registry.npmjs.org/mongoose
+148 info trying registry request attempt 1 at 00:50:31
+149 http GET https://registry.npmjs.org/mongoose
+150 info addNameTag [ 'gulpjs', 'latest' ]
+151 verbose url raw forever
+152 verbose url resolving [ 'https://registry.npmjs.org/', './forever' ]
+153 verbose url resolved https://registry.npmjs.org/forever
+154 info trying registry request attempt 1 at 00:50:31
+155 http GET https://registry.npmjs.org/forever
+156 verbose url raw body-parser
+157 verbose url resolving [ 'https://registry.npmjs.org/', './body-parser' ]
+158 verbose url resolved https://registry.npmjs.org/body-parser
+159 info trying registry request attempt 1 at 00:50:31
+160 http GET https://registry.npmjs.org/body-parser
+161 verbose url raw passport
+162 verbose url resolving [ 'https://registry.npmjs.org/', './passport' ]
+163 verbose url resolved https://registry.npmjs.org/passport
+164 info trying registry request attempt 1 at 00:50:31
+165 http GET https://registry.npmjs.org/passport
+166 verbose url raw ejs-locals
+167 verbose url resolving [ 'https://registry.npmjs.org/', './ejs-locals' ]
+168 verbose url resolved https://registry.npmjs.org/ejs-locals
+169 info trying registry request attempt 1 at 00:50:31
+170 http GET https://registry.npmjs.org/ejs-locals
+171 verbose url raw express
+172 verbose url resolving [ 'https://registry.npmjs.org/', './express' ]
+173 verbose url resolved https://registry.npmjs.org/express
+174 info trying registry request attempt 1 at 00:50:31
+175 http GET https://registry.npmjs.org/express
+176 verbose url raw gulpjs
+177 verbose url resolving [ 'https://registry.npmjs.org/', './gulpjs' ]
+178 verbose url resolved https://registry.npmjs.org/gulpjs
+179 info trying registry request attempt 1 at 00:50:31
+180 http GET https://registry.npmjs.org/gulpjs
+181 verbose url raw numeral
+182 verbose url resolving [ 'https://registry.npmjs.org/', './numeral' ]
+183 verbose url resolved https://registry.npmjs.org/numeral
+184 info trying registry request attempt 1 at 00:50:32
+185 verbose etag "7QW8TAGX9T5LSXOGKHVREVCDV"
+186 http GET https://registry.npmjs.org/numeral
+187 verbose url raw bower
+188 verbose url resolving [ 'https://registry.npmjs.org/', './bower' ]
+189 verbose url resolved https://registry.npmjs.org/bower
+190 info trying registry request attempt 1 at 00:50:32
+191 verbose etag "EB0VPH5GMQV0FUMN1FKMVTPH0"
+192 http GET https://registry.npmjs.org/bower
+193 verbose url raw node-webkit-builder
+194 verbose url resolving [ 'https://registry.npmjs.org/', './node-webkit-builder' ]
+195 verbose url resolved https://registry.npmjs.org/node-webkit-builder
+196 info trying registry request attempt 1 at 00:50:32
+197 verbose etag "4L4PLWB817SAUIG5D93W40ISN"
+198 http GET https://registry.npmjs.org/node-webkit-builder
+199 verbose url raw nodewebkit
+200 verbose url resolving [ 'https://registry.npmjs.org/', './nodewebkit' ]
+201 verbose url resolved https://registry.npmjs.org/nodewebkit
+202 info trying registry request attempt 1 at 00:50:32
+203 verbose etag "8MW5WMGBYUY9IAPY3F7IC1YEW"
+204 http GET https://registry.npmjs.org/nodewebkit
+205 verbose url raw i18n
+206 verbose url resolving [ 'https://registry.npmjs.org/', './i18n' ]
+207 verbose url resolved https://registry.npmjs.org/i18n
+208 info trying registry request attempt 1 at 00:50:32
+209 verbose etag "75PMA9Q6JNJQX7XOONG92FIAU"
+210 http GET https://registry.npmjs.org/i18n
+211 http 200 https://registry.npmjs.org/body-parser
+212 silly registry.get cb [ 200,
+212 silly registry.get   { date: 'Fri, 06 Jun 2014 05:50:33 GMT',
+212 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B)',
+212 silly registry.get     etag: '"28O80RB63TP6IBBUERLZM9MFT"',
+212 silly registry.get     'content-type': 'application/json',
+212 silly registry.get     via: '1.1 varnish',
+212 silly registry.get     'cache-control': 'max-age=1',
+212 silly registry.get     'content-length': '20290',
+212 silly registry.get     'accept-ranges': 'bytes',
+212 silly registry.get     age: '2019',
+212 silly registry.get     'x-served-by': 'cache-sv62-SJC3, cache-ord1723-ORD',
+212 silly registry.get     'x-cache': 'HIT, MISS',
+212 silly registry.get     'x-cache-hits': '1, 0',
+212 silly registry.get     'x-timer': 'S1402033833.679382,VS0,VE88',
+212 silly registry.get     vary: 'Accept',
+212 silly registry.get     'keep-alive': 'timeout=10, max=50',
+212 silly registry.get     connection: 'Keep-Alive' } ]
+213 verbose addNamed [ 'body-parser', '1.3.0' ]
+214 verbose addNamed [ '1.3.0', '1.3.0' ]
+215 silly lockFile d0cf2027-body-parser-1-3-0 body-parser@1.3.0
+216 verbose lock body-parser@1.3.0 /home/gomosoft/.npm/d0cf2027-body-parser-1-3-0.lock
+217 silly lockFile 28dbd85e-ody-parser-body-parser-1-3-0-tgz https://registry.npmjs.org/body-parser/-/body-parser-1.3.0.tgz
+218 verbose lock https://registry.npmjs.org/body-parser/-/body-parser-1.3.0.tgz /home/gomosoft/.npm/28dbd85e-ody-parser-body-parser-1-3-0-tgz.lock
+219 verbose addRemoteTarball [ 'https://registry.npmjs.org/body-parser/-/body-parser-1.3.0.tgz',
+219 verbose addRemoteTarball   '1a651cb9993a01a65531ae38395ceb0199dd7e3c' ]
+220 http 200 https://registry.npmjs.org/passport
+221 silly registry.get cb [ 200,
+221 silly registry.get   { date: 'Fri, 06 Jun 2014 05:50:33 GMT',
+221 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+221 silly registry.get     etag: '"B18YWR6RVDMNF6MOKFF36T94D"',
+221 silly registry.get     'content-type': 'application/json',
+221 silly registry.get     via: '1.1 varnish',
+221 silly registry.get     'cache-control': 'max-age=1',
+221 silly registry.get     'content-length': '31502',
+221 silly registry.get     'accept-ranges': 'bytes',
+221 silly registry.get     age: '310',
+221 silly registry.get     'x-served-by': 'cache-sv61-SJC3, cache-ord1734-ORD',
+221 silly registry.get     'x-cache': 'HIT, MISS',
+221 silly registry.get     'x-cache-hits': '1, 0',
+221 silly registry.get     'x-timer': 'S1402033833.688152,VS0,VE134',
+221 silly registry.get     vary: 'Accept',
+221 silly registry.get     'keep-alive': 'timeout=10, max=50',
+221 silly registry.get     connection: 'Keep-Alive' } ]
+222 info retry fetch attempt 1 at 00:50:33
+223 verbose fetch to= /home/gomosoft/tmp/npm-15013-7KPatRMN/1402033833168-0.9522011945955455/tmp.tgz
+224 http GET https://registry.npmjs.org/body-parser/-/body-parser-1.3.0.tgz
+225 verbose addNamed [ 'passport', '0.2.0' ]
+226 verbose addNamed [ '0.2.0', '0.2.0' ]
+227 silly lockFile 315c7a7b-passport-0-2-0 passport@0.2.0
+228 verbose lock passport@0.2.0 /home/gomosoft/.npm/315c7a7b-passport-0-2-0.lock
+229 silly lockFile 227f9132--org-passport-passport-0-2-0-tgz https://registry.npmjs.org/passport/-/passport-0.2.0.tgz
+230 verbose lock https://registry.npmjs.org/passport/-/passport-0.2.0.tgz /home/gomosoft/.npm/227f9132--org-passport-passport-0-2-0-tgz.lock
+231 verbose addRemoteTarball [ 'https://registry.npmjs.org/passport/-/passport-0.2.0.tgz',
+231 verbose addRemoteTarball   'ae5ebc5611300d51fdc44032c7ca442a548dbca5' ]
+232 info retry fetch attempt 1 at 00:50:33
+233 verbose fetch to= /home/gomosoft/tmp/npm-15013-7KPatRMN/1402033833221-0.7724482133053243/tmp.tgz
+234 http GET https://registry.npmjs.org/passport/-/passport-0.2.0.tgz
+235 http 200 https://registry.npmjs.org/forever
+236 silly registry.get cb [ 200,
+236 silly registry.get   { date: 'Fri, 06 Jun 2014 05:50:33 GMT',
+236 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B)',
+236 silly registry.get     etag: '"5BIQ7TU9H3Z6ZOCVOHHQRKS06"',
+236 silly registry.get     'content-type': 'application/json',
+236 silly registry.get     via: '1.1 varnish',
+236 silly registry.get     'cache-control': 'max-age=1',
+236 silly registry.get     'content-length': '64222',
+236 silly registry.get     'accept-ranges': 'bytes',
+236 silly registry.get     age: '41',
+236 silly registry.get     'x-served-by': 'cache-sv61-SJC3, cache-ord1732-ORD',
+236 silly registry.get     'x-cache': 'HIT, MISS',
+236 silly registry.get     'x-cache-hits': '2, 0',
+236 silly registry.get     'x-timer': 'S1402033833.672145,VS0,VE51',
+236 silly registry.get     vary: 'Accept',
+236 silly registry.get     'keep-alive': 'timeout=10, max=50',
+236 silly registry.get     connection: 'Keep-Alive' } ]
+237 verbose addNamed [ 'forever', '0.11.1' ]
+238 verbose addNamed [ '0.11.1', '0.11.1' ]
+239 silly lockFile 4466a206-forever-0-11-1 forever@0.11.1
+240 verbose lock forever@0.11.1 /home/gomosoft/.npm/4466a206-forever-0-11-1.lock
+241 silly lockFile 10f1a948-s-org-forever-forever-0-11-1-tgz https://registry.npmjs.org/forever/-/forever-0.11.1.tgz
+242 verbose lock https://registry.npmjs.org/forever/-/forever-0.11.1.tgz /home/gomosoft/.npm/10f1a948-s-org-forever-forever-0-11-1-tgz.lock
+243 verbose addRemoteTarball [ 'https://registry.npmjs.org/forever/-/forever-0.11.1.tgz',
+243 verbose addRemoteTarball   '50ac8744c0a6e0c266524c4746397f74d6b09c5b' ]
+244 info retry fetch attempt 1 at 00:50:33
+245 verbose fetch to= /home/gomosoft/tmp/npm-15013-7KPatRMN/1402033833283-0.36980717931874096/tmp.tgz
+246 http GET https://registry.npmjs.org/forever/-/forever-0.11.1.tgz
+247 http 200 https://registry.npmjs.org/socket.io
+248 silly registry.get cb [ 200,
+248 silly registry.get   { date: 'Fri, 06 Jun 2014 05:50:33 GMT',
+248 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+248 silly registry.get     etag: '"743I4EZXUWM18XTFCJQ9BSD2Q"',
+248 silly registry.get     'content-type': 'application/json',
+248 silly registry.get     via: '1.1 varnish',
+248 silly registry.get     'cache-control': 'max-age=1',
+248 silly registry.get     'content-length': '92820',
+248 silly registry.get     'accept-ranges': 'bytes',
+248 silly registry.get     age: '148',
+248 silly registry.get     'x-served-by': 'cache-sv94-SJC3, cache-ord1732-ORD',
+248 silly registry.get     'x-cache': 'HIT, MISS',
+248 silly registry.get     'x-cache-hits': '1, 0',
+248 silly registry.get     'x-timer': 'S1402033833.654318,VS0,VE82',
+248 silly registry.get     vary: 'Accept',
+248 silly registry.get     'keep-alive': 'timeout=10, max=50',
+248 silly registry.get     connection: 'Keep-Alive' } ]
+249 verbose addNamed [ 'socket.io', '1.0.4' ]
+250 verbose addNamed [ '1.0.4', '1.0.4' ]
+251 silly lockFile ee7bbb74-socket-io-1-0-4 socket.io@1.0.4
+252 verbose lock socket.io@1.0.4 /home/gomosoft/.npm/ee7bbb74-socket-io-1-0-4.lock
+253 silly lockFile 2294a771-rg-socket-io-socket-io-1-0-4-tgz https://registry.npmjs.org/socket.io/-/socket.io-1.0.4.tgz
+254 verbose lock https://registry.npmjs.org/socket.io/-/socket.io-1.0.4.tgz /home/gomosoft/.npm/2294a771-rg-socket-io-socket-io-1-0-4-tgz.lock
+255 verbose addRemoteTarball [ 'https://registry.npmjs.org/socket.io/-/socket.io-1.0.4.tgz',
+255 verbose addRemoteTarball   '103cb555e2c730f4447ed93a22d915d4f45b149a' ]
+256 info retry fetch attempt 1 at 00:50:33
+257 verbose fetch to= /home/gomosoft/tmp/npm-15013-7KPatRMN/1402033833379-0.9826569075230509/tmp.tgz
+258 http GET https://registry.npmjs.org/socket.io/-/socket.io-1.0.4.tgz
+259 http 404 https://registry.npmjs.org/gulpjs
+260 verbose headers { date: 'Fri, 06 Jun 2014 05:50:34 GMT',
+260 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+260 verbose headers   'content-type': 'application/json',
+260 verbose headers   via: '1.1 varnish',
+260 verbose headers   'cache-control': 'max-age=0',
+260 verbose headers   'content-length': '52',
+260 verbose headers   'accept-ranges': 'bytes',
+260 verbose headers   age: '0',
+260 verbose headers   'x-served-by': 'cache-sv61-SJC3, cache-ord1732-ORD',
+260 verbose headers   'x-cache': 'MISS, MISS',
+260 verbose headers   'x-cache-hits': '0, 0',
+260 verbose headers   'x-timer': 'S1402033834.161665,VS0,VE87',
+260 verbose headers   'keep-alive': 'timeout=10, max=49',
+260 verbose headers   connection: 'Keep-Alive' }
+261 silly registry.get cb [ 404,
+261 silly registry.get   { date: 'Fri, 06 Jun 2014 05:50:34 GMT',
+261 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+261 silly registry.get     'content-type': 'application/json',
+261 silly registry.get     via: '1.1 varnish',
+261 silly registry.get     'cache-control': 'max-age=0',
+261 silly registry.get     'content-length': '52',
+261 silly registry.get     'accept-ranges': 'bytes',
+261 silly registry.get     age: '0',
+261 silly registry.get     'x-served-by': 'cache-sv61-SJC3, cache-ord1732-ORD',
+261 silly registry.get     'x-cache': 'MISS, MISS',
+261 silly registry.get     'x-cache-hits': '0, 0',
+261 silly registry.get     'x-timer': 'S1402033834.161665,VS0,VE87',
+261 silly registry.get     'keep-alive': 'timeout=10, max=49',
+261 silly registry.get     connection: 'Keep-Alive' } ]
+262 silly lockFile 27b968ed-gulpjs-latest gulpjs@latest
+263 silly lockFile 27b968ed-gulpjs-latest gulpjs@latest
+264 error 404 404 Not Found: gulpjs
+264 error 404
+264 error 404 'gulpjs' is not in the npm registry.
+264 error 404 You should bug the author to publish it
+264 error 404 It was specified as a dependency of 'clinikapp'
+264 error 404
+264 error 404 Note that you can also install from a
+264 error 404 tarball, folder, or http url, or git url.
+265 error System Linux 3.13.0-27-generic
+266 error command "/usr/bin/node" "/usr/bin/npm" "install"
+267 error cwd /home/gomosoft/dev/clinikapp/app/server
+268 error node -v v0.10.28
+269 error npm -v 1.4.9
+270 error code E404
+271 verbose exit [ 1, true ]
