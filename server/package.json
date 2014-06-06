@@ -9,7 +9,7 @@
     "scripts" : {
       "start" : "forever start main.js",
       "restart" : "forever restart main.js",
-      "__debug-app" : "node main.js",
+      "__debug-app" : "node main.js"
     },
 	"dependencies" : {
 	  "express" : "~4.0.0",
