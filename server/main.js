@@ -1,13 +1,18 @@
 //la magia inicia aquí
 
+// ========================= requires ===============================
+
+
 var express = require("express");
 var app = express();
 var bodyparser = require("body-parser");
+var mongoose = require("mongoose");
+
 
 // ... incluir arriba todos los requires principales
 
-// ========================= requires ===============================
 
+ mongoose.connect('mongodb://clinikapp:clinikAPP.2014@localhost/clinikapp');  //nos conectamos a la base de datos
 
 
 var router = express.Router();
@@ -34,7 +39,7 @@ app.use(bodyparser());
 
 // Instanciamiento del app 
 
-var pto = process.env.PORT || 5000;
+var pto = process.env.PORT || 8080;
 
 app.listen(pto);
 

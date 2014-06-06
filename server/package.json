@@ -11,7 +11,8 @@
     "scripts" : {
       "start" : "forever start main.js",
       "restart" : "forever restart main.js",
-      "__debug-app" : "node main.js"
+      "stop" : "forever stop main.js",
+      "dev" : "forever main.js"      
     },
 	"dependencies" : {
 	  "express" : "~4.0.0",	  
@@ -20,7 +21,9 @@
 	  "socket.io" : "latest",
 	  "passport" : "latest",
 	  "forever" : "latest",
-	  "body-parser" : "latest"	  	 
+	  "body-parser" : "latest",
+	  "should" : "latest",
+	  "sanitizer" : "latest"	  	       	  	  	 
 	},
 
 	"devDependencies" : {
@@ -35,7 +38,7 @@
       "gulp-clean": "~0.2.4",
       "gulp-concat": "~2.2.0",
       "gulp-less": "~1.2.3",
-	  "nodewebkit": "latest",
-      "node-webkit-builder": "latest"      
+	  "should" : "latest",	  	       
+	  "sanitizer" : "latest"	  	       
 	}
 }
