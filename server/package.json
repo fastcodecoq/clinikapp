@@ -7,7 +7,9 @@
     "url": "https://github.com/gomosoft/clinikapp.git"
      },  
     "scripts" : {
-      "start" : "forever start main.js"
+      "start" : "forever start main.js",
+      "restart" : "forever restart main.js",
+      "__debug-app" : "node main.js",
     },
 	"dependencies" : {
 	  "express" : "~4.0.0",
@@ -34,7 +36,7 @@
 	  "body-parser" : "latest",
 	  "ejs-locals" : "latest",
 	  "gulpjs" : "latest",
-	  "nodewebkit": "0.9.2-4",
-      "node-webkit-builder": "~0.0.2"  
+	  "nodewebkit": "latest",
+      "node-webkit-builder": "latest"  
 	}
 }
