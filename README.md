@@ -31,4 +31,3 @@ Para correr el app contamos con los siguientes comandos:
 
 
 
-ls -1 /etc/yum.repos.d/epel* /etc/yum.repos.d/remi.repo /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/remi.repo
