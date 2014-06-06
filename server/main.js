@@ -32,7 +32,7 @@ app.use(router);  //le pasamos las routes al app express
 app.use(bodyparser());
 
 
-// ============ app.uses ==========================
+// ============ app.uses ===========================
 
 
 
