@@ -9,8 +9,6 @@ var bodyparser = require("body-parser");
 // ========================= requires ===============================
 
 
-app.engine('html', require('ejs').renderFile);
-
 
 var router = express.Router();
     router = require("./routes/base")(router);  //incluimos el archivo ./routes/base, llamamos a la función y le pasamos el router del app

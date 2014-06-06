@@ -12,37 +12,28 @@
       "__debug-app" : "node main.js"
     },
 	"dependencies" : {
-	  "express" : "~4.0.0",
-	  "bower" : "latest",
-	  "numeral" : "latest",
-	  "i18n" : "latest",
+	  "express" : "~4.0.0",	  
+	  "numeral" : "latest",	  
 	  "mongoose" : "latest",
 	  "socket.io" : "latest",
 	  "passport" : "latest",
 	  "forever" : "latest",
-	  "body-parser" : "latest",
-	  "ejs-locals" : "latest",
-	  "ejs" : "latest"
+	  "body-parser" : "latest"	  	 
 	},
 
 	"devDependencies" : {
-	  "express" : "~4.0.0",
-	  "bower" : "latest",
-	  "numeral" : "latest",
-	  "i18n" : "latest",
+	  "express" : "~4.0.0",	  	  	 
 	  "mongoose" : "latest",
 	  "socket.io" : "latest",
 	  "passport" : "latest",
 	  "forever" : "latest",
-	  "body-parser" : "latest",
-	  "ejs-locals" : "latest",
+	  "body-parser" : "latest",	  
 	  "gulp": "~3.5.6",
       "gulp-inject": "~0.4.1",
       "gulp-clean": "~0.2.4",
       "gulp-concat": "~2.2.0",
       "gulp-less": "~1.2.3",
 	  "nodewebkit": "latest",
-      "node-webkit-builder": "latest",
-      "ejs" : "latest"
+      "node-webkit-builder": "latest"      
 	}
 }
