@@ -11,7 +11,7 @@ Despliegue
 Para iniciar el desarrollo es necesario que tengas git, Node.js y NPM, debidamente instalado, luego:
 
 * $ git clone https://github.com/gomosoft/clinikapp.git
-* $ cd clinikapp
+* $ cd clinikapp/app
 * $ npm install
 
 
