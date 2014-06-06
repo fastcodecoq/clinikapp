@@ -110,18 +110,7 @@ var usuarios = function(router){
 			var sanitizar = require('../helpers/sanitizar.js');
 					
 
-			var datos = {
-				
-					nombres : '<div onhover="alert("hey")">Javier,Arturo</div>',
-					apellidos : 'Gomez,Mora',
-					numero_doc : 1103094999,
-					_tipo_doc : mongoose.Types.ObjectId('5391a6e6a7143cdf4d0585a0'),
-					_sexo : mongoose.Types.ObjectId('5391a6e6a7143cdf4d0585a0'),
-					divipola : '005,05',
-		     		telefono : '3015734372',
-				    email : 'info@gomosoft.com'
-				
-				};
+			var datos = req.params;
 
 
 			// ... recorremos el objeto this que contiene las variables a enviar. 
