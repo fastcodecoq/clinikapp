@@ -4,19 +4,23 @@
 3 info using node@v0.10.28
 4 verbose node symlink /usr/bin/node
 5 error install Couldn't read dependencies
-6 error Failed to parse json
-6 error Unexpected token }
-7 error File: /home/gomosoft/dev/clinikapp/app/server/package.json
-8 error Failed to parse package.json data.
-8 error package.json must be actual JSON, not just JavaScript.
-8 error
-8 error This is not a bug in npm.
-8 error Tell the package author to fix their package.json file. JSON.parse
-9 error System Linux 3.13.0-27-generic
-10 error command "/usr/bin/node" "/usr/bin/npm" "install"
-11 error cwd /home/gomosoft/dev/clinikapp/app/server
-12 error node -v v0.10.28
-13 error npm -v 1.4.9
-14 error file /home/gomosoft/dev/clinikapp/app/server/package.json
-15 error code EJSONPARSE
-16 verbose exit [ 1, true ]
+6 error Error: Invalid version: "Beta v0.0.1"
+6 error     at Object.module.exports.fixVersionField (/usr/lib/node_modules/npm/node_modules/read-package-json/node_modules/normalize-package-data/lib/fixer.js:183:13)
+6 error     at /usr/lib/node_modules/npm/node_modules/read-package-json/node_modules/normalize-package-data/lib/normalize.js:30:38
+6 error     at Array.forEach (native)
+6 error     at normalize (/usr/lib/node_modules/npm/node_modules/read-package-json/node_modules/normalize-package-data/lib/normalize.js:29:15)
+6 error     at final (/usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:342:33)
+6 error     at then (/usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:126:33)
+6 error     at /usr/lib/node_modules/npm/node_modules/read-package-json/read-json.js:316:48
+6 error     at fs.js:207:20
+6 error     at OpenReq.Req.done (/usr/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:144:5)
+6 error     at OpenReq.done (/usr/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:64:22)
+7 error If you need help, you may report this *entire* log,
+7 error including the npm and node versions, at:
+7 error     <http://github.com/npm/npm/issues>
+8 error System Linux 3.13.0-27-generic
+9 error command "/usr/bin/node" "/usr/bin/npm" "install"
+10 error cwd /home/gomosoft/dev/clinikapp/app/server
+11 error node -v v0.10.28
+12 error npm -v 1.4.9
+13 verbose exit [ 1, true ]

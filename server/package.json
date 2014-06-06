@@ -1,6 +1,6 @@
 {
     "name" : "clinikapp",
-    "version" : "Beta v0.0.0",
+    "version" : "0.0.1b",
     "main" : "main.js",
     "repository": {
     "type": "git",
