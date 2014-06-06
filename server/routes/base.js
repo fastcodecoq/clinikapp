@@ -24,6 +24,8 @@ var base = function(router){
 			  res.json({error:true, message:"La petición no es valida"});           			   	
 
             });
+
+            console.log("router base iniciado");
 			
 			return router;
 
