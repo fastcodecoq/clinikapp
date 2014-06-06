@@ -9,7 +9,7 @@ var bodyparser = require("body-parser");
 // ========================= requires ===============================
 
 
-app.use(bodyparser());
+app.engine('html', require('ejs').renderFile);
 
 
 var router = express.Router();
@@ -26,6 +26,12 @@ var router = express.Router();
 
 
 app.use(router);  //le pasamos las routes al app express
+app.use(bodyparser());
+
+
+// ============ app.uses ==========================
+
+
 
 
 // Instanciamiento del app 

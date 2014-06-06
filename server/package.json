@@ -21,7 +21,8 @@
 	  "passport" : "latest",
 	  "forever" : "latest",
 	  "body-parser" : "latest",
-	  "ejs-locals" : "latest"
+	  "ejs-locals" : "latest",
+	  "ejs" : "latest"
 	},
 
 	"devDependencies" : {
@@ -41,6 +42,7 @@
       "gulp-concat": "~2.2.0",
       "gulp-less": "~1.2.3",
 	  "nodewebkit": "latest",
-      "node-webkit-builder": "latest"  
+      "node-webkit-builder": "latest",
+      "ejs" : "latest"
 	}
 }
