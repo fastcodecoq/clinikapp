@@ -5,8 +5,8 @@ Historias clinicas inteligentes
 
 
 
-Iniciar a desarollar
---------------------
+Despliegue
+----------
 
 Para iniciar el desarrollo es necesario que tengas git, Node.js y NPM, debidamente instalado, luego:
 
