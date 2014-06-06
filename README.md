@@ -1,4 +1,4 @@
-clinikapp
+Clinikapp
 =========
 
 Historias clinicas inteligentes
