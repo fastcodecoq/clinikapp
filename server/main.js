@@ -15,6 +15,6 @@ var router = express.Router();
  	 res.json({error:false, message:"Bienvenid@ a nuestra API"});
  });
 
-var puerto = process.env.PORT || 4000;
+var pto = process.env.PORT || 4000;
 
-app.listen()
+app.listen(pto);
