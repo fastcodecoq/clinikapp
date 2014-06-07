@@ -1,7 +1,7 @@
 Clinikapp
 =========
 
-Historias clinicas inteligentes
+Historias clínicas inteligentes
 
 
 
