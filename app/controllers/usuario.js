@@ -20,11 +20,11 @@ var usuario = {
 
        },
 
-      eliminar : function(id){  
+      eliminar : function(id, callback){  
 
             if(!id.should.type("string")) return false;            
       
-      	usuarios.remove({_id:id}, callback); 
+          	usuarios.remove({_id:id}, callback); 
 
             return true;
             
@@ -35,9 +35,11 @@ var usuario = {
 
             if(!id.should.type("string")) return false;
             if(!datos.should.type("object")) return false;
-            if(!callback.should.be.type("function")) return false;                            
+            if(!callback.should.be.type("function")) return false;     
+
+            console.log(id)                       
       
-      	usuarios.findOneAndUpdate({_id : id}, datos, callback); 
+      	   usuarios.findOneAndUpdate({_id : id}, datos, callback); 
 
             return true;
             
@@ -77,7 +79,27 @@ var usuario = {
 
          return true;
 
-      }
+      },
+
+       sanitizar : function(datos){
+
+                var sanitizar = require('../helpers/sanitizador.js');
+                                  
+
+             // ... recorremos el objeto this que contiene las variables a enviar. 
+          
+              for(x in datos) 
+                datos[x] = sanitizar.hacer(datos[x]);  // sanitizamos los valores
+        
+        
+              console.log(datos);  // valores sanitizados
+              
+              datos._tipo_doc = mongoose.Types.ObjectId(datos._tipo_doc);
+              datos._sexo = mongoose.Types.ObjectId(datos._sexo);
+
+              return datos;
+
+     }
 
       
 

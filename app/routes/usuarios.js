@@ -2,7 +2,7 @@
 var usuarios = function(router){
 
 	   
-	     var ctrl = require('../controllers/usuario.js');  // definimos el controlador a usar, en este caso el de usaurios
+	     var usrCtrl = require('../controllers/usuario.js');  // definimos el controlador a usar, en este caso el de usaurios
        var mongoose = require('mongoose');
        
        // ============== con el verbo HTTP Get Obtenemos todos los usuarios
@@ -10,7 +10,7 @@ var usuarios = function(router){
 
       router.get('/usuarios', function (req, res){
 
-			if ( ! ctrl.buscar(function (err, rs){
+			if ( ! usrCtrl.buscar(function (err, rs){
 
                 if(!err) 			 
   			    res.json({error:false, message: rs});     
@@ -34,7 +34,7 @@ var usuarios = function(router){
 
         	var id = req.params.id;
 
-			if ( ! ctrl.buscarUno(id, function (err, rs){
+			if ( ! usrCtrl.buscarUno(id, function (err, rs){
 
                 if(!err) 			 
   			    res.json({error:false, message: rs});     
@@ -60,7 +60,7 @@ var usuarios = function(router){
          	   	 var id = req.params.id || req.body.id;
 
 
-         		if( ! ctrl.eliminar( id, function (err, rs){
+         		if( ! usrCtrl.eliminar( id, function (err, rs){
 
          		    if(!err) 			 
   			         res.json({error:false, message: "ok"});     
@@ -82,14 +82,14 @@ var usuarios = function(router){
         router.put('/usuarios/:id', function (req, res){
 
          	 	 var id = req.params.id;
-         	 	 var datos = req.params.datos;
+         	 	 var datos = req.body;
 
-         		 if ( ! ctrl.actualizar( id, datos, function (err, rs){
+         		 if ( ! usrCtrl.actualizar( id, datos, function (err, rs){
 
          		    if(!err) 			 
   			         res.json({error:false, message: "ok"});     
-  				    else
-			       	 res.json({error:true, message: 'no se puede modificar el usuario'}); 
+  				      else
+			       	   res.json({error:true, message: 'no se puede modificar el usuario'}); 
 
 
          		 }) ) res.json({ error:true, message: 'parametros no validos'}) ;
@@ -103,28 +103,13 @@ var usuarios = function(router){
        // ============== con el verbo HTTP Post creamos un usuario
 
 
-    	 router.post('/usuarios', function (req, res){
-
-    	 	      
-
-          var sanitizar = require('../helpers/sanitizador.js');
+    	 router.post('/usuarios', function (req, res){    	 	               
           
           
-          var datos = req.body;
-        
-        console.log(req);
+         var datos = usrCtrl.sanitizar(req.body);
+                  
 
-
-			// ... recorremos el objeto this que contiene las variables a enviar. 
-					
-					for(x in datos) 
-					 datos[x] = sanitizar.hacer(datos[x]);  // sanitizamos los valores
-        
-				
-				console.log(datos);  // valores sanitizados
-
-
-			  if ( ! ctrl.crear(datos, function (err, rs){
+			  if ( ! usrCtrl.crear(datos, function (err, rs){
 
 			  	 if(!err)			  	
 			  	 res.json({error:false, message: 'ok'}); 
@@ -140,6 +125,37 @@ var usuarios = function(router){
 
 
 
+        router.post('/usuarios/registro', function (req, res){
+               
+               var regCtrl = require('../controllers/registro.js');               
+
+               var datos = usrCtrl.sanitizar(req.body);
+        
+               
+              
+              if ( ! regCtrl.crear(datos, function (err, doc){
+              
+                if(!err)         
+                  {
+                     // como no hay error procedemos a instaciar credenciales y sistema de logueo
+                     // tener en cuenta que los datos para instanciar dichas entidades son enviados desde el cliente
+
+                     //incluimos modelos de credenciales y sistemas de logueo para conseguir el objetivo
+
+
+                      
+                  }
+                else
+                  res.json({error:true, message: err}); 
+                  
+              
+                 }) ) res.json({ error:true, message: 'parametros no validos'}) ;
+
+        });
+
+
+
+
 
     	 // ============== con el verbo HTTP Delete eliminamos los usaurios
 
@@ -150,7 +166,7 @@ var usuarios = function(router){
          	   	 
          	   	 var id = req.body.id || req.params;
 
-         		if( ! ctrl.eliminarTodos(function (err, rs){
+         		if( ! usrCtrl.eliminarTodos(function (err, rs){
 
          		    if(!err) 			 
   			         res.json({error:false, message: "se han eliminado los usuarios"});     

@@ -17,7 +17,9 @@ var usuarioSchema = new Schema({
 	_sexo : {type : Schema.Types.ObjectId, required : true},
 	divipola : {type : String, required : true},
 	telefono : String,
-	email : String
+	email : {type : String, required : true},
+	activo : {type : Boolean, default: false },    //activaremos la cuenta cuando se verifique el email 
+	registro : {type : Date, default: Date.now }
 
 });
 
