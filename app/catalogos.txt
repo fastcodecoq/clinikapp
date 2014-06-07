@@ -1,0 +1,27 @@
+ Json para crear un usuario
+
+ { 
+
+  "nombres": "Remigio,Roberto",
+  "apellidos": "Martínez,Mario",
+  "numero_doc": 1103979098,
+  "_tipo_doc": "5391a6e6a7143cdf4d0585a0",
+  "_sexo": "5391a6e6a7143cdf4d0585a0",
+  "divipola": "05,005",
+  "telefono": "3015734372",
+  "email" : "info@gomosoft.com" 
+  
+  }
+
+Json para probar XSS
+
+   { 
+  "nombres": "Remigio,Remberto",
+  "apellidos": "<div onload='alert('xss')'>xss</div>",
+  "numero_doc": 1103979098,
+  "_tipo_doc": "5391a6e6a7143cdf4d0585a0",
+  "_sexo": "5391a6e6a7143cdf4d0585a0",
+  "divipola": "05,005",
+  "telefono": "3015734372",
+  "email" : "info@gomosoft.com" 
+  }
