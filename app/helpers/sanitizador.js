@@ -23,9 +23,10 @@ var sanitizar = {
       		 	valor  = sanitizer.unescapeEntities(valor);
       		 	valor = escapeHtml(valor); 
 
+
       		 	return valor;     		 	
       		 
-      	}
+      	}        
 
        
   

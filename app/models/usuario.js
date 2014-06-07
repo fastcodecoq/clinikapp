@@ -23,6 +23,8 @@ var usuarioSchema = new Schema({
 
 
 
+
+
 // ===================== mongoose middleware ====================================
 
 
@@ -30,16 +32,18 @@ var usuarioSchema = new Schema({
 
  usuarioSchema.path('nombres').validate(function(datos){
 
-  
+   
+   var validar = require('../helpers/validador.js');
+
  
    //verificamos si las variables contienen el formato adecuado...
 
 
    if(this.telefono)   
-    if(!/[0-9]/g.test(this.telefono)) return false;  //validamos el telefono
+    if(!validar.tel(this.telefono)) return false;  //validamos el telefono
 
    if(this.email)
-    if(!/(.+)@(.+)\.(.+)/g.test(this.email)) return false;  //validamos el email
+    if(!validar.mail(this.email)) return false;  //validamos el email
 
 
 

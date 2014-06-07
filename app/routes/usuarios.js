@@ -107,12 +107,12 @@ var usuarios = function(router){
 
     	 	      
 
-          var sanitizar = require('../helpers/sanitizar.js');
+          var sanitizar = require('../helpers/sanitizador.js');
           
           
           var datos = req.body;
-          
-          console.log(datos)
+        
+        console.log(req);
 
 
 			// ... recorremos el objeto this que contiene las variables a enviar. 
@@ -129,7 +129,7 @@ var usuarios = function(router){
 			  	 if(!err)			  	
 			  	 res.json({error:false, message: 'ok'}); 
 			  	 else
-			  	 res.json({error:true, message: 'no se pudo registrar'}); 
+			  	 res.json({error:true, message: err}); 
 
 			  	 
 			   }) ) res.json({ error:true, message: 'parametros no validos'}) ;
