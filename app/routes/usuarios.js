@@ -2,13 +2,13 @@
 var usuarios = function(router){
 
 	   
-	   var ctrl = require('../controllers/usuario.js');  // definimos el controlador a usar, en este caso el de usaurios
+	     var ctrl = require('../controllers/usuario.js');  // definimos el controlador a usar, en este caso el de usaurios
        var mongoose = require('mongoose');
        
        // ============== con el verbo HTTP Get Obtenemos todos los usuarios
        
 
-       router.get('/usuarios', function (req, res){
+      router.get('/usuarios', function (req, res){
 
 			if ( ! ctrl.buscar(function (err, rs){
 
@@ -30,7 +30,7 @@ var usuarios = function(router){
        // ============== con el verbo HTTP Get pasando el id como param obtenemos un usuario
 
 
-        router.get('/usuarios/:id', function (req, res){
+      router.get('/usuarios/:id', function (req, res){
 
         	var id = req.params.id;
 
@@ -55,7 +55,7 @@ var usuarios = function(router){
        // ============== con el verbo HTTP Delete con parametro id, eliminamos un usuario
 
 
-         router.delete('/usuarios/:id', function (req, res) {
+        router.delete('/usuarios/:id', function (req, res) {
          	   	 
          	   	 var id = req.params.id || req.body.id;
 
@@ -79,7 +79,7 @@ var usuarios = function(router){
        // ============== con el verbo HTTP Put actualizamos / modificamos un usuario (trabaja como el POST)
 
 
-         router.put('/usuarios/:id', function (req, res){
+        router.put('/usuarios/:id', function (req, res){
 
          	 	 var id = req.params.id;
          	 	 var datos = req.params.datos;
@@ -107,12 +107,12 @@ var usuarios = function(router){
 
     	 	      
 
-			var sanitizar = require('../helpers/sanitizar.js');
-					
-
-			var datos = req.body;
-
-			console.log(datos)
+          var sanitizar = require('../helpers/sanitizar.js');
+          
+          
+          var datos = req.body;
+          
+          console.log(datos)
 
 
 			// ... recorremos el objeto this que contiene las variables a enviar. 
@@ -146,7 +146,7 @@ var usuarios = function(router){
     	 // ============== esto solo estará disponible en modo de desarrollo ===============
 
 
-         router.delete('/usuarios', function (req, res) {
+        router.delete('/usuarios', function (req, res) {
          	   	 
          	   	 var id = req.body.id || req.params;
 
@@ -155,7 +155,7 @@ var usuarios = function(router){
          		    if(!err) 			 
   			         res.json({error:false, message: "se han eliminado los usuarios"});     
   				    else
-			       	 res.json({error:true, message: 'no se puede eliminar el usuario'}); 
+			       	   res.json({error:true, message: 'no se puede eliminar el usuario'}); 
 
 
          		 }) ) res.json({ error:true, message: 'parametros no validos'}) ;

@@ -34,6 +34,7 @@ var usuarioSchema = new Schema({
  
    //verificamos si las variables contienen el formato adecuado...
 
+
    if(this.telefono)   
     if(!/[0-9]/g.test(this.telefono)) return false;  //validamos el telefono
 

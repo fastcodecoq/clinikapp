@@ -8,15 +8,17 @@ var app = express();
 var bodyparser = require("body-parser");
 var mongoose = require("mongoose");
 
+app.use(bodyparser());
 
 // ... incluir arriba todos los requires principales
 
 
- mongoose.connect('mongodb://clinikapp:clinikAPP.2014@localhost/clinikapp');  //nos conectamos a la base de datos
+mongoose.connect('mongodb://clinikapp:clinikAPP.2014@localhost/clinikapp');  //nos conectamos a la base de datos
 
 
 var router = express.Router();
     router = require("./routes/base")(router);  //incluimos el archivo ./routes/base, llamamos a la función y le pasamos el router del app
+
 
 // ================= la route base contendrá todas las llamadas principales  ===========================
  
@@ -29,7 +31,6 @@ var router = express.Router();
 
 
 app.use(router);  //le pasamos las routes al app express
-app.use(bodyparser());
 
 
 // ============ app.uses ===========================
