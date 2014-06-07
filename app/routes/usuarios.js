@@ -114,7 +114,7 @@ var usuarios = function(router){
 			  	 if(!err)			  	
 			  	 res.json({error:false, message: 'ok'}); 
 			  	 else
-			  	 res.json({error:true, message: err}); 
+			  	 res.json({error:true, message: datos}); 
 
 			  	 
 			   }) ) res.json({ error:true, message: 'parametros no validos'}) ;
@@ -146,7 +146,7 @@ var usuarios = function(router){
                       
                   }
                 else
-                  res.json({error:true, message: err}); 
+                  res.json({error:true, message: datos}); 
                   
               
                  }) ) res.json({ error:true, message: 'parametros no validos'}) ;
