@@ -114,7 +114,7 @@ var usuarios = function(router){
 			  	 if(!err)			  	
 			  	 res.json({error:false, message: 'ok'}); 
 			  	 else
-			  	 res.json({error:true, message: datos}); 
+			  	 res.json({error:true, message: datos}); //como hubo un error retornamos lo que recibimos, para procesar en el cliente que errores hay en los datos
 
 			  	 
 			   }) ) res.json({ error:true, message: 'parametros no validos'}) ;
@@ -130,8 +130,7 @@ var usuarios = function(router){
                var regCtrl = require('../controllers/registro.js');               
 
                var datos = usrCtrl.sanitizar(req.body);
-        
-               
+                       
               
               if ( ! regCtrl.crear(datos, function (err, doc){
               
@@ -146,7 +145,7 @@ var usuarios = function(router){
                       
                   }
                 else
-                  res.json({error:true, message: datos}); 
+                  res.json({error:true, message: datos}); //como hubo un error retornamos lo que recibimos, para procesar en el cliente que errores hay en los datos
                   
               
                  }) ) res.json({ error:true, message: 'parametros no validos'}) ;
