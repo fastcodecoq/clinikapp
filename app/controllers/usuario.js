@@ -1,5 +1,4 @@
 var usuarios = require('../models/usuario.js');
-var onPolicy = usuarios
 var should = require('should');
 var mongoose = require('mongoose');
 
