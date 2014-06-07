@@ -106,7 +106,7 @@ var usuarios = function(router){
     	 router.post('/usuarios', function (req, res){    	 	               
           
           
-         var datos = usrCtrl.sanitizar(req.body);
+         var datos = req.body;
                   
 
 			  if ( ! usrCtrl.crear(datos, function (err, rs){

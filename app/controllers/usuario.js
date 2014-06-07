@@ -12,8 +12,10 @@ var usuario = {
 
             if(!datos.should.type("object")) return false;            
             if(!callback.should.be.type("function")) return false;
-      	
-      	new usuarios(datos).save( callback ); 
+      	     
+            datos = this.sanitizar(datos);                                 
+
+           	new usuarios(datos).save( callback ); 
 
             return true;
             
@@ -37,9 +39,12 @@ var usuario = {
             if(!datos.should.type("object")) return false;
             if(!callback.should.be.type("function")) return false;     
 
-            console.log(id)                       
+            console.log(id)  
+
+            datos = this.sanitizar(datos);                                 
+                               
       
-      	   usuarios.findOneAndUpdate({_id : id}, datos, callback); 
+      	    usuarios.findOneAndUpdate({_id : id}, datos, callback); 
 
             return true;
             
