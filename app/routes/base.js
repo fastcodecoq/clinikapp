@@ -1,11 +1,24 @@
 
 var base = function(router){
 
-			router.get('/', function(req, res){
+
+		  // ========= Arbitro base: Este arbitro se ejecuta primero que todos.
+		  // ========= En este controlaremos el acceso al api en el primer nivel
+
+		  
+		   router.use(require('../arbiters/base.js'));
+
+		   
+		   router.get('/', function(req, res){
 			
 			  res.json({error:false, message:'Bienvenid@ a nuestra API'});
 			
 			});
+
+
+
+		    // ===================== easter eggs  =====================
+
 			
 			router.get('/hola', function(req, res){
 			

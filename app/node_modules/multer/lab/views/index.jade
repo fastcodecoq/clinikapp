@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1 Multer Test
+  form(method="post", enctype="multipart/form-data")
+    input(type="text", name="name first")
+    input(type="text", name="name second")
+    br
+    input(type="file", name="userfile[]")
+    input(type="file", name="userfile[]")
+    input(type="file", name="singlefile")
+    br
+    input(type="submit")
+

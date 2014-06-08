@@ -1,4 +1,4 @@
-//la magia inicia aquí
+//LA MAGIA INICIA AQUÍ
 
 // ========================= requires ===============================
 
@@ -8,7 +8,10 @@ var app = express();
 var bodyparser = require("body-parser");
 var mongoose = require("mongoose");
 
-app.use(bodyparser());
+app.use(bodyparser());  // usaremos JSON raw para envío de datos en modo
+                        // desarrollo de este modo testeamos mas rapido el api
+                        // luego solo es cambiar bodyparser() por bodyparser.urlencoded() 
+
 
 // ... incluir arriba todos los requires principales
 

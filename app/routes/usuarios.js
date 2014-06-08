@@ -4,9 +4,17 @@ var usuarios = function(router){
 	   
 	     var usrCtrl = require('../controllers/usuario');  // definimos el controlador a usar, en este caso el de usaurios
        var mongoose = require('mongoose');
+
+     
+      // ========== Hacemos todos los controles de seguridad necesarios
+      // ========== usamos el arbitro de usuarios
+
+
+      router.use('^/usuarios', require('../arbiters/usuarios'));
+
        
-       // ============== con el verbo HTTP Get Obtenemos todos los usuarios
-       
+       // ============== con el verbo HTTP Get Obtenemos todos los usuarios      
+
 
       router.get('/usuarios', function (req, res){
 
