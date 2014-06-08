@@ -23,7 +23,8 @@
 	  "forever" : "latest",
 	  "body-parser" : "latest",
 	  "should" : "latest",
-	  "sanitizer" : "latest"	  	       	  	  	 
+	  "sanitizer" : "latest",
+	  "multer" : "latest"	  	       	  	  	 
 	},
 
 	"devDependencies" : {
@@ -39,6 +40,7 @@
       "gulp-concat": "~2.2.0",
       "gulp-less": "~1.2.3",
 	  "should" : "latest",	  	       
-	  "sanitizer" : "latest"	  	       
+	  "sanitizer" : "latest",
+	  "multer" : "latest"	  	       
 	}
 }
