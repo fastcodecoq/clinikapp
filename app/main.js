@@ -7,7 +7,9 @@ var express = require("express");
 var app = express();
 var bodyparser = require("body-parser");
 var mongoose = require("mongoose");
+var multer = require("multer");
 
+app.use(multer());
 app.use(bodyparser());  // usaremos JSON raw para envío de datos en modo
                         // desarrollo de este modo testeamos mas rapido el api
                         // luego solo es cambiar bodyparser() por bodyparser.urlencoded() 
