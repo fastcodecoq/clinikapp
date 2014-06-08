@@ -1,0 +1,6 @@
+{
+	"datos_invalidos" : "parametros invalidos",
+	"no_eliminable" : "no se pudo eliminar",
+	"no_editable" : "no se pudo editar",
+	"sin_registros" : "no se han econtrado resultados"
+}

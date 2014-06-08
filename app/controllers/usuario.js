@@ -1,4 +1,4 @@
-var usuarios = require('../models/usuario.js');
+var usuarios = require('../models/usuario');
 var should = require('should');
 var mongoose = require('mongoose');
 
@@ -12,11 +12,15 @@ var usuario = {
             if(!datos.should.type("object")) return false;            
             if(!callback.should.be.type("function")) return false;
       	     
-            datos = this.sanitizar(datos);                                 
+            datos = this.sanitizar(datos); 
 
-           	new usuarios(datos).save( callback ); 
+            if(datos.email)
+               datos.email = { dir : datos.email};
 
-            return true;
+          
+           	 new usuarios(datos).save( callback ); 
+
+             return true;
             
 
        },
@@ -41,7 +45,9 @@ var usuario = {
             console.log(id)  
 
             datos = this.sanitizar(datos);                                 
-                               
+            
+            if(datos.email)
+               datos.email = { dir : datos.email};                                
       
       	    usuarios.findOneAndUpdate({_id : id}, datos, callback); 
 
@@ -87,7 +93,7 @@ var usuario = {
 
        sanitizar : function(datos){
 
-                var sanitizar = require('../helpers/sanitizador.js');
+                var sanitizar = require('../helpers/sanitizador');
                                   
 
              // ... recorremos el objeto this que contiene las variables a enviar. 

@@ -27,6 +27,10 @@ var validar = {
    	   return !/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/g.test(val);
    },
 
+   ip : function(val){
+       return /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/g.test(val);
+   },
+
    tc : {  // tarjetas de creditos
 
    	    master_card : function(num){
@@ -48,13 +52,20 @@ var validar = {
 }
 
 
-// ========== USO =========================== //
+// ========== USO ============================================================================
 
-// validar.mail("mi@correo.com")
-// validar.tel("+57 314 3333333") || validar.tel("314 333 3333") || validar.tel("3143333333")
-// validar.tc.master_card(5399181818388111)
+// if(validar.tc.cedula(1111111111)) //correcto else //incorrecto ;
+// if(validar.mail("mi@correo.com")) //correcto else //incorrecto ;
+// if(validar.tel("+57 314 3333333") || validar.tel("314 333 3333") || validar.tel("3143333333")) //correcto else //incorrecto ;
+// if(validar.clave(myClave)) //correcto else //incorrecto ;
+// if(validar.ip("192.9.9.9")) //correcto else //incorrecto ;
+// if(validar.tc.master_card(5399181818388111)) //correcto else //incorrecto ;
+// if(validar.url('http://mi.url')) //correcto else //incorrecto ;
+// if(validar.vacia('')) //correcto else //incorrecto ;
+// if(validar.tc.master_card(5399181818388111)) //correcto else //incorrecto ;
+// if(validar.tc.visa(5399181818388111)) //correcto else //incorrecto ;
+// if(validar.tc.maestro(5399181818388111)) //correcto else //incorrecto ;
 
-//===========================================================
-console.log(validar.vacia('a'))
+//============================================================================================
 
 module.exports = validar;

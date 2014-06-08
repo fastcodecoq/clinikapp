@@ -1,13 +1,14 @@
-var usuarios = require('./usuario.js');
 
 var registro = {
  
       hacer : function(datos, callback){ 
+        
+      var usrCtrl = require('./usuario');
 
       	    if(!datos)
       	    	return false;
         	
-        	 usuarios.crear(datos, callback);
+        	 usrCtrl.crear(datos, callback);
 
         	 return true;
 

@@ -10,15 +10,15 @@ var should = require('should');
 
 var usuarioSchema = new Schema({
 
-	nombres : {type : String, required : true},
-	apellidos : {type : String, required: true},
+	nombres : {type : String, required : true},    //los 2 nombres delimitados por coma (,) ej. Alberto,Andres
+	apellidos : {type : String, required: true},   //la misma estructura que para los nombres ej. Acosta, Arteta
 	numero_doc : {type : Number, required : true},
 	_tipo_doc : {type : Schema.Types.ObjectId, required : true},
 	_sexo : {type : Schema.Types.ObjectId, required : true},
+	fecha_nac : {type : Date},
 	divipola : {type : String, required : true},
 	telefono : String,
-	email : {type : String, required : true},
-	activo : {type : Boolean, default: false },    //activaremos la cuenta cuando se verifique el email 
+	email : { dir : String , verificado : { type : Boolean , default : false}},
 	registro : {type : Date, default: Date.now }
 
 });
@@ -43,9 +43,10 @@ var usuarioSchema = new Schema({
 
    if(this.telefono)   
     if(!validar.tel(this.telefono)) return false;  //validamos el telefono
+  
 
    if(this.email)
-    if(!validar.mail(this.email)) return false;  //validamos el email
+    if(!validar.mail(this.email.dir)) return false;  //validamos el email
 
 
 

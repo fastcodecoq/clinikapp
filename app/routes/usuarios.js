@@ -2,7 +2,7 @@
 var usuarios = function(router){
 
 	   
-	     var usrCtrl = require('../controllers/usuario.js');  // definimos el controlador a usar, en este caso el de usaurios
+	     var usrCtrl = require('../controllers/usuario');  // definimos el controlador a usar, en este caso el de usaurios
        var mongoose = require('mongoose');
        
        // ============== con el verbo HTTP Get Obtenemos todos los usuarios
@@ -15,10 +15,10 @@ var usuarios = function(router){
                 if(!err) 			 
   			    res.json({error:false, message: rs});     
   				else
-			  	res.json({error:true, message: 'no hay usuarios para mostrar'}); 
+			  	res.json({error:true, message: 'sin_registros'});   // sin_registros es una llave de referencia del mensaje de error.
 
  
-			  }) ) res.json({ error:true, message: 'parametros no validos'}) ; 
+			  }) ) res.json({ error:true, message: 'datos_invalidos'}) ; 
 			      
 			
 		  });
@@ -39,10 +39,10 @@ var usuarios = function(router){
                 if(!err) 			 
   			    res.json({error:false, message: rs});     
   				else
-			  	res.json({error:true, message: 'no hay usuario para mostrar'}); 
+			  	res.json({error:true, message: 'sin_registros'}); 
 
  
-			  }) ) res.json({ error:true, message: 'parametros no validos'}) ; 
+			  }) ) res.json({ error:true, message: 'datos_invalidos'}) ; 
 			      
 			
 		  });
@@ -65,10 +65,10 @@ var usuarios = function(router){
          		    if(!err) 			 
   			         res.json({error:false, message: "ok"});     
   				    else
-			       	 res.json({error:true, message: 'no se puede eliminar el usuario'}); 
+			       	 res.json({error:true, message: 'no_eliminado'}); 
 
 
-         		 }) ) res.json({ error:true, message: 'parametros no validos'}) ;
+         		 }) ) res.json({ error:true, message: 'datos_invalidos'}) ;
 
          }); 
 
@@ -89,10 +89,10 @@ var usuarios = function(router){
          		    if(!err) 			 
   			         res.json({error:false, message: "ok"});     
   				      else
-			       	   res.json({error:true, message: 'no se puede modificar el usuario'}); 
+			       	   res.json({error:true, message: 'no_editable'}); 
 
 
-         		 }) ) res.json({ error:true, message: 'parametros no validos'}) ;
+         		 }) ) res.json({ error:true, message: 'datos_invalidos'}) ;
 
          });
 
@@ -109,15 +109,18 @@ var usuarios = function(router){
          var datos = req.body;
                   
 
-			  if ( ! usrCtrl.crear(datos, function (err, rs){
+			  if ( ! usrCtrl.existe(datos, function (err, rs){
 
 			  	 if(!err)			  	
-			  	 res.json({error:false, message: 'ok'}); 
+			  	 {
+              if(rs === 0 )
+                usrCtrl.crear(datos, function)
+           }
 			  	 else
-			  	 res.json({error:true, message: datos}); //como hubo un error retornamos lo que recibimos, para procesar en el cliente que errores hay en los datos
+			  	 res.json({error:true, error_code : "bd_error"}); //como hubo un error retornamos lo que recibimos, para procesar en el cliente que errores hay en los datos
 
 			  	 
-			   }) ) res.json({ error:true, message: 'parametros no validos'}) ;
+			   }) ) res.json({ error:true, error_code : "datos_invalidos"}) ;
 			 						          
 			
 			});
@@ -148,7 +151,7 @@ var usuarios = function(router){
                   res.json({error:true, message: datos}); //como hubo un error retornamos lo que recibimos, para procesar en el cliente que errores hay en los datos
                   
               
-                 }) ) res.json({ error:true, message: 'parametros no validos'}) ;
+                 }) ) res.json({ error:true, message: 'datos_invalidos'}) ;
 
         });
 
@@ -168,12 +171,12 @@ var usuarios = function(router){
          		if( ! usrCtrl.eliminarTodos(function (err, rs){
 
          		    if(!err) 			 
-  			         res.json({error:false, message: "se han eliminado los usuarios"});     
+  			         res.json({error:false, message: "ok"});     
   				    else
-			       	   res.json({error:true, message: 'no se puede eliminar el usuario'}); 
+			       	   res.json({error:true, message: 'no_eliminable'}); 
 
 
-         		 }) ) res.json({ error:true, message: 'parametros no validos'}) ;
+         		 }) ) res.json({ error:true, message: 'datos_invalidos'}) ;
 
          }); 
 
