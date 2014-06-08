@@ -1,3 +1,0 @@
-location ~*\.htaccess : {
-		deny all;
-}

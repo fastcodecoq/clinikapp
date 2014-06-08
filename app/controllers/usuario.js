@@ -14,11 +14,34 @@ var usuario = {
       	     
             datos = this.sanitizar(datos); 
 
-            if(datos.email)
+           
+         // ========== validamos si el usuario existe ====== //
+
+            this.existe(datos, function(err, exist){  // ....... este método se encuentra al final
+
+              if(err)
+                {
+                  callback(err, exist);
+                  return;
+                }
+
+         // ==== le damos el formato correcto al campo email, acorde al Schema usuarios ======= //
+
+              if(datos.email)
                datos.email = { dir : datos.email};
 
-          
-           	 new usuarios(datos).save( callback ); 
+ 
+         // ==== verifiamos si no existe el usuario, sino existe, lo creamos ======= //
+
+              if(!exist)
+               new usuarios(datos).save( callback );
+              else
+                callback(true, "usuario_existe"); 
+
+
+            });
+
+            
 
              return true;
             
@@ -91,7 +114,7 @@ var usuario = {
 
       },
 
-       sanitizar : function(datos){
+    sanitizar : function(datos){
 
                 var sanitizar = require('../helpers/sanitizador');
                                   
@@ -108,6 +131,27 @@ var usuario = {
               datos._sexo = mongoose.Types.ObjectId(datos._sexo);
 
               return datos;
+
+     },
+
+     existe : function(datos, callback){  // valida si un usuario existe. Retorna error en el primer parametro y un boolean que indica si existe en el segundo parametro
+
+           var validar = require('../helpers/validador');           
+           var numero_doc = datos.numero_doc;
+
+
+           if(!validar.cedula(numero_doc)) {             
+             callback(true, "numero_doc_incorrecto");
+             return false;
+            };            
+
+           usuarios.count({ numero_doc : numero_doc}, function(err, count){
+
+                callback(err, count > 0);  //si count es igual a cero devolvemos false (no existe)
+
+           });
+
+           return true;
 
      }
 

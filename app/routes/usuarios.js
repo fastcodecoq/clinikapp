@@ -12,7 +12,7 @@ var usuarios = function(router){
 
 			if ( ! usrCtrl.buscar(function (err, rs){
 
-                if(!err) 			 
+         if(!err) 			 
   			    res.json({error:false, message: rs});     
   				else
 			  	res.json({error:true, message: 'sin_registros'});   // sin_registros es una llave de referencia del mensaje de error.
@@ -36,7 +36,7 @@ var usuarios = function(router){
 
 			if ( ! usrCtrl.buscarUno(id, function (err, rs){
 
-                if(!err) 			 
+          if(!err) 			 
   			    res.json({error:false, message: rs});     
   				else
 			  	res.json({error:true, message: 'sin_registros'}); 
@@ -62,10 +62,10 @@ var usuarios = function(router){
 
          		if( ! usrCtrl.eliminar( id, function (err, rs){
 
-         		    if(!err) 			 
+         		  if(!err) 			 
   			         res.json({error:false, message: "ok"});     
   				    else
-			       	 res.json({error:true, message: 'no_eliminado'}); 
+			       	   res.json({error:true, message: 'no_eliminado'}); 
 
 
          		 }) ) res.json({ error:true, message: 'datos_invalidos'}) ;
@@ -104,26 +104,26 @@ var usuarios = function(router){
 
 
     	 router.post('/usuarios', function (req, res){    	 	               
-          
-          
+                   
          var datos = req.body;
                   
 
-			  if ( ! usrCtrl.existe(datos, function (err, rs){
+            
+                if ( ! usrCtrl.crear(datos, function(err, rs){
 
-			  	 if(!err)			  	
-			  	 {
-              if(rs === 0 )
-                usrCtrl.crear(datos, function)
-           }
-			  	 else
-			  	 res.json({error:true, error_code : "bd_error"}); //como hubo un error retornamos lo que recibimos, para procesar en el cliente que errores hay en los datos
+                   if(err && (typeof rs === 'string') )       // verificamos si rs es un string, ya que se retorna un String en caso de que el error no sea de base de datos    
+                     res.json({error:true, message : rs});
+                   else if(!err)
+                          res.json({error:false,message:"ok"});
+                   else
+                          res.json({error:true, message : 'datos_invalidos'});                                     
 
-			  	 
-			   }) ) res.json({ error:true, error_code : "datos_invalidos"}) ;
+
+                  }) ) res.json({error:true, message : 'datos_invalidos'}); 
+
 			 						          
 			
-			});
+			  });
 
 
 
