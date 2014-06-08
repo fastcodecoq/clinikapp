@@ -95,7 +95,7 @@ var usuario = {
         if(!id.should.type("string")) return false;        
         if(!callback.should.be.type("function")) return false; 
 
-        usuarios.findOne({_id : id}, callback);
+        usuarios.findOne({_id : mongoose.Types.ObjectId(id)}, callback);  // usamos mongoose.Types.ObjectId para compilar el id, evitando que nos coloquen otro tipo de variable
 
        
        return true;
@@ -138,6 +138,7 @@ var usuario = {
 
            var validar = require('../helpers/validador');           
            var numero_doc = datos.numero_doc;
+           var tipo_doc = datos.tipo_doc;
 
 
            if(!validar.cedula(numero_doc)) {             
@@ -145,7 +146,9 @@ var usuario = {
              return false;
             };            
 
-           usuarios.count({ numero_doc : numero_doc}, function(err, count){
+          // contamos los usuarios existentes con el mismo numero de documento
+
+           usuarios.count({ numero_doc : numero_doc, _tipo_doc : mongoose.Types.ObjectId(tipo_doc)}, function(err, count){
 
                 callback(err, count > 0);  //si count es igual a cero devolvemos false (no existe)
 
