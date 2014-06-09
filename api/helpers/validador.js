@@ -31,6 +31,18 @@ var validar = {
        return /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/g.test(val);
    },
 
+   int : function(val){
+
+       return /^[0-9]+$/g.test(val);
+
+   },
+
+   float : function(val){
+
+      return /^[0-9.,]+$/g.test(val);
+
+   },
+
    tc : {  // tarjetas de creditos
 
    	    master_card : function(num){

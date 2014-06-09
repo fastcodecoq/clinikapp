@@ -53,7 +53,9 @@ var usuario = {
       eliminar : function(id, callback){  
 
             if(!id.should.type("string")) return false;            
-      
+            
+            var sanitizar = require('../helpers/sanitizador');   
+            id = sanitizar(id);   
           	usuarios.remove({_id:mongoose.Types.ObjectId(id)}, callback); 
 
             return true;
@@ -79,11 +81,36 @@ var usuario = {
 
       },
 
-      buscar : function(callback){  
+      buscar : function(opts, callback){  
+
+
+            if(typeof opts === 'function')
+               {var callback = opts; var opts = undefined; }
 
             if(!callback.should.be.type("function")) return false; 
-      
-      	var rs = usuarios.find(callback); 
+
+            
+            var sanitizar = require('../helpers/sanitizador');            
+
+
+            var opts = opts || {};  //miramos por las opts
+
+            var query = opts.query  || {};     // miramos si está definido un query
+
+            var variables = opts.variables || {};  // miramos si se han especificado tomar unas variables especificas
+
+             //sanitizamos las variables del query
+             for(x in query)
+                query[x] = sanitizar(query[x]);
+
+           
+      	    usuarios.find(
+                          query, 
+                          variables, 
+                          { skip : parseInt(opts.skip) || 0 , limit : parseInt(opts.limit) || 0}, 
+                          callback
+                         ); 
+
 
             return true;
             
@@ -94,6 +121,10 @@ var usuario = {
         
         if(!id.should.type("string")) return false;        
         if(!callback.should.be.type("function")) return false; 
+
+
+        var sanitizar = require('../helpers/sanitizador');   
+            id = sanitizar(id);         
 
         usuarios.findOne({_id : mongoose.Types.ObjectId(id)}, callback);  // usamos mongoose.Types.ObjectId para compilar el id, evitando que nos coloquen otro tipo de variable
 
@@ -114,7 +145,7 @@ var usuario = {
 
       },
 
-    sanitizar : function(datos){
+      sanitizar : function(datos){
 
                 var sanitizar = require('../helpers/sanitizador');
                                   

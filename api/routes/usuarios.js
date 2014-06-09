@@ -18,7 +18,7 @@ var usuarios = function(router){
 
       router.get('/usuarios', function (req, res){
 
-			if ( ! usrCtrl.buscar(function (err, rs){
+			if ( ! usrCtrl.buscar( function (err, rs){  //
 
          if(!err) 			 
   			    res.json({error:false, message: rs});     
@@ -26,10 +26,48 @@ var usuarios = function(router){
 			  	res.json({error:true, message: 'sin_registros'});   // sin_registros es una llave de referencia del mensaje de error.
 
  
-			  }) ) res.json({ error:true, message: 'datos_invalidos'}) ; 
+			  }) ) res.json({ error:true, message: 'params_invalidos'}) ; 
 			      
 			
 		  });
+
+
+
+      // ruta para obtener los usuarios hasta cierto limite
+       // se reciben las variables limit y skip
+
+       //  /usuarios/limit/1  || /usuarios/limit/1/2(skip)
+
+      router.get('/usuarios/limit/:limit/:skip\?', function (req, res){
+
+        var validar = require('../helpers/validador');
+
+
+
+        var delim = {};
+            delim["limit"] = req.params.limit || false;
+            delim["skip"] = req.params.skip || false;
+       
+
+       if(!validar.int(delim["limit"]))   
+       {
+        res.json({error:true,message:"params_invalidos"});
+        return;
+       }
+
+
+       if ( ! usrCtrl.buscar( delim , function (err, rs){  //
+
+         if(!err)        
+            res.json({error:false, message: rs});     
+          else
+          res.json({error:true, message: 'sin_registros'});   // sin_registros es una llave de referencia del mensaje de error.
+
+ 
+        }) ) res.json({ error:true, message: 'params_invalidos'}) ; 
+            
+      
+      });
 
 
        // ======================================================================
@@ -50,7 +88,7 @@ var usuarios = function(router){
 			  	res.json({error:true, message: 'sin_registros'}); 
 
  
-			  }) ) res.json({ error:true, message: 'datos_invalidos'}) ; 
+			  }) ) res.json({ error:true, message: 'params_invalidos'}) ; 
 			      
 			
 		  });
@@ -76,7 +114,7 @@ var usuarios = function(router){
 			       	   res.json({error:true, message: 'no_eliminado'}); 
 
 
-         		 }) ) res.json({ error:true, message: 'datos_invalidos'}) ;
+         		 }) ) res.json({ error:true, message: 'params_invalidos'}) ;
 
          }); 
 
@@ -100,7 +138,7 @@ var usuarios = function(router){
 			       	   res.json({error:true, message: 'no_editable'}); 
 
 
-         		 }) ) res.json({ error:true, message: 'datos_invalidos'}) ;
+         		 }) ) res.json({ error:true, message: 'params_invalidos'}) ;
 
          });
 
@@ -124,10 +162,10 @@ var usuarios = function(router){
                    else if(!err)
                           res.json({error:false,message:"ok"});
                    else
-                          res.json({error:true, message : 'datos_invalidos'});                                     
+                          res.json({error:true, message : 'params_invalidos'});                                     
 
 
-                  }) ) res.json({error:true, message : 'datos_invalidos'}); 
+                  }) ) res.json({error:true, message : 'params_invalidos'}); 
 
 			 						          
 			
@@ -159,14 +197,13 @@ var usuarios = function(router){
                   res.json({error:true, message: datos}); //como hubo un error retornamos lo que recibimos, para procesar en el cliente que errores hay en los datos
                   
               
-                 }) ) res.json({ error:true, message: 'datos_invalidos'}) ;
+                 }) ) res.json({ error:true, message: 'params_invalidos'}) ;
 
         });
 
 
 
-
-
+    
     	 // ============== con el verbo HTTP Delete eliminamos los usaurios
 
     	 // ============== esto solo estará disponible en modo de desarrollo ===============
@@ -184,7 +221,7 @@ var usuarios = function(router){
 			       	   res.json({error:true, message: 'no_eliminable'}); 
 
 
-         		 }) ) res.json({ error:true, message: 'datos_invalidos'}) ;
+         		 }) ) res.json({ error:true, message: 'params_invalidos'}) ;
 
          }); 
 

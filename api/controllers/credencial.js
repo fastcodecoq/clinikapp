@@ -70,14 +70,37 @@ var credencial = {
 
       },
 
-      buscar : function(callback){  
+      buscar : function(opts, callback){  
+
+            if(typeof opts === 'function')
+               {var callback = opts; var opts = undefined; }
 
             if(!callback.should.be.type("function")) return false; 
-      
-      	var rs = credenciales.find(callback); 
+
+            
+            var sanitizar = require('../helpers/sanitizador');            
+
+
+            var opts = opts || {};  //miramos por las opts
+
+            var query = opts.query  || {};     // miramos si está definido un query
+
+            var variables = opts.variables || {};  // miramos si se han especificado tomar unas variables especificas
+
+             //sanitizamos las variables del query
+             for(x in query)
+                query[x] = sanitizar(query[x]);
+
+           
+            credenciales.find(
+                          query, 
+                          variables, 
+                          { skip : parseInt(opts.skip) || 0 , limit : parseInt(opts.limit) || 0}, 
+                          callback
+                         ); 
+
 
             return true;
-            
 
       },
       
