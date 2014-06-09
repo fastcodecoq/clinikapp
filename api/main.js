@@ -29,10 +29,11 @@ mongoose.connection.on('error', function(err){
 });
 
 try {
-  mongoose.connect('mongodb://' + db_address);
-  console.log('Iniciando conexión en :' + ('mongodb://' + db_address) + ', esperando...');
-} catch (err) {
   //nos conectamos a la base de datos
+  mongoose.connect('mongodb://' + db_address);
+  console.log('Iniciando conexión en: ' + ('mongodb://' + db_address) + ', esperando...');
+} catch (err) {
+  console.log('Conexión fallida a: ' + db_address);
 }
 
 
