@@ -62,7 +62,7 @@ if (cluster.isMaster) {
   
 
   cluster.on('exit', function(worker, code, signal) {
-    console.log('worker ' + worker.process.pid + ' died');
+    console.log(worker.process.pid);
   });
 
 }
