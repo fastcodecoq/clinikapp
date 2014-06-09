@@ -15,12 +15,6 @@ var cores = require('os').cpus().length;  //numero de cpus
 
 
 
-app.use(multer());
-app.use(bodyparser());  // usaremos JSON raw para envío de datos en modo
-                        // desarrollo de este modo testeamos mas rapido el api
-                        // luego solo es cambiar bodyparser() por bodyparser.urlencoded() 
-
-
 // ... incluir arriba todos los requires principales
 
 
@@ -37,14 +31,19 @@ var router = express.Router();
 
 //  ... incluir arriba todo lo relacionado con routes
 
-// ================= routes  ==========================================================================
+// ============ app.use ===========================
 
 
+app.use(multer());
+app.use(bodyparser());  // usaremos JSON raw para envío de datos en modo
+                        // desarrollo de este modo testeamos mas rapido el api
+                        // luego solo es cambiar bodyparser() por bodyparser.urlencoded() 
 
 app.use(router);  //le pasamos las routes al app express
 
 
-// ============ app.uses ===========================
+
+// ============ app.use ===========================
 
 
 
