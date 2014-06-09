@@ -2,5 +2,7 @@
 	"params_invalidos" : "parametros invalidos",
 	"no_eliminable" : "no se pudo eliminar",
 	"no_editable" : "no se pudo editar",
-	"sin_registros" : "no se han econtrado resultados"
+	"sin_registros" : "no se han econtrado resultados",
+	"usuario_existe" : "el usuario ya se encuentra registrado",
+	"credencial_existe" : "el usuario ya tiene una credencial con este servicio"
 }

@@ -31,7 +31,7 @@ var credencial = {
               if(!exist)
                new credenciales(datos).save( callback );
               else
-                callback(true, "usuario_existe"); 
+                callback(true, "credencial_existe"); 
 
 
             });
@@ -150,11 +150,12 @@ var credencial = {
      existe : function(datos, callback){  // valida si un usuario existe. Retorna error en el primer parametro y un boolean que indica si existe en el segundo parametro
 
            var validar = require('../helpers/validador');                      
-           var id_usuario = datos.id_usuario;
+           var id_usuario = datos._id_usuario;
+           var id_sistema_logueo = datos._id_sistema_logueo;
 
           // contamos los credenciales existentes 
 
-           credenciales.count({  _id_usuario : mongoose.Types.ObjectId(id_usuario)}, function(err, count){
+           credenciales.count({  _id_usuario : mongoose.Types.ObjectId(id_usuario), _id_sistema_logueo : mongoose.Types.ObjectId(id_sistema_logueo)}, function(err, count){
 
                 callback(err, count > 0);  //si count es igual a cero devolvemos false (no existe)
 
