@@ -17,8 +17,23 @@ var cores = require('os').cpus().length;  //numero de cpus
 
 // ... incluir arriba todos los requires principales
 
+var db_address = 'clinikapp:clinikAPP.2014@localhost/clinikapp';
 
-mongoose.connect('mongodb://clinikapp:clinikAPP.2014@localhost/clinikapp');  //nos conectamos a la base de datos
+mongoose.connection.on('open', function(ref){
+  return console.log('Conectado a Mongo');
+});
+
+mongoose.connection.on('error', function(err){
+  console.log('no se pudo realizar la conexión con mongo');
+  return console.log(err.message);
+});
+
+try {
+  mongoose.connect('mongodb://' + db_address);
+  console.log('Iniciando conexión en :' + ('mongodb://' + db_address) + ', esperando...');
+} catch (err) {
+  //nos conectamos a la base de datos
+}
 
 
 var router = express.Router();
@@ -26,7 +41,7 @@ var router = express.Router();
 
 
 // ================= la route base contendrá todas las llamadas principales  ===========================
- 
+
 
 
 //  ... incluir arriba todo lo relacionado con routes
@@ -37,7 +52,7 @@ var router = express.Router();
 app.use(multer());
 app.use(bodyparser());  // usaremos JSON raw para envío de datos en modo
                         // desarrollo de este modo testeamos mas rapido el api
-                        // luego solo es cambiar bodyparser() por bodyparser.urlencoded() 
+                        // luego solo es cambiar bodyparser() por bodyparser.urlencoded()
 
 app.use(router);  //le pasamos las routes al app express
 
@@ -55,10 +70,9 @@ app.use(router);  //le pasamos las routes al app express
 
 
 if (cluster.isMaster) {
-  
+
   for (var i = 0; i < cores; i++)
      cluster.fork();
-  
 
   cluster.on('exit', function(worker, code, signal) {
     console.log(worker.process.pid);
@@ -68,7 +82,7 @@ if (cluster.isMaster) {
 else
 {
 
-// Instanciamiento del app 
+// Instanciamiento del app
 
 var pto = process.env.PORT || 8080;
 
