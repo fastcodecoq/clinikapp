@@ -8,14 +8,12 @@ var Schema  =  mongoose.Schema;
 // ............... es un helper para diferenciar facilmente que es un campo  populable
 
 var credencialSchema = new Schema({
-
-	_id_sistema_logueo : {type : Schema.Types.ObjectId, required : true}, 
-	_id_usuario : {type : Schema.Types.ObjectId, required : true},   
-	token : {type : String, required : true},
-	email : {type : String, required : true},
-	uid : {type : String, required : true},  //id del usuario en el sistema de logueo (google, outlook o yahoo)
-    fecha : {type : Date, default: Date.now}
-    
+  _id_sistema_logueo : {type : Schema.Types.ObjectId, required : false}, 
+  _id_usuario : {type : Schema.Types.ObjectId, required : false},   
+  token : {type : String, required : true},
+  email : {type : String, required : true},
+  uid : {type : String, required : true},  //id del usuario en el sistema de logueo (google, outlook o yahoo)
+  fecha : {type : Date, default: Date.now}
 });
 
 
@@ -27,28 +25,14 @@ var credencialSchema = new Schema({
 
 // ... esto nos sirve para validar los datos que se ingresarán a la base de datos
 
- usuarioSchema.path('email').validate(function(datos){
-
-   
+credencialSchema.path('email').validate(function(datos){
    var validar = require('../helpers/validador.js');
-
- 
    //verificamos si las variables contienen el formato adecuado...
-  
-
    if(this.email)
-    if(!validar.mail(this.email.dir)) return false;  //validamos el email
-
-
-
+    if(!validar.mail(this.email)) return false;  //validamos el email
   // como todo esta en orden, entonces retornamos positivo, para que guarde el documento
-   
    return true;   
-
- 
-}, 'email invalido'); 
-
-
+}, 'email invalido');
 
 // ==========================================================
 
