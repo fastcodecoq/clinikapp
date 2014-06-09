@@ -115,7 +115,6 @@ var credencial = {
        return true;
          
 
-
       },
 
       // solo disponible para modo desarrollo 

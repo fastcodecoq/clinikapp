@@ -43,7 +43,6 @@ var usuarios = function(router){
         var validar = require('../helpers/validador');
 
 
-
         var delim = {};
             delim["limit"] = req.params.limit || false;
             delim["skip"] = req.params.skip || false;

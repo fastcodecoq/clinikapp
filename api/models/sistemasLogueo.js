@@ -12,7 +12,7 @@ var sistemaLogueoSchema = new Schema({
 	nombre : {type : String, required : true}, 
 	key : {type : String, required : true}, //app key del sistema de logueo   
 	secret : {type : String, required : true}, //app secret del sistema de logueo (google, outlook o yahoo)
-  fecha : {type : Date, default: Date.now}
+    fecha : {type : Date, default: Date.now}
     
 });
 

@@ -9,12 +9,12 @@ var Schema  =  mongoose.Schema;
 
 var credencialSchema = new Schema({
 
-	_id_sistema_logueo : {type : Schema.Types.ObjectId, required : true}, 
-	_id_usuario : {type : Schema.Types.ObjectId, required : true},   
+	_id_sistema_logueo : {type : Schema.Types.ObjectId, required : true, ref : 'sistemaLogueoSchema'}, 
+	_id_usuario : {type : Schema.Types.ObjectId, ref : 'usuarioSchema'},   
 	token : {type : String, required : true},
 	email : {type : String, required : true},
 	uid : {type : String, required : true},  //id del usuario en el sistema de logueo (google, outlook o yahoo)
-    fecha : {type : Date, default: Date.now}
+  fecha : {type : Date, default: Date.now}
     
 });
 
