@@ -10,16 +10,11 @@ var credencial = {
    
     var validar = require('../helpers/validador');
     
-    if(typeof datos === 'string')
-       {
-        if(!validar.mail(datos)) callback({message: 'email_invalido'}, null);
-        datos = { email : datos };        
-       }
-    else 
-       datos = { _usuario : mongoose.Types.ObjectId(datos._usuario), _sistema_logueo : mongoose.Types.ObjectId(datos._sistema_logueo)}
-    
+     this.sanitizar(datos);
     
     // contamos los credenciales existentes
+
+    console.log(datos)
 
     credenciales.count( datos, function(err, count){
       callback(err, !!count ); 
@@ -31,7 +26,7 @@ var credencial = {
       datos = this.sanitizar(datos);
       console.log(datos);
       // ========== validamos si la credencial existe ====== //
-      this.buscarPorEmail(datos, function(err, exist){  // ....... este método se encuentra al final
+      this.existe(datos, function(err, exist){  // ....... este método se encuentra al final
         if(exist) {
           // ==== verifiamos si no existe la credencial, sino existe, lo creamos ======= //
           callback({message: 'credencial_existe'}, null);
@@ -141,8 +136,11 @@ var credencial = {
 
               console.log(datos);  // valores sanitizados
 
-              datos._id_usuario = mongoose.Types.ObjectId(datos._id_usuario);
-              datos._id_sistema_logueo = mongoose.Types.ObjectId(datos._id_sistema_logueo);
+              if(datos._usuario)
+              datos._usuario = mongoose.Types.ObjectId(datos._usuario);
+
+              if(datos._sistema_logueo)
+              datos._sistema_logueo = mongoose.Types.ObjectId(datos._sistema_logueo);
 
               return datos;
 

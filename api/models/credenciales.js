@@ -36,27 +36,26 @@ credencialSchema.pre('save', function(next) {
 // ... esto nos sirve para validar los datos que se ingresarán a la base de datos
 
 credencialSchema.path('email').validate(function(datos){
+  
    var validar = require('../helpers/validador.js');
    //verificamos si las variables contienen el formato adecuado...
    if(this.email)
     if(!validar.mail(this.email)) return false;  //validamos el email
   // como todo esta en orden, entonces retornamos positivo, para que guarde el documento
    return true;
+
 }, 'email invalido');
 
 // ==========================================================
 
 credencialSchema.methods.compararPassword = function(comparable, cb) {
-<<<<<<< HEAD
-  bcrypt.compare(comparable, this.password, function(err, isMatch) {
-    if(err) return cb(err);
-    cb(null, isMatch);
-=======
+
   bcrypt.compare(comparable, this.password, function(err, iguales) {
     if(err) return cb(err);
     cb(null, iguales);
->>>>>>> 8378997a977b572300d125467292e2964423487d
+
   });
+
 };
 
 module.exports = mongoose.model('credenciales', credencialSchema);

@@ -56,7 +56,9 @@ passport.use('registro-local', new LocalStrategy(
         });
       });
     }
+    
   }));
+
 passport.use('ingreso-local', new LocalStrategy({
         usernameField : 'email',
         passwordField : 'clave',
@@ -76,7 +78,7 @@ passport.use('ingreso-local', new LocalStrategy({
             console.log('logged in');
             return listo(null, credencial);
           } else {
-            return listo(null, false, "contrasena_incorrecta");
+            return listo(null, false, "contraseña_incorrecta");
           }
         });
       });
