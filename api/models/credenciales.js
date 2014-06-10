@@ -1,26 +1,18 @@
 var mongoose  =  require('mongoose');
 var Schema  =  mongoose.Schema;
 
-
-
 // ==== usaremos el caracter _ para diferenciar los campos que se relacionan a otras colecciones
 
 // ............... es un helper para diferenciar facilmente que es un campo  populable
 
 var credencialSchema = new Schema({
-
-	_sistema_logueo : {type : Schema.Types.ObjectId, required : true, ref : 'sistemaLogueoSchema'}, 
-	_usuario : {type : Schema.Types.ObjectId, ref : 'usuarioSchema'},   
-	token : {type : String, required : true},
-	email : {type : String, required : true},
-	uid : {type : String, required : true},  //id del usuario en el sistema de logueo (google, outlook o yahoo)
+  _id_sistema_logueo : {type : Schema.Types.ObjectId, required : true, ref : 'sistemaLogueoSchema'}, 
+  _usuario : {type : Schema.Types.ObjectId, ref : 'usuarioSchema'},   
+  token : {type : String, required : true},
+  email : {type : String, required : true},
+  uid : {type : String, required : true},  //id del usuario en el sistema de logueo (google, outlook o yahoo)
   fecha : {type : Date, default: Date.now}
-    
 });
-
-
-
-
 
 // ===================== mongoose middleware ====================================
 
@@ -37,7 +29,5 @@ credencialSchema.path('email').validate(function(datos){
 }, 'email invalido');
 
 // ==========================================================
-
-
 
 module.exports = mongoose.model('credenciales', credencialSchema);
