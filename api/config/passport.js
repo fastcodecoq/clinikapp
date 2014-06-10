@@ -46,7 +46,7 @@ passport.use(new LocalStrategy({
 function(email, clave, listo){
   // TODO: checkear si el usuario existe
   if(false){
-    return listo(null,false,'ya hay un usuario con ese correo');
+    return listo(null,false,'correo_existe'); //cada error se le debe crear una llave, y esta llave añadirla en /frontend/locales/es.json
   } else {
 
     var datos = {email : email, token : clave, uid : email};
@@ -57,7 +57,7 @@ function(email, clave, listo){
       if(! credencialCtrl.crear(datos, function(err) {
         if (err) throw err;
         return listo(null, nuevaCredencial);
-      }) ) return listo(true, nuevaCredencial);
+      }) ) return listo(true, nuevaCredencial, 'datos_invalidos'); //cada error se le debe crear una llave, y esta llave añadirla en /frontend/locales/es.json
 
     });
   }
