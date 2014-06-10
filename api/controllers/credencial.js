@@ -12,7 +12,7 @@ var credencial = {
     
     if(typeof datos === 'string')
        {
-        if(!validar.mail(datos)) callback(true, false, 'email_invalido');
+        if(!validar.mail(datos)) callback({message: 'email_invalido'}, null);
         datos = { email : datos };        
        }
     else 
