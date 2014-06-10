@@ -31,7 +31,7 @@ var credencial = {
          // ==== verifiamos si no existe la credencial, sino existe, lo creamos ======= //
 
               if(!exist)
-               new credenciales(datos).save( callback );
+                credenciales(datos).save( callback );
               else
                 callback(true, null,"credencial_existe"); 
 
@@ -81,7 +81,6 @@ var credencial = {
 
             
             var sanitizar = require('../helpers/sanitizador');            
-
 
             var opts = opts || {};  //miramos por las opts
 
