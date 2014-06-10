@@ -26,6 +26,7 @@ mongoose.connection.on('open', function(ref){
 
 mongoose.connection.on('error', function(err){
   console.log('no se pudo realizar la conexión con mongo');
+  console.log(err);
   return console.log(err.message);
 });
 
