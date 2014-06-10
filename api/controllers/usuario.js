@@ -145,6 +145,34 @@ var usuario = {
 
       },
 
+      completarRegistro : function(datos, callback){
+
+
+          if(typeof datos !== 'object') return false;
+          if(typeof callback !=== 'function') return false;
+
+          
+          this.crear(datos, function(err, rs){
+
+             if(err)
+             {
+               callback(err,rs);
+               return;
+             }
+
+             // _id_credencial debe ser pasado como parametro
+
+             var uid = rs._id;
+             var _id_credencial  = mongoose.Types.ObjectId(datos._id_credencial);
+             var credencialCtrl = require('./credencial');
+
+             credencialCtrl.actualizar({_id : _id_credencial},{_id_usuario : uid}, callback);
+
+          });
+
+
+      },
+
       sanitizar : function(datos){
 
                 var sanitizar = require('../helpers/sanitizador');
