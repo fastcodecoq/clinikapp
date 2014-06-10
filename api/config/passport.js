@@ -29,15 +29,15 @@ var getSistemaDeLogueo = function(nombre, callback){
   });
 };
 
-var existeCredencial = function(){
-};
 
-passport.serializeUser(function(usuario,listo) {
-  listo(null, usuario.id);
+
+passport.serializeUser(function(credencial,listo) {
+  listo(null, credencial.id);
 });
-passport.deserializeUser(function(usuario,listo) {
-  usuario.findById(id, function(err, usuario){
-    listo(err, usuario);
+
+passport.deserializeUser(function(id,listo) {
+  Credencial.findById(id, function(err, credencial){
+    listo(err, credencial);
   });
 });
 
@@ -51,12 +51,13 @@ passport.use(new LocalStrategy(
 
       var datos = {email : email, token : clave, uid : email, password : clave};
 
-      getSistemaDeLogueo('local',function(err,log){
-        datos._id_sistema_logueo = log;
-        credencialCtrl.crear(datos, function(err) {
-          if (err) throw err;
-          return listo(null, nuevaCredencial);
-        });
-      });
-    }
-  }));
+    getSistemaDeLogueo('local',function(err,log){
+      datos._sistema_logueo = log;
+      if(! credencialCtrl.crear(datos, function(err) {
+        if (err) throw err;
+        return listo(null, nuevaCredencial);
+      }) ) return listo(true, nuevaCredencial, 'datos_invalidos'); //cada error se le debe crear una llave, y esta llave añadirla en /frontend/locales/es.json
+
+    });
+  }
+}));

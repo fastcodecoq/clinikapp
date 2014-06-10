@@ -8,7 +8,7 @@ var Schema  =  mongoose.Schema;
 // ............... es un helper para diferenciar facilmente que es un campo  populable
 
 var credencialSchema = new Schema({
-  _id_sistema_logueo : {type : Schema.Types.ObjectId, required : true, ref : 'sistemaLogueoSchema'},
+  _sistema_logueo : {type : Schema.Types.ObjectId, required : true, ref : 'sistemaLogueoSchema'},
   _usuario : {type : Schema.Types.ObjectId, ref : 'usuarioSchema'},
   token : {type : String, required : true},
   email : {type : String, required : true},
@@ -23,13 +23,13 @@ var credencialSchema = new Schema({
 // encriptamos la contraseña, asignamos un salt
 credencialSchema.pre('save', function(next) {
   var credencial = this;
-  if (!user.isModified('password')) return next();
+  if (!credencial.isModified('password')) return next();
   bcrypt.genSalt(5, function(err, salt) {
     if (err) return next(err);
 
-    bcrypt.hash(user.password, salt, null, function(err, hash) {
+    bcrypt.hash(credencial.password, salt, null, function(err, hash) {
       if (err) return next(err);
-      user.password = hash;
+      credencial.password = hash;
       next();
     });
   });
