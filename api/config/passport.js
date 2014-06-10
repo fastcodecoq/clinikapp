@@ -2,6 +2,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth');
 var Credencial = require('../models/credenciales');
 var Logueo = require('../models/sistemasLogueo');
+var credenciales = require('../controllers/credencial.js');
 
 var getSistemaDeLogueo = function(nombre, callback){
   Logueo.findOne({nombre : nombre}, function(err,log){

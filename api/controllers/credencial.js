@@ -14,6 +14,8 @@ var credencial = {
       	     
             datos = this.sanitizar(datos); 
 
+            datos._id_sistema_logueo = mongoose.Types.ObjectId(datos._id_sistema_logueo);
+
            
          // ========== validamos si la credencial existe ====== //
 
