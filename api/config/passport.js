@@ -57,7 +57,7 @@ function(email, clave, listo){
       if(! credencialCtrl.crear(datos, function(err) {
         if (err) throw err;
         return listo(null, nuevaCredencial);
-      }) ) return listo(true, nuevaCredencial, 'datos_invalidos'); //cada error se le debe crear una llave, y esta llave añadirla en /frontend/locales/es.json
+      }) ) return listo(true, nuevaCredencial, 'params_invalidos'); //cada error se le debe crear una llave, y esta llave añadirla en /frontend/locales/es.json
 
     });
   }
