@@ -11,8 +11,11 @@ var credencial = {
     var validar = require('../helpers/validador');
     
     if(typeof datos === 'string')
-       datos = { email : datos }
-    else
+       {
+        if(!validar.mail(datos)) callback(true, false, 'email_invalido');
+        datos = { email : datos };        
+       }
+    else 
        datos = { _usuario : mongoose.Types.ObjectId(datos._usuario), _sistema_logueo : mongoose.Types.ObjectId(datos._sistema_logueo)}
     
     
