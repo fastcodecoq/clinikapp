@@ -3,7 +3,6 @@ var Schema  =  mongoose.Schema;
 var should = require('should');
 
 
-
 // ==== usaremos el caracter _ para diferenciar los campos que se relacionan a otras colecciones
 
 // ............... es un helper para diferenciar facilmente que es un campo  populable
@@ -11,10 +10,9 @@ var should = require('should');
 var usuarioSchema = new Schema({
 
 	nombres : {type : String, required : true},    //los 2 nombres delimitados por coma (,) ej. Alberto,Andres
-	apellidos : {type : String, required: true},   //la misma estructura que para los nombres ej. Acosta, Arteta
-	numero_doc : {type : Number, required : true},
-	_tipo_doc : {type : Schema.Types.ObjectId, required : true, ref : 'tipoDocsSchema'},
-	_sexo : {type : Schema.Types.ObjectId, required : true, ref : 'sexosSchema'},
+	apellidos : {type : String, required: true},   //la misma estructura que para los nombres ej. Acosta, Arteta	
+	sexo : {type : Number, required : true},
+	_tipo_doc : {type : Schema.Types.ObjectId, required : true, ref : 'tiposDocs'},
 	fecha_nac : {type : Date},
 	divipola : {type : String, required : true},
 	telefono : String,
