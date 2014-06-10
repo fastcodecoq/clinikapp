@@ -17,7 +17,8 @@ var usuarioSchema = new Schema({
 	divipola : {type : String, required : true},
 	telefono : String,
 	email : { dir : String , verificado : { type : Boolean , default : false}},
-	registro : {type : Date, default: Date.now }
+	registro : {type : Date, default: Date.now },
+	local : { password : String},
 
 });
 

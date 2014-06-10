@@ -5,42 +5,44 @@
     "description" : "Historias clínicas inteligentes",
     "readme" : "",
     "repository": {
-    "type": "git",
-    "url": "https://github.com/gomosoft/clinikapp.git"
-     },  
+	"type": "git",
+	"url": "https://github.com/gomosoft/clinikapp.git"
+    },  
     "scripts" : {
-      "start" : "forever start main.js",
-      "restart" : "forever restart main.js",
-      "stop" : "forever stop main.js",
-      "dev" : "forever main.js"      
+	"start" : "forever start main.js",
+	"restart" : "forever restart main.js",
+	"stop" : "forever stop main.js",
+	"dev" : "forever main.js"      
     },
-	"dependencies" : {
-	  "express" : "~4.0.0",	  
-	  "numeral" : "latest",	  
-	  "mongoose" : "latest",
-	  "socket.io" : "latest",
-	  "passport" : "latest",
-	  "forever" : "latest",
-	  "body-parser" : "latest",
-	  "should" : "latest",
-	  "sanitizer" : "latest",
-	  "multer" : "latest"	  	       	  	  	 
-	},
+    "dependencies" : {
+	"express" : "~4.0.0",	  
+	"numeral" : "latest",	  
+	"mongoose" : "latest",
+	"socket.io" : "latest",
+	"passport" : "latest",
+	"passport-google-oauth" : "latest",
+	"passport-local" : "latest",
+	"forever" : "latest",
+	"body-parser" : "latest",
+	"should" : "latest",
+	"sanitizer" : "latest",
+	"multer" : "latest"	  	       	  	  	 
+    },
 
-	"devDependencies" : {
-	  "express" : "~4.0.0",	  	  	 
-	  "mongoose" : "latest",
-	  "socket.io" : "latest",
-	  "passport" : "latest",
-	  "forever" : "latest",
-	  "body-parser" : "latest",	  
-	  "gulp": "~3.5.6",
-      "gulp-inject": "~0.4.1",
-      "gulp-clean": "~0.2.4",
-      "gulp-concat": "~2.2.0",
-      "gulp-less": "~1.2.3",
-	  "should" : "latest",	  	       
-	  "sanitizer" : "latest",
-	  "multer" : "latest"	  	       
-	}
+    "devDependencies" : {
+	"express" : "~4.0.0",	  	  	 
+	"mongoose" : "latest",
+	"socket.io" : "latest",
+	"passport" : "latest",
+	"forever" : "latest",
+	"body-parser" : "latest",	  
+	"gulp": "~3.5.6",
+	"gulp-inject": "~0.4.1",
+	"gulp-clean": "~0.2.4",
+	"gulp-concat": "~2.2.0",
+	"gulp-less": "~1.2.3",
+	"should" : "latest",	  	       
+	"sanitizer" : "latest",
+	"multer" : "latest"	  	       
+    }
 }

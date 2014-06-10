@@ -27,28 +27,14 @@ var credencialSchema = new Schema({
 
 // ... esto nos sirve para validar los datos que se ingresarán a la base de datos
 
- usuarioSchema.path('email').validate(function(datos){
-
-   
+credencialSchema.path('email').validate(function(datos){
    var validar = require('../helpers/validador.js');
-
- 
    //verificamos si las variables contienen el formato adecuado...
-  
-
    if(this.email)
-    if(!validar.mail(this.email.dir)) return false;  //validamos el email
-
-
-
+    if(!validar.mail(this.email)) return false;  //validamos el email
   // como todo esta en orden, entonces retornamos positivo, para que guarde el documento
-   
    return true;   
-
- 
-}, 'email invalido'); 
-
-
+}, 'email invalido');
 
 // ==========================================================
 

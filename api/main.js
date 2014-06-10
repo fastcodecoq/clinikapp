@@ -10,10 +10,7 @@ var mongoose = require('mongoose');
 var multer = require('multer');
 var cluster = require('cluster');
 var cores = require('os').cpus().length;  //numero de cpus
-
-
-
-
+var passport = require('passport');
 
 // ... incluir arriba todos los requires principales
 
@@ -37,11 +34,8 @@ try {
 }
 
 
-var router = express.Router();
-    router = require('./routes/base')(router);  //incluimos el archivo ./routes/base, llamamos a la función y le pasamos el router del app
 
 
-// ================= la route base contendrá todas las llamadas principales  ===========================
 
 
 
@@ -49,19 +43,22 @@ var router = express.Router();
 
 // ============ app.use ===========================
 
-
 app.use(multer());
-app.use(bodyparser());  // usaremos JSON raw para envío de datos en modo
-                        // desarrollo de este modo testeamos mas rapido el api
-                        // luego solo es cambiar bodyparser() por bodyparser.urlencoded()
-
-app.use(router);  //le pasamos las routes al app express
-
+// usaremos JSON raw para envío de datos en modo desarrollo de este modo
+// testeamos mas rapido el api luego solo es cambiar bodyparser() por bodyparser.urlencoded()
+app.use(bodyparser());
+//le pasamos las routes al app express
+require('./config/passport')(passport);
+app.use(passport.initialize());
 
 
 // ============ app.use ===========================
 
+var router = express.Router();
+    router = require('./routes/base')(router,passport);  //incluimos el archivo ./routes/base, llamamos a la función y le pasamos el router del app
 
+app.use(router);
+// ================= la route base contendrá todas las llamadas principales  ===========================
 
 
 
@@ -71,26 +68,17 @@ app.use(router);  //le pasamos las routes al app express
 
 
 if (cluster.isMaster) {
-
   for (var i = 0; i < cores; i++)
-     cluster.fork();
-
+  cluster.fork();
   cluster.on('exit', function(worker, code, signal) {
     console.log(worker.process.pid);
   });
-
 }
-else
-{
-
-// Instanciamiento del app
-
-var pto = process.env.PORT || 8080;
-
-app.listen(pto);
-console.log('Magia en el puerto',pto);
-
+else {
+  // Instanciamiento del app
+  var pto = process.env.PORT || 8080;
+  app.listen(pto);
+  console.log('Magia en el puerto',pto);
 }
-
 
 // ===========================================================
