@@ -32,25 +32,6 @@ var usuarios = function(router){
 		  });
 
 
-      router.get('/credenciales', function (req, res){
-
-          var credencialesCtrl = require('../controllers/credencial');
-
-      if ( ! credencialesCtrl.buscar( function (err, rs){  //
-
-         if(!err)        
-            res.json({error:false, message: rs});     
-          else
-          res.json({error:true, message: 'sin_registros'});   // sin_registros es una llave de referencia del mensaje de error.
-
- 
-        }) ) res.json({ error:true, message: 'params_invalidos'}) ; 
-            
-      
-      });
-
-
-
       // ruta para obtener los usuarios hasta cierto limite
        // se reciben las variables limit y skip
 
