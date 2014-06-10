@@ -38,7 +38,7 @@ var usuario = {
               if(!exist)
                new usuarios(datos).save( callback );
               else
-                callback(true, null,"usuario_existe"); 
+                callback({ message : "usuario_existe"}, null); 
 
 
             });
@@ -201,7 +201,7 @@ var usuario = {
 
 
            if(!validar.cedula(numero_doc)) {             
-             callback(true, "numero_doc_incorrecto");
+             callback({ message : 'numero_doc_incorrecto'}, null);
              return false;
             };            
 

@@ -3,22 +3,26 @@ var should = require('should');
 var mongoose = require('mongoose');
 
 
-
 var credencial = {
 
-  buscarPorEmail: function(email, callback){
-    credenciales.count({ email: email }, function(err,count){
-      callback(err, !!count);
-    });
-  },
 
   existe : function(datos, callback){  // valida si un usuario existe. Retorna error en el primer parametro y un boolean que indica si existe en el segundo parametro
+   
     var validar = require('../helpers/validador');
-    var _usuario = datos._usuario;
-    var _sistema_logueo = datos._sistema_logueo;
+    
+    if(typeof datos === 'string')
+       {
+        if(!validar.mail(datos)) callback({message: 'email_invalido'}, null);
+        datos = { email : datos };        
+       }
+    else 
+       datos = { _usuario : mongoose.Types.ObjectId(datos._usuario), _sistema_logueo : mongoose.Types.ObjectId(datos._sistema_logueo)}
+    
+    
     // contamos los credenciales existentes
-    credenciales.count({  _usuario : mongoose.Types.ObjectId(_usuario), _sistema_logueo : mongoose.Types.ObjectId(_sistema_logueo)}, function(err, count){
-      callback(err, count > 0);  //si count es igual a cero devolvemos false (no existe)
+
+    credenciales.count( datos, function(err, count){
+      callback(err, !!count ); 
     });
   },
 
@@ -77,7 +81,6 @@ var credencial = {
 
 
             var sanitizar = require('../helpers/sanitizador');
-
 
             var opts = opts || {};  //miramos por las opts
 

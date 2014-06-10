@@ -47,6 +47,7 @@ passport.use('registro-local', new LocalStrategy(
 
       var datos = {email : email, token : "na", uid : email, password : clave};
 
+
       getSistemaDeLogueo('local',function(err,log){
         datos._sistema_logueo = log;
         credencialCtrl.crear(datos, function(err,nuevaCredencial) {
@@ -81,4 +82,3 @@ passport.use('ingreso-local', new LocalStrategy({
       });
 
     }));
-
