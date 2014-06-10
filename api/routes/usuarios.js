@@ -23,7 +23,7 @@ var usuarios = function(router){
          if(!err) 			 
   			    res.json({error:false, message: rs});     
   				else
-			  	res.json({error:true, message: 'sin_registros'});   // sin_registros es una llave de referencia del mensaje de error.
+			  	  res.json({error:true, message: 'sin_registros'});   // sin_registros es una llave de referencia del mensaje de error.
 
  
 			  }) ) res.json({ error:true, message: 'params_invalidos'}) ; 
@@ -58,8 +58,10 @@ var usuarios = function(router){
 
          if(!err)        
             res.json({error:false, message: rs});     
+          else if(err.message)
+          res.json({error:true, message: err.message});   // sin_registros es una llave de referencia del mensaje de error.
           else
-          res.json({error:true, message: 'sin_registros'});   // sin_registros es una llave de referencia del mensaje de error.
+          res.json({error:true, message: 'error_desconocido'});  
 
  
         }) ) res.json({ error:true, message: 'params_invalidos'}) ; 
