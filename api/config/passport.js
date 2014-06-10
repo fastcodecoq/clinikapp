@@ -56,3 +56,29 @@ passport.use('registro-local', new LocalStrategy(
       });
     }
   }));
+passport.use('ingreso-local', new LocalStrategy({
+        usernameField : 'email',
+        passwordField : 'clave',
+        passReqToCallback : true
+    },
+    function(req, email, clave, listo) {
+
+      Credencial.findOne({ 'email' :  email }, function(err, credencial) {
+        if (err)
+          return listo(err);
+        if (!credencial)
+          return listo(null, false, "correo_no_existe");
+        credencial.compararPassword(clave, function(err,iguales){
+          if (err)
+            return listo(err);
+          if(iguales){
+            console.log('logged in');
+            return listo(null, credencial);
+          } else {
+            return listo(null, false, "contrasena_incorrecta");
+          }
+        });
+      });
+
+    }));
+

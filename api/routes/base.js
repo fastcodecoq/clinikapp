@@ -21,7 +21,11 @@ var base = function(router,passport) {
   });
   //route.get('/registro',function(req,res){
   //});
-  router.post('/ingresar', passport.authenticate('registro-local', {
+  router.post('/registrar', passport.authenticate('registro-local', {
+    successRedirect : '/perfil', // enviar a completar perfil
+    failureRedirect : '/registrar', // redirigir a registro en caso de fallo
+  }));
+  router.post('/ingresar', passport.authenticate('ingreso-local', {
     successRedirect : '/perfil', // enviar a completar perfil
     failureRedirect : '/ingresar', // redirigir a registro en caso de fallo
   }));

@@ -47,9 +47,9 @@ credencialSchema.path('email').validate(function(datos){
 // ==========================================================
 
 credencialSchema.methods.compararPassword = function(comparable, cb) {
-  bcrypt.compare(comparable, this.password, function(err, isMatch) {
+  bcrypt.compare(comparable, this.password, function(err, iguales) {
     if(err) return cb(err);
-    cb(null, isMatch);
+    cb(null, iguales);
   });
 };
 
