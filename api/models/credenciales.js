@@ -26,7 +26,6 @@ credencialSchema.pre('save', function(next) {
   if (!credencial.isModified('password')) return next();
   bcrypt.genSalt(5, function(err, salt) {
     if (err) return next(err);
-
     bcrypt.hash(credencial.password, salt, null, function(err, hash) {
       if (err) return next(err);
       credencial.password = hash;
@@ -46,5 +45,12 @@ credencialSchema.path('email').validate(function(datos){
 }, 'email invalido');
 
 // ==========================================================
+
+credencialSchema.methods.compararPassword = function(comparable, cb) {
+  bcrypt.compare(comparable, this.password, function(err, isMatch) {
+    if(err) return cb(err);
+    cb(null, isMatch);
+  });
+};
 
 module.exports = mongoose.model('credenciales', credencialSchema);

@@ -20,8 +20,7 @@ var getSistemaDeLogueo = function(nombre, callback){
           else callback(null,logeo._id);
         });
       }else{
-        console.log({ message: 'no existe el sistema de logueo ' + nombre });
-        callback(err);
+        callback({ message: 'no existe el sistema de logueo ' + nombre });
       }
     } else {
       callback(null,log._id);
@@ -30,18 +29,15 @@ var getSistemaDeLogueo = function(nombre, callback){
 };
 
 
-
 passport.serializeUser(function(credencial,listo) {
-  listo(null, credencial.id);
+  listo(null, credencial);
 });
 
-passport.deserializeUser(function(id,listo) {
-  Credencial.findById(id, function(err, credencial){
-    listo(err, credencial);
-  });
+passport.deserializeUser(function(credencial,listo) {
+    listo(null, credencial);
 });
 
-passport.use(new LocalStrategy(
+passport.use('registro-local', new LocalStrategy(
   { usernameField : 'email', passwordField : 'clave' },
   function(email, clave, listo){
     // TODO: checkear si el usuario existe
@@ -49,15 +45,14 @@ passport.use(new LocalStrategy(
       return listo(null,false,'correro_existe'); //cada error lleva una llave que lo asocia con el json ubicado en /frontend/locales/es.json
     } else {
 
-      var datos = {email : email, token : clave, uid : email, password : clave};
+      var datos = {email : email, token : "na", uid : email, password : clave};
 
-    getSistemaDeLogueo('local',function(err,log){
-      datos._sistema_logueo = log;
-      if(! credencialCtrl.crear(datos, function(err) {
-        if (err) throw err;
-        return listo(null, nuevaCredencial);
-      }) ) return listo(true, nuevaCredencial, 'params_invalidos'); //cada error se le debe crear una llave, y esta llave añadirla en /frontend/locales/es.json
-
-    });
-  }
-}));
+      getSistemaDeLogueo('local',function(err,log){
+        datos._sistema_logueo = log;
+        credencialCtrl.crear(datos, function(err,nuevaCredencial) {
+          if (err) throw err;
+          listo(null,nuevaCredencial);
+        });
+      });
+    }
+  }));

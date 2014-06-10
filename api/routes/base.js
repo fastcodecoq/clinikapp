@@ -21,10 +21,13 @@ var base = function(router,passport) {
   });
   //route.get('/registro',function(req,res){
   //});
-  router.post('/registro', passport.authenticate('local', {
+  router.post('/ingresar', passport.authenticate('registro-local', {
     successRedirect : '/perfil', // enviar a completar perfil
-    failureRedirect : '/registro2', // redirigir a registro en caso de fallo
+    failureRedirect : '/ingresar', // redirigir a registro en caso de fallo
   }));
+  //router.get('/perfil', estaLogueado, function(req, res){
+    //res.json(req.user);
+  //});
   console.log('rutas iniciadas');
   return router;  // siempre se retorna el router
 };
