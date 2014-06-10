@@ -16,25 +16,11 @@ var base = function(router,passport) {
 
   // ============================= incluimos las rutas basicas ===================
   router = require('./usuarios')(router); //iniciamos las rutas para los usuarios
+  router = require('./auth')(router);
   // ================================= requires =================================
   //route.get('/registro',function(req,res){
   //});
 
-
-  router.post('/registrar', passport.authenticate('registro-local', {
-    successRedirect : '/perfil', // enviar a completar perfil
-    failureRedirect : '/registrar', // redirigir a registro en caso de fallo
-  }));
-
-
-  router.post('/ingresar', passport.authenticate('ingreso-local', {
-    successRedirect : '/perfil', // enviar a completar perfil
-    failureRedirect : '/ingresar', // redirigir a registro en caso de fallo
-  }));
-
-  router.get('/perfil', estaLogueado, function(req, res){
-    res.json(req.user);
-  });
 
   router.get('*', function(req, res) {
     res.json({error:true, message:'peticion_invalida'});
