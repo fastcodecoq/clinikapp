@@ -16,7 +16,7 @@ var base = function(router,passport) {
 
   // ============================= incluimos las rutas basicas ===================
   router = require('./usuarios')(router); //iniciamos las rutas para los usuarios
-  router = require('./auth')(router);
+  router = require('./auth')(router, passport);
   // ================================= requires =================================
   //route.get('/registro',function(req,res){
   //});
@@ -33,9 +33,3 @@ var base = function(router,passport) {
 
 
 module.exports = base;
-
-function estaLogueado(req, res, next){
-  if (req.isAuthenticated())
-    return next();
-  res.redirect('/');
-}

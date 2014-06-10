@@ -56,7 +56,7 @@ app.use(bodyparser());
 var pass = require('./config/passport');
 app.use(cookieParser());
 app.use(session({
-  secret: (process.env.SESSION_SECRET || 'Your Session Secret goes here'),
+  secret: (process.env.SESSION_SECRET || '~cliniKApp|~@l14'),
   store: new MongoStore({
       url: 'mongodb://' + db_address,
       auto_reconnect: true

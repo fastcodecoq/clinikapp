@@ -31,7 +31,6 @@
 	"should" : "latest",
 	"sanitizer" : "latest",
 	"multer" : "latest",
-	"crypto" : "latest",
 	"bcrypt-nodejs" : "latest"
     },
 
