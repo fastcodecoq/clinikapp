@@ -38,7 +38,7 @@ var usuario = {
               if(!exist)
                new usuarios(datos).save( callback );
               else
-                callback(true, "usuario_existe"); 
+                callback(true, null,"usuario_existe"); 
 
 
             });

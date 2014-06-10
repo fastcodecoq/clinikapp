@@ -32,6 +32,24 @@ var usuarios = function(router){
 		  });
 
 
+      router.get('/credenciales', function (req, res){
+
+          var credencialesCtrl = require('../controllers/credencial');
+
+      if ( ! credencialesCtrl.buscar( function (err, rs){  //
+
+         if(!err)        
+            res.json({error:false, message: rs});     
+          else
+          res.json({error:true, message: 'sin_registros'});   // sin_registros es una llave de referencia del mensaje de error.
+
+ 
+        }) ) res.json({ error:true, message: 'params_invalidos'}) ; 
+            
+      
+      });
+
+
 
       // ruta para obtener los usuarios hasta cierto limite
        // se reciben las variables limit y skip
@@ -154,10 +172,10 @@ var usuarios = function(router){
                   
 
             
-                if ( ! usrCtrl.crear(datos, function(err, rs){
+                if ( ! usrCtrl.crear(datos, function(err, rs, llave_err){
 
-                   if(err && (typeof rs === 'string') )       // verificamos si rs es un string, ya que se retorna un String en caso de que el error no sea de base de datos    
-                     res.json({error:true, message : rs});
+                   if(typeof llave_err  === 'string')       // verificamos si rs es un string, ya que se retorna un String en caso de que el error no sea de base de datos    
+                     res.json({error:true, message : llave_err});
                    else if(!err)
                           res.json({error:false,message:"ok"});
                    else
@@ -201,6 +219,9 @@ var usuarios = function(router){
         });
 
 
+
+
+   
 
     
     	 // ============== con el verbo HTTP Delete eliminamos los usaurios
