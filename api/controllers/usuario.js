@@ -149,7 +149,7 @@ var usuario = {
 
 
           if(typeof datos !== 'object') return false;
-          if(typeof callback !=== 'function') return false;
+          if(typeof callback !== 'function') return false;
 
           
           this.crear(datos, function(err, rs){
