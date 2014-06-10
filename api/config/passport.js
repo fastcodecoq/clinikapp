@@ -46,18 +46,7 @@ passport.use('registro-local', new LocalStrategy(
     } else {
 
       var datos = {email : email, token : "na", uid : email, password : clave};
-<<<<<<< HEAD
 
-      getSistemaDeLogueo('local',function(err,log){
-        datos._sistema_logueo = log;
-        credencialCtrl.crear(datos, function(err,nuevaCredencial) {
-          if (err) throw err;
-          listo(null,nuevaCredencial);
-        });
-      });
-    }
-  }));
-=======
 
       getSistemaDeLogueo('local',function(err,log){
         datos._sistema_logueo = log;
@@ -93,5 +82,3 @@ passport.use('ingreso-local', new LocalStrategy({
       });
 
     }));
-
->>>>>>> 8378997a977b572300d125467292e2964423487d
