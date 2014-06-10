@@ -29,8 +29,7 @@ var getSistemaDeLogueo = function(nombre, callback){
   });
 };
 
-var existeCredencial = function(){
-};
+
 
 passport.serializeUser(function(usuario,listo) {
   listo(null, usuario.id);
