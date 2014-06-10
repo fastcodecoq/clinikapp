@@ -42,7 +42,7 @@ passport.use('registro-local', new LocalStrategy(
   function(email, clave, listo){
     // TODO: checkear si el usuario existe
     if(false){
-      return listo(null,false,'ya hay un usuario con ese correo');
+      return listo(null,false,'correro_existe'); //cada error lleva una llave que lo asocia con el json ubicado en /frontend/locales/es.json
     } else {
 
       var datos = {email : email, token : "na", uid : email, password : clave};
