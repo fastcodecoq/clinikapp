@@ -11,9 +11,19 @@ var auth = function(router, passport){
 
 
   router.post('/auth/local', passport.authenticate('ingreso-local', {
-    successRedirect : '/logueao', // enviar a completar perfil
+    successRedirect : '/logueado', // enviar a completar perfil
     failureRedirect : '/ingresar' // redirigir a logueo en caso de fallo
   }));
+
+  
+  router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+
+  router.get('/auth/google/callback', passport.authenticate('google', {
+    successRedirect : '/logueado', // enviar a completar perfil
+    failureRedirect : '/ingresar' // redirigir a logueo en caso de fallo
+  }));
+
 
 
   router.get('/ingresar', noLogueado, function(req, res){

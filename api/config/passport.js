@@ -1,5 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
-var GoogleStrategy = require('passport-google-oauth');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var Credencial = require('../models/credenciales');
 var Logueo = require('../models/sistemasLogueo');
 var credencialCtrl = require('../controllers/credencial');
@@ -72,6 +72,9 @@ passport.use('registro-local', new LocalStrategy(
 
   }));
 
+
+
+
 passport.use('ingreso-local', new LocalStrategy({
         usernameField : 'email',
         passwordField : 'clave',
@@ -109,3 +112,24 @@ passport.use('ingreso-local', new LocalStrategy({
 
 
     }));
+
+
+passport.use('google', new GoogleStrategy({    
+    clientID: '676866663553-f1ju015m12ia1bu8nt99o85chqtrnt13.apps.googleusercontent.com',
+    clientSecret: 'm9rUagRj07jNM7r-W8q-lSk0',
+    callbackURL: 'http://localhost:8080/auth/google/callback'
+  },
+  function(token, refreshToken, profile, listo) {
+    
+    process.nextTick(function(){
+
+        console.log(token,profile);
+
+        profile['token'] = token;
+
+        listo(null, profile);
+
+    });
+
+  }
+));

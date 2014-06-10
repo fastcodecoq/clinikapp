@@ -27,11 +27,6 @@ var usuario = {
                   return;
                 }
 
-         // ==== le damos el formato correcto al campo email, acorde al Schema usuarios ======= //
-
-              if(datos.email)
-               datos.email = { dir : datos.email};
-
  
          // ==== verifiamos si no existe el usuario, sino existe, lo creamos ======= //
 
@@ -69,10 +64,7 @@ var usuario = {
             if(!datos.should.type("object")) return false;
             if(!callback.should.be.type("function")) return false;     
 
-            datos = this.sanitizar(datos);                                 
-            
-            if(datos.email)
-               datos.email = { dir : datos.email};                                
+            datos = this.sanitizar(datos);                                                               
       
       	    usuarios.findOneAndUpdate({_id : mongoose.Types.ObjectId(id)}, datos, callback); 
 
