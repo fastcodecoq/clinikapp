@@ -7,20 +7,20 @@
     "repository": {
 	"type": "git",
 	"url": "https://github.com/gomosoft/clinikapp.git"
-    },  
+    },
     "scripts" : {
 	"start" : "forever start main.js",
 	"restart" : "forever restart main.js",
 	"stop" : "forever stop main.js",
-	"dev" : "forever main.js"      
+	"dev" : "forever main.js"
     },
     "dependencies" : {
-	"express" : "~4.0.0",	  
-	"numeral" : "latest",	  
-	"express-session" : "latest",	  
-	"express-flash" : "latest",	  
-	"cookie-parser" : "latest",	  
-	"connect-mongo" : "latest",	  
+	"express" : "~4.0.0",
+	"numeral" : "latest",
+	"express-session" : "latest",
+	"express-flash" : "latest",
+	"cookie-parser" : "latest",
+	"connect-mongo" : "latest",
 	"mongoose" : "latest",
 	"socket.io" : "latest",
 	"passport" : "latest",
@@ -30,23 +30,25 @@
 	"body-parser" : "latest",
 	"should" : "latest",
 	"sanitizer" : "latest",
-	"multer" : "latest"	  	       	  	  	 
+	"multer" : "latest",
+	"crypto" : "latest",
+	"bcrypt-nodejs" : "latest"
     },
 
     "devDependencies" : {
-	"express" : "~4.0.0",	  	  	 
+	"express" : "~4.0.0",
 	"mongoose" : "latest",
 	"socket.io" : "latest",
 	"passport" : "latest",
 	"forever" : "latest",
-	"body-parser" : "latest",	  
+	"body-parser" : "latest",
 	"gulp": "~3.5.6",
 	"gulp-inject": "~0.4.1",
 	"gulp-clean": "~0.2.4",
 	"gulp-concat": "~2.2.0",
 	"gulp-less": "~1.2.3",
-	"should" : "latest",	  	       
+	"should" : "latest",
 	"sanitizer" : "latest",
-	"multer" : "latest"	  	       
+	"multer" : "latest"
     }
 }

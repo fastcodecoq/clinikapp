@@ -14,9 +14,9 @@ var sistemaLogueoSchema = new Schema({
 // ===================== mongoose middleware ====================================
 
 
-// ... esto nos sirve para validar los datos que se ingresarán a la base de datos
 
- sistemaLogueoSchema.path('key').validate(function(datos){
+// ... esto nos sirve para validar los datos que se ingresarán a la base de datos
+sistemaLogueoSchema.path('key').validate(function(datos){
    //verificamos si las variables contienen el formato adecuado...
     if(!typeof this.key === 'string') return false;  //validamos el formato del key
     if(!typeof this.secret === 'string') return false;  //validamos el formato del secret

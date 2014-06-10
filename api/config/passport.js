@@ -40,24 +40,23 @@ passport.deserializeUser(function(usuario,listo) {
     listo(err, usuario);
   });
 });
-passport.use(new LocalStrategy({
-  usernameField : 'email',
-  passwordField : 'clave'
-},
-function(email, clave, listo){
-  // TODO: checkear si el usuario existe
-  if(false){
-    return listo(null,false,'ya hay un usuario con ese correo');
-  } else {
 
-    var datos = {email : email, token : clave, uid : email};
+passport.use(new LocalStrategy(
+  { usernameField : 'email', passwordField : 'clave' },
+  function(email, clave, listo){
+    // TODO: checkear si el usuario existe
+    if(false){
+      return listo(null,false,'ya hay un usuario con ese correo');
+    } else {
 
-    getSistemaDeLogueo('local',function(err,log){
-      datos._id_sistema_logueo = log;
-      credencialCtrl.crear(datos, function(err) {
-        if (err) throw err;
-        return listo(null, nuevaCredencial);
+      var datos = {email : email, token : clave, uid : email, password : clave};
+
+      getSistemaDeLogueo('local',function(err,log){
+        datos._id_sistema_logueo = log;
+        credencialCtrl.crear(datos, function(err) {
+          if (err) throw err;
+          return listo(null, nuevaCredencial);
+        });
       });
-    });
-  }
-}));
+    }
+  }));
