@@ -34,8 +34,9 @@ var base = function(router,passport) {
     failureRedirect : '/ingresar', // redirigir a registro en caso de fallo
   }));
 
+
    router.get('*', function(req, res) {
-    res.json({error:true, message:'La petición no es valida'});
+    res.json({error:true, message:'peticion_no_valida'});
    });
 
   //router.get('/perfil', estaLogueado, function(req, res){
