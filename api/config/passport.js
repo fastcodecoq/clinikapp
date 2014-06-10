@@ -54,10 +54,12 @@ function(email, clave, listo){
 
     getSistemaDeLogueo('local',function(err,log){
       datos._id_sistema_logueo = log;
-      credencialCtrl.crear(datos, function(err) {
+      
+      if(! credencialCtrl.crear(datos, function(err) {
         if (err) throw err;
         return listo(null, nuevaCredencial);
-      });
+      }) ) return listo(null, nuevaCredencial);
+
     });
   }
 }));
