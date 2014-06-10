@@ -1,4 +1,4 @@
-var credenciales = require('../models/credencial');
+var credenciales = require('../models/credenciales');
 var should = require('should');
 var mongoose = require('mongoose');
 

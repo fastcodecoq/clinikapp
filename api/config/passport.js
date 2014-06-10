@@ -2,7 +2,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth');
 var Credencial = require('../models/credenciales');
 var Logueo = require('../models/sistemasLogueo');
-var credencialCtrl = require('../controllers/credencial.js');
+var credencialCtrl = require('../controllers/credencial');
 var passport = require('passport');
 
 
