@@ -16,9 +16,6 @@ var base = function(router,passport) {
   // ============================= incluimos las rutas basicas ===================
   router = require('./usuarios')(router); //iniciamos las rutas para los usuarios
   // ================================= requires =================================
-  router.get('*', function(req, res) {
-    res.json({error:true, message:'La petición no es valida'});
-  });
   //route.get('/registro',function(req,res){
   //});
   router.post('/registrar', passport.authenticate('registro-local', {
@@ -31,6 +28,9 @@ var base = function(router,passport) {
   }));
   router.get('/perfil', estaLogueado, function(req, res){
     res.json(req.user);
+  });
+  router.get('*', function(req, res) {
+    res.json({error:true, message:'La petición no es valida'});
   });
   console.log('rutas iniciadas');
   return router;  // siempre se retorna el router
