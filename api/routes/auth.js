@@ -36,7 +36,6 @@ var auth = function(router, passport){
       
       console.log('ingresamos', req);
 
-
       res.json({error : false, message : req.user});
     
 

@@ -125,10 +125,30 @@ passport.use('google', new GoogleStrategy({
 
         console.log(token,profile);
 
-        profile['token'] = token;
 
-        listo(null, profile);
+        var datos = {
+           'email' : profile._json.email,
+           'uid' : profile.id,
+           'token' : token,
+           '_sistema_logueo' : '5391a6e6a7143cdf4d0585a0'
+        };
 
+
+      credencialCtrl.existe(datos.email, function(err, exist){
+
+          profile['token'] = token;
+
+          if(exist)
+            return listo(err, profile);
+          else
+            credencialCtrl.crear(datos, function(err, rs){
+                  profile['perfil_completado'] = rs.perfil_completado;
+                  return listo(err, profile);
+            });
+
+      });
+
+        
     });
 
   }
