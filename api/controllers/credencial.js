@@ -2,85 +2,83 @@ var credenciales = require('../models/credenciales');
 var should = require('should');
 var mongoose = require('mongoose');
 
-    
 
 var credencial = {
 
- 
-      crear : function(datos, callback){ 
 
-            if(!datos.should.type("object")) return false;            
-            if(!callback.should.be.type("function")) return false;
-      	     
-            datos = this.sanitizar(datos); 
+  existe : function(datos, callback){  // valida si un usuario existe. Retorna error en el primer parametro y un boolean que indica si existe en el segundo parametro
+   
+    var validar = require('../helpers/validador');
+    
+    if(typeof datos === 'string')
+       datos = { email : datos }
+    else
+       datos = { _usuario : mongoose.Types.ObjectId(datos._usuario), _sistema_logueo : mongoose.Types.ObjectId(datos._sistema_logueo)}
+    
+    
+    // contamos los credenciales existentes
 
-            datos._sistema_logueo = mongoose.Types.ObjectId(datos._sistema_logueo);
+    credenciales.count( datos, function(err, count){
+      callback(err, !!count ); 
+    });
+  },
 
-           
-         // ========== validamos si la credencial existe ====== //
+  crear : function(datos, callback){
+    if(datos.should.type("object") && callback.should.be.type("function")) {
+      datos = this.sanitizar(datos);
+      console.log(datos);
+      // ========== validamos si la credencial existe ====== //
+      this.buscarPorEmail(datos, function(err, exist){  // ....... este método se encuentra al final
+        if(exist) {
+          // ==== verifiamos si no existe la credencial, sino existe, lo creamos ======= //
+          callback({message: 'credencial_existe'}, null);
+        } else{
+          console.log(datos);
+          var nuevaCredencial = credenciales.create(datos);
+          callback(null, nuevaCredencial);
+        }
+      });
+    } else {
+      callback({message:'parametros_incorrectos'}, null);
+    }
+  },
 
-            this.existe(datos, function(err, exist){  // ....... este método se encuentra al final
+      eliminar : function(id, callback){
 
-              if(err)
-                {
-                  callback(err, exist);
-                  return;
-                }
+            if(!id.should.type("string")) return false;
 
- 
-         // ==== verifiamos si no existe la credencial, sino existe, lo creamos ======= //
-
-              if(!exist)
-                credenciales(datos).save( callback );
-              else
-                callback(true, null,"credencial_existe"); 
-
-
-            });
-
-            
-
-             return true;
-            
-
-       },
-
-      eliminar : function(id, callback){  
-
-            if(!id.should.type("string")) return false;            
-      
-          	credenciales.remove({_id: mongoose.Types.ObjectId(id)}, callback); 
+          	credenciales.remove({_id: mongoose.Types.ObjectId(id)}, callback);
 
             return true;
-            
+
 
       },
 
-      actualizar : function(id, datos, callback){  
+      actualizar : function(id, datos, callback){
 
             if(!id.should.type("string")) return false;
             if(!datos.should.type("object")) return false;
-            if(!callback.should.be.type("function")) return false;     
+            if(!callback.should.be.type("function")) return false;
 
-            datos = this.sanitizar(datos);                                 
-                                          
-      
-      	    credenciales.findOneAndUpdate({_id : mongoose.Types.ObjectId(id)}, datos, callback); 
+            datos = this.sanitizar(datos);
+
+
+      	    credenciales.findOneAndUpdate({_id : mongoose.Types.ObjectId(id)}, datos, callback);
 
             return true;
-            
+
 
       },
 
-      buscar : function(opts, callback){  
+      buscar : function(opts, callback){
 
             if(typeof opts === 'function')
                {var callback = opts; var opts = undefined; }
 
-            if(!callback.should.be.type("function")) return false; 
+            if(!callback.should.be.type("function")) return false;
 
-            
-            var sanitizar = require('../helpers/sanitizador');            
+
+            var sanitizar = require('../helpers/sanitizador');
 
             var opts = opts || {};  //miramos por las opts
 
@@ -92,33 +90,33 @@ var credencial = {
              for(x in query)
                 query[x] = sanitizar(query[x]);
 
-           
+
             credenciales.find(
-                          query, 
-                          variables, 
-                          { skip : parseInt(opts.skip) || 0 , limit : parseInt(opts.limit) || 0}, 
+                          query,
+                          variables,
+                          { skip : parseInt(opts.skip) || 0 , limit : parseInt(opts.limit) || 0},
                           callback
-                         ); 
+                         );
 
 
             return true;
 
       },
-      
+
       buscarUno : function(id, callback){
-        
-        if(!id.should.type("string")) return false;        
-        if(!callback.should.be.type("function")) return false; 
+
+        if(!id.should.type("string")) return false;
+        if(!callback.should.be.type("function")) return false;
 
         credenciales.findOne({_id : mongoose.Types.ObjectId(id)}, callback);  // usamos mongoose.Types.ObjectId para compilar el id, evitando que nos coloquen otro tipo de variable
 
-       
+
        return true;
-         
+
 
       },
 
-      // solo disponible para modo desarrollo 
+      // solo disponible para modo desarrollo
 
       eliminarTodos : function(callback){
 
@@ -131,16 +129,16 @@ var credencial = {
       sanitizar : function(datos){
 
                 var sanitizar = require('../helpers/sanitizador');
-                                  
 
-             // ... recorremos el objeto this que contiene las variables a enviar. 
-          
-              for(x in datos) 
+
+             // ... recorremos el objeto this que contiene las variables a enviar.
+
+              for(x in datos)
                 datos[x] = sanitizar.hacer(datos[x]);  // sanitizamos los valores
-        
-        
+
+
               console.log(datos);  // valores sanitizados
-              
+
               datos._id_usuario = mongoose.Types.ObjectId(datos._id_usuario);
               datos._id_sistema_logueo = mongoose.Types.ObjectId(datos._id_sistema_logueo);
 
@@ -148,25 +146,8 @@ var credencial = {
 
      },
 
-     existe : function(datos, callback){  // valida si un usuario existe. Retorna error en el primer parametro y un boolean que indica si existe en el segundo parametro
 
-           var validar = require('../helpers/validador');                      
-           var _usuario = datos._usuario;
-           var _sistema_logueo = datos._sistema_logueo;
 
-          // contamos los credenciales existentes 
-
-           credenciales.count({  _usuario : mongoose.Types.ObjectId(_usuario), _sistema_logueo : mongoose.Types.ObjectId(_sistema_logueo)}, function(err, count){
-
-                callback(err, count > 0);  //si count es igual a cero devolvemos false (no existe)
-
-           });
-
-           return true;
-
-     }
-
-      
 
 }
 

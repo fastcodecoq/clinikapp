@@ -46,6 +46,7 @@ passport.use('registro-local', new LocalStrategy(
     } else {
 
       var datos = {email : email, token : "na", uid : email, password : clave};
+<<<<<<< HEAD
 
       getSistemaDeLogueo('local',function(err,log){
         datos._sistema_logueo = log;
@@ -56,3 +57,41 @@ passport.use('registro-local', new LocalStrategy(
       });
     }
   }));
+=======
+
+      getSistemaDeLogueo('local',function(err,log){
+        datos._sistema_logueo = log;
+        credencialCtrl.crear(datos, function(err,nuevaCredencial) {
+          if (err) throw err;
+          listo(null,nuevaCredencial);
+        });
+      });
+    }
+  }));
+passport.use('ingreso-local', new LocalStrategy({
+        usernameField : 'email',
+        passwordField : 'clave',
+        passReqToCallback : true
+    },
+    function(req, email, clave, listo) {
+
+      Credencial.findOne({ 'email' :  email }, function(err, credencial) {
+        if (err)
+          return listo(err);
+        if (!credencial)
+          return listo(null, false, "correo_no_existe");
+        credencial.compararPassword(clave, function(err,iguales){
+          if (err)
+            return listo(err);
+          if(iguales){
+            console.log('logged in');
+            return listo(null, credencial);
+          } else {
+            return listo(null, false, "contrasena_incorrecta");
+          }
+        });
+      });
+
+    }));
+
+>>>>>>> 8378997a977b572300d125467292e2964423487d
