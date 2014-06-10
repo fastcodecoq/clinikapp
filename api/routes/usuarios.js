@@ -32,7 +32,6 @@ var usuarios = function(router){
 		  });
 
 
-
       // ruta para obtener los usuarios hasta cierto limite
        // se reciben las variables limit y skip
 
@@ -154,10 +153,10 @@ var usuarios = function(router){
                   
 
             
-                if ( ! usrCtrl.crear(datos, function(err, rs){
+                if ( ! usrCtrl.crear(datos, function(err, rs, llave_err){
 
-                   if(err && (typeof rs === 'string') )       // verificamos si rs es un string, ya que se retorna un String en caso de que el error no sea de base de datos    
-                     res.json({error:true, message : rs});
+                   if(typeof llave_err  === 'string')       // verificamos si rs es un string, ya que se retorna un String en caso de que el error no sea de base de datos    
+                     res.json({error:true, message : llave_err});
                    else if(!err)
                           res.json({error:false,message:"ok"});
                    else
@@ -201,6 +200,9 @@ var usuarios = function(router){
         });
 
 
+
+
+   
 
     
     	 // ============== con el verbo HTTP Delete eliminamos los usaurios
