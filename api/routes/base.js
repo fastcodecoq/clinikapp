@@ -29,10 +29,16 @@ var base = function(router,passport) {
     successRedirect : '/perfil', // enviar a completar perfil
     failureRedirect : '/ingresar', // redirigir a registro en caso de fallo
   }));
-  //router.get('/perfil', estaLogueado, function(req, res){
-    //res.json(req.user);
-  //});
+  router.get('/perfil', estaLogueado, function(req, res){
+    res.json(req.user);
+  });
   console.log('rutas iniciadas');
   return router;  // siempre se retorna el router
 };
 module.exports = base;
+
+function estaLogueado(req, res, next){
+  if (req.isAuthenticated())
+    return next();
+  res.redirect('/');
+}
