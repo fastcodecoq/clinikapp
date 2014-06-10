@@ -58,7 +58,7 @@ function(email, clave, listo){
       if(! credencialCtrl.crear(datos, function(err) {
         if (err) throw err;
         return listo(null, nuevaCredencial);
-      }) ) return listo(null, nuevaCredencial);
+      }) ) return listo(true, nuevaCredencial);
 
     });
   }
