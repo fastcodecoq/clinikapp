@@ -142,7 +142,7 @@ passport.use('google', new GoogleStrategy({
             return listo(err, profile);
           else
             credencialCtrl.crear(datos, function(err, rs){
-                  profile['perfil_completado'] = rs.perfil_completado;
+                  profile['perfil_completado'] = false;
                   return listo(err, profile);
             });
 
