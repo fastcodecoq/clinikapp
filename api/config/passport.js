@@ -2,7 +2,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth');
 var Credencial = require('../models/credenciales');
 var Logueo = require('../models/sistemasLogueo');
-var credenciales = require('../controllers/credencial.js');
+var credencialCtrl = require('../controllers/credencial.js');
 var passport = require('passport');
 
 
@@ -54,7 +54,7 @@ function(email, clave, listo){
 
     getSistemaDeLogueo('local',function(err,log){
       datos._id_sistema_logueo = log;
-      credenciales.crear(datos, function(err) {
+      credencialCtrl.crear(datos, function(err) {
         if (err) throw err;
         return listo(null, nuevaCredencial);
       });
