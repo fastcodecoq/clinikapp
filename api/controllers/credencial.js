@@ -33,8 +33,7 @@ var credencial = {
           callback({message: 'credencial_existe'}, null);
         } else{
           console.log(datos);
-          var nuevaCredencial = credenciales.create(datos);
-          callback(null, nuevaCredencial);
+          credenciales.create(datos, callback);
         }
       });
     } else {
