@@ -17,6 +17,10 @@
     "dependencies" : {
 	"express" : "~4.0.0",	  
 	"numeral" : "latest",	  
+	"express-session" : "latest",	  
+	"express-flash" : "latest",	  
+	"cookie-parser" : "latest",	  
+	"connect-mongo" : "latest",	  
 	"mongoose" : "latest",
 	"socket.io" : "latest",
 	"passport" : "latest",
