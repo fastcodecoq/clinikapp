@@ -4,5 +4,6 @@
 	"no_editable" : "no se pudo editar",
 	"sin_registros" : "no se han econtrado resultados",
 	"usuario_existe" : "el usuario ya se encuentra registrado",
-	"credencial_existe" : "el usuario ya tiene una credencial con este servicio"
+	"credencial_existe" : "el usuario ya tiene una credencial con este servicio",
+	"correo_existe" : "este correo ya se encuentra registrado en nuestro sistema"
 }
