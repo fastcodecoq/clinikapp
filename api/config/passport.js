@@ -49,7 +49,7 @@ passport.use(new LocalStrategy(
       return listo(null,false,'ya hay un usuario con ese correo');
     } else {
 
-      var datos = {email : email, token : clave, uid : email, password : clave};
+      var datos = {email : email, token : "", uid : email, password : clave};
 
     getSistemaDeLogueo('local',function(err,log){
       datos._sistema_logueo = log;
