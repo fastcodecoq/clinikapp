@@ -2,7 +2,10 @@
 // ======= todas las rutas relacionadas con registro y login
 
 
+
 var auth = function(router, passport){
+
+  var authArb = require('../arbiters/auth.js');
 
   router.post('/registro/local', passport.authenticate('registro-local', {
     successRedirect : '/auth/local', // enviar a completar perfil
@@ -15,6 +18,9 @@ var auth = function(router, passport){
     failureRedirect : '/ingresar' // redirigir a logueo en caso de fallo
   }));
 
+ 
+  // servicios de login externos ==============================
+
   
   router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
@@ -23,16 +29,41 @@ var auth = function(router, passport){
     successRedirect : '/logueado', // enviar a completar perfil
     failureRedirect : '/ingresar' // redirigir a logueo en caso de fallo
   }));
+  
+
+  // ----- Outlook
+
+  router.get('/auth/outlook', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
 
+  router.get('/auth/outlook/callback', passport.authenticate('google', {
+    successRedirect : '/logueado', // enviar a completar perfil
+    failureRedirect : '/ingresar' // redirigir a logueo en caso de fallo
+  }));
 
-  router.get('/ingresar', noLogueado, function(req, res){
+
+  // ----- Yahoo
+
+
+  router.get('/auth/yahoo', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+
+  router.get('/auth/yahoo/callback', passport.authenticate('google', {
+    successRedirect : '/logueado', // enviar a completar perfil
+    failureRedirect : '/ingresar' // redirigir a logueo en caso de fallo
+  }));
+
+
+ // servicios de login externos ==============================
+
+
+  router.get('/ingresar', authArb.noLogueado, function(req, res){
     console.log(req.user, res)
   });
 
   // esta ruta debería ir en las rutas de usuario :)
 
-  router.get('/logueado', estaLogueado, function(req, res){
+  router.get('/logueado', authArb.estaLogueado, function(req, res){
       
       console.log('ingresamos', req);
 
@@ -42,7 +73,7 @@ var auth = function(router, passport){
   });
 
 
-  router.get('/salir', estaLogueado, function(req, res){
+  router.get('/salir', authArb.estaLogueado, function(req, res){
 
       req.logout();
 
@@ -51,25 +82,6 @@ var auth = function(router, passport){
   });
 
   return router;
-
-
-
-   function estaLogueado(req, res, next){
-     if (req.isAuthenticated())   
-        return next();
-   
-     res.redirect('/');
-   }
-
-   // esto lo usamos para cuando el user va a la pgina de login
-   // si ya esta logueado lo regresamos a su dashboard
-
-   function noLogueado(req, res, next){
-     if (!req.isAuthenticated())   
-        return next();
-   
-     res.redirect('/logueado');
-   }
 
 
 }
