@@ -2,9 +2,13 @@ var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth');
 var Credencial = require('../models/credenciales');
 var Logueo = require('../models/sistemasLogueo');
+<<<<<<< HEAD
 var credenciales = require('../controllers/credencial.js');
 var passport = require('passport');
 
+=======
+var passport = require('passport');
+>>>>>>> ea0b52f432a0e712b69fb20b2884635b9a6d3a0c
 
 var getSistemaDeLogueo = function(nombre, callback){
   Logueo.findOne({nombre : nombre}, function(err,log){
@@ -49,11 +53,21 @@ function(email, clave, listo){
   if(false){
     return listo(null,false,'ya hay un usuario con ese correo');
   } else {
+<<<<<<< HEAD
     var datos = {email : email, token : clave, uid : email};
 
     getSistemaDeLogueo('local',function(err,log){
       datos._id_sistema_logueo = log;
       credenciales.crear(datos, function(err) {
+=======
+    var nuevaCredencial = new Credencial();
+    nuevaCredencial.email = email;
+    nuevaCredencial.token = clave;
+    nuevaCredencial.uid = email;
+    getSistemaDeLogueo('local',function(err,log){
+      nuevaCredencial._id_sistema_logueo = log;
+      nuevaCredencial.save(function(err) {
+>>>>>>> ea0b52f432a0e712b69fb20b2884635b9a6d3a0c
         if (err) throw err;
         return listo(null, nuevaCredencial);
       });
