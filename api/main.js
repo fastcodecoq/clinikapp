@@ -5,12 +5,16 @@
 
 var express = require('express');
 var app = express();
+var session = require('express-session');
+var flash = require('express-flash');
 var bodyparser = require('body-parser');
 var mongoose = require('mongoose');
 var multer = require('multer');
+var cookieParser = require('cookie-parser')
 var cluster = require('cluster');
 var cores = require('os').cpus().length;  //numero de cpus
 var passport = require('passport');
+var MongoStore = require('connect-mongo')({ session: session });
 
 // ... incluir arriba todos los requires principales
 
@@ -48,10 +52,18 @@ app.use(multer());
 // testeamos mas rapido el api luego solo es cambiar bodyparser() por bodyparser.urlencoded()
 app.use(bodyparser());
 //le pasamos las routes al app express
-require('./config/passport')(passport);
+var pass = require('./config/passport');
+app.use(cookieParser());
+app.use(session({
+  secret: (process.env.SESSION_SECRET || 'Your Session Secret goes here'),
+  store: new MongoStore({
+      url: 'mongodb://' + db_address,
+      auto_reconnect: true
+    })
+}));
 app.use(passport.initialize());
-
-
+app.use(passport.session());
+app.use(flash());
 // ============ app.use ===========================
 
 var router = express.Router();
