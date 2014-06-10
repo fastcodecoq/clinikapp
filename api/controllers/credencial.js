@@ -17,7 +17,7 @@ var credencial = {
     console.log(datos)
 
     credenciales.count( datos, function(err, count){
-      callback(err, !!count ); 
+       callback(err, count > 0 ); 
     });
   },
 

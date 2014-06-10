@@ -9,6 +9,7 @@ var passport = require('passport');
 var getSistemaDeLogueo = function(nombre, callback){
   
   Logueo.findOne({nombre : nombre}, function(err,log){
+
     if(err || log === null) {
       // #TODO local solo deberia servir en desarrollo
       if (nombre === 'local'){
@@ -42,26 +43,32 @@ passport.serializeUser(function(credencial,listo) {
 passport.use('registro-local', new LocalStrategy(
   { 
     usernameField : 'email',
-    passwordField : 'clave' 
+    passwordField : 'clave'
+
   },
   function(email, clave, listo){
     
     // TODO: checkear si el usuario existe
-    
-    if(false){
-      return listo(null,false,'correro_existe'); //cada error lleva una llave que lo asocia con el json ubicado en /frontend/locales/es.json
-   }else{
-      var datos = {email : email, token : "na", uid : email, clave : Credencial.schema.methods.genHash(clave)};
 
+
+    
+    credencialCtrl.existe({ email : email},
+      function(err, exist){
+
+        if(exist)
+          return listo(null,false,'correro_existe'); //cada error lleva una llave que lo asocia con el json ubicado en /frontend/locales/es.json
+
+      var datos = {email : email, token : "na", uid : email, clave : Credencial.schema.methods.genHash(clave)};
 
       getSistemaDeLogueo('local',function(err,log){
         datos._sistema_logueo = log;
         credencialCtrl.crear(datos, function(err,nuevaCredencial) {
           if (err) throw err;
           listo(null,nuevaCredencial);
-        });
+          });
+       });
+
       });
-    }
 
   }));
 
