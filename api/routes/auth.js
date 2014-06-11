@@ -68,15 +68,29 @@ var auth = function(router, passport){
   });
 
 
+  router.get('/completar-registro', authArb.estaLogueado, function(req, res){
+      
+      console.log('hacemos el registro', req);
+
+      var user_raw = JSON.stringify(req.user);
+      var style = 'word-break: break-all;width: 466px;';
+
+      res.send('<h1>Vista de completar registro en server</h1><br><p style="' + style +'">' + user_raw + '</p> <br><a href="/auth/salir">Cancelar</a>');
+    
+
+  });
+
   router.get('/logueado', authArb.estaLogueado, function(req, res){
       
       console.log('ingresamos', req);
 
       var servicios = require('../config/servicios');
 
+      if(req.user.perfil_completado)
       res.redirect( servicios.local.callbackURL + '/user/' + req.user.uid + '/' + req.user.token );
-    
-
+      else
+      res.redirect( '/completar-registro' );      
+        
   });
 
 

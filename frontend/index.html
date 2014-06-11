@@ -22,12 +22,19 @@
    		 if(/ingresar/g.test(path))
    		 {
 
+   		 	var if_error = /falla/g.test(path) ? 
+   		 	'<span style="color:red">Los datos de accceso ingresados no son correctos :/ </span><br><br>' 
+   		 	: 
+   		 	'';
+
+
+
    		 	console.log(path)
    		 	box.innerHTML = ''
    		        + '<form method="post" enctype="text/plain" action="http://localhost:8080/auth/local">'
-   		         + ''
-   		 	     + '<span>Correo</span><br><input name="mail" type="email" placeholder="Ingrese su correo"><br><br>'
-   		 	     + '<span>Clave</span><br><input name="clave" type="password"><br>'   		      
+   		         + if_error
+   		 	     + '<label>Correo</label><br><input name="mail" type="email" placeholder="Ingrese su correo"><br><br>'
+   		 	     + '<label>Clave</label><br><input name="clave" type="password"><br>'   		      
    		 	     + '<button>Ingresar</button>'
    		 	    + '</form> <br>'
    		 	      + 'No tiene una cuenta? <a href="http://localhost:8080/registro">Registrese</a>'
