@@ -5,5 +5,49 @@
    </head>
     <body>
     	   <h2>Clinikapp</h2>
+    	  <div class='box'>
+    	  </div>
    	</body>
+
+   	<script type="text/javascript">
+
+   	(function ini(w){
+
+   		 var box = document.querySelector(".box");
+
+   		 var path = document.location.pathname;
+
+   		 console.log(path)
+
+   		 if(/ingresar/g.test(path))
+   		 {
+
+   		 	console.log(path)
+   		 	box.innerHTML = ''
+   		        + '<form method="post" enctype="text/plain" action="http://localhost:8080/auth/local">'
+   		         + ''
+   		 	     + '<span>Correo</span><br><input name="mail" type="email" placeholder="Ingrese su correo"><br><br>'
+   		 	     + '<span>Clave</span><br><input name="clave" type="password"><br>'   		      
+   		 	     + '<button>Ingresar</button>'
+   		 	    + '</form> <br>'
+   		 	      + 'No tiene una cuenta? <a href="http://localhost:8080/registro">Registrese</a>'
+   		 	      + '<br><br>Ó<br><br>'
+   		 		  + 'Ingresa más rapido con tu cuenta de: <br><br>'
+   		 		  + '<a href="http://localhost:8080/auth/google">Correo Gmail</a>'
+   		 		  + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'   		 	 
+   		 		  + '<a href="http://localhost:8080/auth/live">Correo Outlook o Hotmail</a>'   	;	 		  
+   		 		return;  
+   		 }
+
+
+   		 if(/user/g.test(path))   		 
+   		 	box.innerHTML = ''
+   		 		  + '<a href="http://localhost:8080/auth/salir">Salir</a>';	
+
+   		 		  } 
+
+   		 		  )(window);		    
+   		 
+
+   	</script>
 </html>

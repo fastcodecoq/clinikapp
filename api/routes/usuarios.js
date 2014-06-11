@@ -4,6 +4,7 @@ var usuarios = function(router){
 	   
 	     var usrCtrl = require('../controllers/usuario');  // definimos el controlador a usar, en este caso el de usaurios
        var mongoose = require('mongoose');
+       var arbAuth = require('../arbiters/auth');
 
      
       // ========== Hacemos todos los controles de seguridad necesarios
@@ -16,7 +17,8 @@ var usuarios = function(router){
        // ============== con el verbo HTTP Get Obtenemos todos los usuarios      
 
 
-      router.get('/usuarios', function (req, res){
+      router.get('/usuarios', arbAuth.estaLogueado ,function (req, res){
+
 
 			if ( ! usrCtrl.buscar( function (err, rs){  //
 

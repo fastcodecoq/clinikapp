@@ -15,10 +15,10 @@ var cluster = require('cluster');
 var cores = require('os').cpus().length;  //numero de cpus
 var passport = require('passport');
 var MongoStore = require('connect-mongo')({ session: session });
+var servicios = require('./config/servicios');
 
 // ... incluir arriba todos los requires principales
 
-var db_address = 'clinikapp:clinikAPP.2014@localhost/clinikapp';
 
 mongoose.connection.on('open', function(ref){
   return console.log('Conectado a Mongo');
@@ -32,10 +32,10 @@ mongoose.connection.on('error', function(err){
 
 try {
   //nos conectamos a la base de datos
-  mongoose.connect('mongodb://' + db_address);
+  mongoose.connect('mongodb://' + servicios.db.url );
   console.log('Iniciando conexión en: ' + ('mongodb://' + db_address) + ', esperando...');
 } catch (err) {
-  console.log('Conexión fallida a: ' + db_address);
+  console.log('Conexión fallida a: ' + servicios.db.url);
 }
 
 
@@ -58,7 +58,7 @@ app.use(cookieParser());
 app.use(session({
   secret: (process.env.SESSION_SECRET || '~cliniKApp|~@l14'),
   store: new MongoStore({
-      url: 'mongodb://' + db_address,
+      url: 'mongodb://' + servicios.db.url,
       auto_reconnect: true
     })
 }));

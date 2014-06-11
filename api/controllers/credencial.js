@@ -136,11 +136,7 @@ var credencial = {
 
               console.log(datos);  // valores sanitizados
 
-              if(datos._usuario)
-              datos._usuario = mongoose.Types.ObjectId(datos._usuario);
-
-              if(datos._sistema_logueo)
-              datos._sistema_logueo = mongoose.Types.ObjectId(datos._sistema_logueo);
+              
 
               return datos;
 

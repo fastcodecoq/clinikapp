@@ -16,7 +16,7 @@ var usuarioSchema = new Schema({
 	fecha_nac : {type : Date},
 	divipola : {type : String, required : true},
 	telefono : String,
-	email : { dir : String , require : true},
+	email : { type : String , required : true},
 	email_verificado : { type : Boolean , default : false},
 	registro : {type : Date, default: Date.now },
 	local : { password : String},

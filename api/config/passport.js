@@ -1,9 +1,12 @@
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var liveStrategy = require('passport-windowslive').Strategy;
+var yahooStrategy = require('passport-yahoo-oauth').Strategy;
 var Credencial = require('../models/credenciales');
 var Logueo = require('../models/sistemasLogueo');
 var credencialCtrl = require('../controllers/credencial');
 var passport = require('passport');
+var servicios = require('./servicios');
 
 
 var getSistemaDeLogueo = function(nombre, callback){
@@ -115,9 +118,9 @@ passport.use('ingreso-local', new LocalStrategy({
 
 
 passport.use('google', new GoogleStrategy({    
-    clientID: '676866663553-f1ju015m12ia1bu8nt99o85chqtrnt13.apps.googleusercontent.com',
-    clientSecret: 'm9rUagRj07jNM7r-W8q-lSk0',
-    callbackURL: 'http://localhost:8080/auth/google/callback'
+    clientID: servicios.google.id,
+    clientSecret: servicios.google.secret,
+    callbackURL: servicios.google.callbackURL
   },
   function(token, refreshToken, profile, listo) {
     
@@ -130,7 +133,139 @@ passport.use('google', new GoogleStrategy({
            'email' : profile._json.email,
            'uid' : profile.id,
            'token' : token,
-           '_sistema_logueo' : '5391a6e6a7143cdf4d0585a0'
+           '_sistema_logueo' :  servicios.google.sistema_logueo
+        };
+
+
+      credencialCtrl.existe(datos.email, function(err, exist){
+
+          if(exist)
+            {
+              Credencial.findOne({uid : profile.id}, function(err, rs){
+                if(err)
+                  return listo(err, null);
+
+                if(rs)
+                {
+                rs.token = token;
+                rs.save(function(err,rs){
+                
+                console.log(rs);  
+                if(!err)
+                    return listo(err, rs); 
+                    
+                return listo(err, rs);
+
+                });
+                }
+                return listo(err, rs);
+
+
+                  
+              })
+            }
+          else
+            credencialCtrl.crear(datos, function(err, rs){
+                  profile['perfil_completado'] = false;
+                  return listo(err, rs);
+            });
+
+      });
+
+        
+    });
+
+  }
+));
+
+
+
+passport.use('live', new liveStrategy({    
+    clientID: servicios.live.id,
+    clientSecret: servicios.live.secret,
+    callbackURL: servicios.live.callbackURL
+  },
+  function(token, refreshToken, profile, listo) {
+
+
+    
+    process.nextTick(function(){
+
+        console.log(token,profile);
+
+
+        var datos = {
+           'email' : profile._json.emails.preferred,
+           'uid' : profile.id,
+           'token' : token,
+           '_sistema_logueo' : servicios.live.sistema_logueo
+        };
+
+
+     credencialCtrl.existe(datos.email, function(err, exist){
+
+
+          if(exist)
+            {
+              Credencial.findOne({uid : profile.id}, function(err, rs){
+                if(err)
+                  return listo(err, err);
+
+                if(rs)
+                {
+                rs.token = token;
+                rs.save(function(err,rs){
+                
+                console.log(rs);  
+                if(!err)
+                    return listo(err, rs); 
+                    
+                return listo(err, rs);
+
+                });
+                }
+                return listo(err, rs);
+
+
+                  
+              })
+            }
+          else
+            credencialCtrl.crear(datos, function(err, rs){
+                  profile['perfil_completado'] = false;
+                  return listo(err, rs);
+            });
+
+      });
+
+        
+    });
+
+  }
+));
+
+
+
+
+passport.use('yahoo', new yahooStrategy({    
+    consumerKey: servicios.yahoo.key,
+    consumerSecret: servicios.yahoo.secret,
+    callbackURL: servicios.yahoo.callbackURL
+  },
+  function(token, refreshToken, profile, listo) {
+
+
+    
+    process.nextTick(function(){
+
+        console.log(token,profile);
+
+
+        var datos = {
+           'email' : profile._json.email,
+           'uid' : profile.id,
+           'token' : token,
+           '_sistema_logueo' : servicios.yahoo.sistema_logueo
         };
 
 
@@ -143,7 +278,7 @@ passport.use('google', new GoogleStrategy({
           else
             credencialCtrl.crear(datos, function(err, rs){
                   profile['perfil_completado'] = false;
-                  return listo(err, profile);
+                  return listo(err, rs);
             });
 
       });

@@ -1,24 +1,27 @@
 
+var auth = {
+ 
+ estaLogueado :function (req, res, next){
 
- function estaLogueado(req, res, next){
-     if (req.isAuthenticated())   
+    console.log(req.id)
+
+     if (req.isAuthenticated())        
         return next();
    
-     res.redirect('/');
+     res.json({error:true, message: 'no_autorizado'});
+
    }
 
-   // esto lo usamos para cuando el user va a la pgina de login
-   // si ya esta logueado lo regresamos a su dashboard
+  ,
 
-   function noLogueado(req, res, next){
+  noLogueado : function (req, res, next){
      if (!req.isAuthenticated())   
-        return next();
-   
+       return next();
+
      res.redirect('/logueado');
    }
 
+ }
 
-module.exports = {
-  estaLogueado : estaLogueado,
-  noLogueado : noLogueado
-};		  
+
+module.exports = auth;
