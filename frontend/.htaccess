@@ -6,12 +6,3 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^(.*)    ./index.html
 
-ProxyRequests Off
-
-<Proxy *>
-Order deny,allow
-Allow from all
-</Proxy>
-
-ProxyPass /auth(.*) http://localhost:8080/auth$1
-ProxyPassReverse /auth(.*) http://localhost:8080/auth$1

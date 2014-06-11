@@ -64,7 +64,7 @@ passport.use('registro-local', new LocalStrategy(
         if(exist)
           return listo(null,false,'correro_existe'); //cada error lleva una llave que lo asocia con el json ubicado en /frontend/locales/es.json
 
-      var datos = {email : email, uid : email, _sistema_logueo : servicios.local.id ,clave : Credencial.schema.methods.genHash(clave)};
+      var datos = {email : email, uid : email, _sistema_logueo : servicios.local.sistema_logueo ,clave : Credencial.schema.methods.genHash(clave)};
           datos.token =  Credencial.schema.methods.genHash(datos.clave + datos.email + new Date().getTime());
 
         credencialCtrl.crear(datos, function(err,nuevaCredencial) {
