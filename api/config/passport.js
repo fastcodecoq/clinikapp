@@ -216,7 +216,7 @@ passport.use('live', new liveStrategy({
 
      credencialCtrl.existe({email : datos.email}, function(err, exist){
 
-      console.log('algooo')
+      console.log('live')
 
 
           if(exist)
@@ -275,19 +275,42 @@ passport.use('yahoo', new yahooStrategy({
 
 
         var datos = {
-           'email' : profile._json.email,
+           'email' : profile._json.emails.preferred,
            'uid' : profile.id,
            'token' : token,
            '_sistema_logueo' : servicios.yahoo.sistema_logueo
         };
 
 
-      credencialCtrl.existe(datos.email, function(err, exist){
+      credencialCtrl.existe({email : datos.email}, function(err, exist){
 
-          profile['token'] = token;
+      console.log('yahoo')
+
 
           if(exist)
-            return listo(err, profile);
+            {
+              Credencial.findOne({uid : profile.id}, function(err, credencial){
+                if(err)
+                  return listo(err, err);
+
+                if(credencial)
+                {
+                credencial.token = token;
+                credencial.save(function(err,credencial){
+
+                if(!err)
+                    return listo(err, credencial); 
+                    
+                return listo(err, credencial);
+
+                });
+                }
+                return listo(err, credencial);
+
+
+                  
+              })
+            }
           else
             credencialCtrl.crear(datos, function(err, rs){
                   profile['perfil_completado'] = false;

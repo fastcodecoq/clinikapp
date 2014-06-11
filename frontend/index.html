@@ -2,11 +2,101 @@
 <html lan="es-CO">
    <head>
    	  <meta charset="UTF-8">
+
+   	  <style>
+
+   	     *{
+   	     	border:0; margin: 0; outline: none; box-shadow: none; padding: 0;
+   	      }
+
+
+
+   	     body{ 
+   	     	font-size:13.5px; 
+   	     	font-family: 'Helevetica neue', Arial, Sans-serif;   	     
+   	      }
+
+   	       input{
+   	      	 border:1px solid #ccc;
+   	      	 padding: 5px;   	      	 
+   	      	 font-size: 1.3em;
+   	      }
+
+   	     .redable{ 
+   	     	font-family: 'verdana', Arial, serif; 
+   	     	line-height: 1.5;
+   	      }
+
+   	     .row{ display: block; }
+
+   	     .col{ 
+   	     	 display: inline-block;
+   	     	 float: left;
+   	     	 margin-left: 1em;
+   	        }
+
+   	     .s{width: 15%; min-width: 150px;}
+   	     .n{width: 25%; min-width: 300px;}
+   	     .m{width: 45%; min-width: 450px;}
+   	     .l{width: 70%; min-width: 600px;}
+   	     .xl{width: 80%; min-width: 800px;}
+   	     .xll{width: 90%; min-width: 900px;}
+   	     .full{width: 100%; min-width: 100%;}
+   	     .tfix{width:103%;}
+
+   	     .ts{font-size: 1em;}
+   	     .tm{font-size: 1.3em;}
+   	     .tl{font-size: 1.8em;}
+   	     .txl{font-size: 2.5em;}
+   	     .txxl{font-size: 3.3em;}
+
+   	     .tc{text-align: center;}
+   	     .tl{text-align: left;}
+   	     .tr{text-align: right;}
+   	     .tj{text-align: justify;}
+
+
+   	     .center{
+   	     	 display:table;
+   	     	 margin: 0 auto;
+   	     	 float: none;
+   	      }
+
+   	     .block{display: block;}
+   	     .inline{display: inline;}
+   	     .inline-block{display: inline-block;}
+   	     .table{display: table;}
+   	     .f-left{float: left;}
+   	     .f-right{float: right;}
+   	     .padded{ padding: 10px; }
+   	     .no-padded-sides{ padding-left:0; padding-right: 0; }
+
+
+   	     @media (max-width: 640px){
+
+   	     .s{width: 95%; }
+   	     .n{width: 95%; }
+   	     .m{width: 95%; }
+   	     .l{width: 95%; }
+   	     .xl{width: 95%; }
+   	     .xll{width: 95%; }
+   	     .full{width: 100%; }
+   	     .tfix{width:103%;}
+
+   	     }
+
+
+   	  </style>
    </head>
     <body>
-    	   <h2>Clinikapp</h2>
-    	  <div class='box'>
-    	  </div>
+    	<br>
+    	<br>
+    	<br>
+    	 <div class='contenido padded center n'>
+    	   <h2 class="txl tc">Clinikapp</h2>
+    	   <br>
+    	   <div class='box'></div>
+    	 </div>
    	</body>
 
    	<script type="text/javascript">
@@ -23,7 +113,7 @@
    		 {
 
    		 	var if_error = /falla/g.test(path) ? 
-   		 	'<span style="color:red">Los datos de accceso ingresados no son correctos :/ </span><br><br>' 
+   		 	'<span style="color:red" class="tc block">Los datos de accceso ingresados no son correctos :/ </span><br><br>' 
    		 	: 
    		 	'';
 
@@ -31,18 +121,22 @@
 
    		 	console.log(path)
    		 	box.innerHTML = ''
-   		        + '<form method="post" enctype="text/plain" action="http://localhost:8080/auth/local">'
+   		        + '<form class="full row" method="post" enctype="text/plain" action="http://localhost:8080/auth/local">'
    		         + if_error
-   		 	     + '<label>Correo</label><br><input name="mail" type="email" placeholder="Ingrese su correo"><br><br>'
-   		 	     + '<label>Clave</label><br><input name="clave" type="password"><br>'   		      
-   		 	     + '<button>Ingresar</button>'
+   		 	     + '<label class="block">Correo</label><br><input class="full" name="mail" type="email" placeholder="Ingrese su correo"><br><br>'
+   		 	     + '<label class="block">Clave</label><br><input class="full" name="clave" type="password"><br><br>'   		      
+   		 	     + '<button class="padded no-padded-sides block full tm tfix">Ingresar</button>'
    		 	    + '</form> <br>'
-   		 	      + 'No tiene una cuenta? <a href="http://localhost:8080/registro">Registrese</a>'
-   		 	      + '<br><br>Ó<br><br>'
-   		 		  + 'Ingresa más rapido con tu cuenta de: <br><br>'
+   		 	      + '<div >'
+   		 	      +  'No tiene una cuenta? <a href="http://localhost:8080/registro">Registrese</a>'
+   		 	      +'<br><br><div class="row s tc">Ó</div><br>'
+   		 		  + 'Ingrese más rapido con tu cuenta de: <br><br>'
    		 		  + '<a href="http://localhost:8080/auth/google">Correo Gmail</a>'
    		 		  + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'   		 	 
-   		 		  + '<a href="http://localhost:8080/auth/live">Correo Outlook o Hotmail</a>'   	;	 		  
+   		 		  + '<a href="http://localhost:8080/auth/live">Correo Outlook o Hotmail</a>'
+   		 		  + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'   		 	 
+   		 		  + '<a href="http://localhost:8080/auth/yahoo">Correo Yahoo</a>'
+   		 		  + '</div>'   	;	 		  
    		 		return;  
    		 }
 

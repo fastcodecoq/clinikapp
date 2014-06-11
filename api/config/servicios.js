@@ -12,8 +12,8 @@ module.exports = {
 	},
 
 	"yahoo" : {
-		"key" : "dj0yJmk9QUM1QzA1bHI2Njd3JmQ9WVdrOVRWSkxXVzlQTlRJbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1hOQ---",
-		"secret" : "431e7b020b9eba66a9423aeed310bec8eeecf97a" ,
+		"key" : "dj0yJmk9ekE0VkxKdmVFYjhTJmQ9WVdrOVdFUllkSEZJTkdVbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1hNA--",
+		"secret" : "af13dd72a4b8463cc32c3e5993124e8a31b5a6b7" ,
 		"callbackURL" : "http://clinikapp-l.com/auth/yahoo/callback",
 		"sistema_logueo" : 3
 	},
