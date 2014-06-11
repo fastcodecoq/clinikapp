@@ -1,6 +1,7 @@
 module.exports = {
 	"local" : {
-		"callbackURL" : "http://localhost/clinikapp/app/frontend"
+		"callbackURL" : "http://localhost/clinikapp/app/frontend",
+		"id" : 1
 	},
 
 	"google" : {

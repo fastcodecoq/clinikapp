@@ -7,6 +7,8 @@ var Logueo = require('../models/sistemasLogueo');
 var credencialCtrl = require('../controllers/credencial');
 var passport = require('passport');
 var servicios = require('./servicios');
+var bcrypt = require('bcrypt-nodejs');
+
 
 
 var getSistemaDeLogueo = function(nombre, callback){
@@ -56,22 +58,22 @@ passport.use('registro-local', new LocalStrategy(
 
     
     credencialCtrl.existe({ email : email},
+      
       function(err, exist){
 
         if(exist)
           return listo(null,false,'correro_existe'); //cada error lleva una llave que lo asocia con el json ubicado en /frontend/locales/es.json
 
-      var datos = {email : email, token : "na", uid : email, clave : Credencial.schema.methods.genHash(clave)};
+      var datos = {email : email, uid : email, _sistema_logueo : servicios.local.id ,clave : Credencial.schema.methods.genHash(clave)};
+          datos.token =  Credencial.schema.methods.genHash(datos.clave + datos.email + new Date().getTime());
 
-      getSistemaDeLogueo('local',function(err,log){
-        datos._sistema_logueo = log;
         credencialCtrl.crear(datos, function(err,nuevaCredencial) {
           if (err) throw err;
           listo(null,nuevaCredencial);
           });
-       });
-
+ 
       });
+
 
   }));
 
@@ -105,11 +107,21 @@ passport.use('ingreso-local', new LocalStrategy({
         if(! credencial.compararClaves(clave))
           return listo(null, false, "contraseña_incorrecta");
 
-        credencial['clave'] = null;        
+        credencial['clave'] = null;  
+
+        credencial.token_time = new Date().getTime();
+        credencial.token = credencial._usuario + credencial.clave + credencial.email + new Date().getTime();             
+        credencial.token = credencial.genHash(credencial.token);
+
+        credencial.save(function(err, credencial){
+           
+           if(err) return listo(err, {});
+
+             console.log('hemos ingresado');
+             return listo(null, credencial);
+
+        });
         
-        console.log('hemos ingresado');
-        return listo(null, credencial);
-       
 
         });
 
@@ -202,29 +214,30 @@ passport.use('live', new liveStrategy({
         };
 
 
-     credencialCtrl.existe(datos.email, function(err, exist){
+     credencialCtrl.existe({email : datos.email}, function(err, exist){
+
+      console.log('algooo')
 
 
           if(exist)
             {
-              Credencial.findOne({uid : profile.id}, function(err, rs){
+              Credencial.findOne({uid : profile.id}, function(err, credencial){
                 if(err)
                   return listo(err, err);
 
-                if(rs)
+                if(credencial)
                 {
-                rs.token = token;
-                rs.save(function(err,rs){
-                
-                console.log(rs);  
+                credencial.token = token;
+                credencial.save(function(err,credencial){
+
                 if(!err)
-                    return listo(err, rs); 
+                    return listo(err, credencial); 
                     
-                return listo(err, rs);
+                return listo(err, credencial);
 
                 });
                 }
-                return listo(err, rs);
+                return listo(err, credencial);
 
 
                   

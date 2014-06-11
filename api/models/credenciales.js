@@ -11,6 +11,8 @@ var credencialSchema = new Schema({
   _sistema_logueo : {type : Number, required : true},
   _usuario : {type : Schema.Types.ObjectId, ref : 'usuarioSchema'},
   token : {type : String, required : true},
+  token_time  : { type : String, default :  new Date().getTime()},
+  token_larga_vida : {type : Boolean, default : false},
   email : {type : String, required : true},
   uid : {type : String, required : true},  //id del usuario en el sistema de logueo (google, outlook o yahoo)
   fecha : {type : Date, default: Date.now},
