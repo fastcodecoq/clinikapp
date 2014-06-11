@@ -31,5 +31,9 @@ Para correr el app contamos con los siguientes comandos:
 * [Documentación de Mongoose Schemas](http://mongoosejs.com/docs/guide.html)
 
 
+**Notas.**
+
+* Para usar Postman enviar los datos del formulario como; x-www-form-urlencoded.
+
 
 

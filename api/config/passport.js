@@ -45,6 +45,8 @@ passport.serializeUser(function(credencial,listo) {
     listo(null, credencial);
 }); 
 
+
+
 passport.use('registro-local', new LocalStrategy(
   { 
     usernameField : 'email',
@@ -54,8 +56,6 @@ passport.use('registro-local', new LocalStrategy(
   function(email, clave, listo){
     
     // TODO: checkear si el usuario existe
-
-
     
     credencialCtrl.existe({ email : email},
       
@@ -66,6 +66,8 @@ passport.use('registro-local', new LocalStrategy(
 
       var datos = {email : email, uid : email, _sistema_logueo : servicios.local.sistema_logueo ,clave : Credencial.schema.methods.genHash(clave)};
           datos.token =  Credencial.schema.methods.genHash(datos.clave + datos.email + new Date().getTime());
+
+          console.log(datos);
 
         credencialCtrl.crear(datos, function(err,nuevaCredencial) {
           if (err) throw err;
@@ -88,6 +90,9 @@ passport.use('ingreso-local', new LocalStrategy({
     
     function(req, email, clave, listo) {
 
+
+      console.log(email);
+
       var validar = require('../helpers/validador');
 
       if(!validar.mail(email)) listo(null, false, 'params_invalidos');
@@ -107,7 +112,6 @@ passport.use('ingreso-local', new LocalStrategy({
         if(! credencial.compararClaves(clave))
           return listo(null, false, "contraseña_incorrecta");
 
-        credencial['clave'] = null;  
 
         credencial.token_time = new Date().getTime();
         credencial.token = credencial._usuario + credencial.clave + credencial.email + new Date().getTime();             
@@ -118,7 +122,29 @@ passport.use('ingreso-local', new LocalStrategy({
            if(err) return listo(err, {});
 
              console.log('hemos ingresado');
-             return listo(null, credencial);
+             
+             var _credencial = {
+                "token" : credencial.token,
+                "uid" : credencial.uid,
+                "email" : credencial.email,
+                "perfil_completado" : credencial.perfil_completado               
+             }; 
+
+             if(credencial.perfil_completado)
+                credencial.populate('_usuario').exec(function(err, credencial){
+
+                   var _credencial = {
+                     "token" : credencial.token,
+                     "uid" : credencial.uid,
+                     "email" : credencial.email,
+                     "usuario" : credencial._user 
+                   }; 
+
+                   return listo(null, _credencial);
+
+                });
+            else
+               return listo(null, _credencial);
 
         });
         

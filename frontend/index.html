@@ -121,9 +121,9 @@
 
    		 	console.log(path)
    		 	box.innerHTML = ''
-   		        + '<form class="full row" method="post" enctype="text/plain" action="http://localhost:8080/auth/local">'
+   		        + '<form class="full row" method="post" enctype="application/x-www-form-urlencoded" action="http://localhost:8080/auth/local">'
    		         + if_error
-   		 	     + '<label class="block">Correo</label><br><input class="full" name="mail" type="email" placeholder="Ingrese su correo"><br><br>'
+   		 	     + '<label class="block">Correo</label><br><input class="full" name="email" type="email" placeholder="Ingrese su correo"><br><br>'
    		 	     + '<label class="block">Clave</label><br><input class="full" name="clave" type="password"><br><br>'   		      
    		 	     + '<button class="padded no-padded-sides block full tm tfix">Ingresar</button>'
    		 	    + '</form> <br>'

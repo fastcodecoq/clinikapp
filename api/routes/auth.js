@@ -10,7 +10,7 @@ var auth = function(router, passport){
 
 
   router.post('/registro/local', passport.authenticate('registro-local', {
-    successRedirect : '/auth/local', // enviar a completar perfil
+    successRedirect : '/auth/local', // creamos credenciales y usuario. Logueamos usuario
     failureRedirect : '/registro' // redirigir a logueo en caso de fallo
   }));
 
@@ -60,7 +60,7 @@ var auth = function(router, passport){
 
   router.get('/registro', authArb.noLogueado, function(req, res){
       
-      console.log('hacemos el registro', req);
+      console.log('hacemos el registro');
 
       res.send("<h1>Vista de registro en server</h1>");
     
@@ -86,7 +86,9 @@ var auth = function(router, passport){
 
       var servicios = require('../config/servicios');
 
-      if(req.user.perfil_completado)
+      //verificamos si el perfil esta completado
+
+      if(req.user.perfil_completado || req.user.usuario)
       res.redirect( servicios.local.callbackURL + '/user/' + req.user.uid + '/' + req.user.token );
       else
       res.redirect( '/completar-registro' );      

@@ -51,7 +51,7 @@ try {
 app.use(multer());
 // usaremos JSON raw para envío de datos en modo desarrollo de este modo
 // testeamos mas rapido el api luego solo es cambiar bodyparser() por bodyparser.urlencoded()
-app.use(bodyparser());
+app.use(bodyparser.urlencoded());
 //le pasamos las routes al app express
 var pass = require('./config/passport');
 app.use(cookieParser());
