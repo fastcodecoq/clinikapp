@@ -96,7 +96,7 @@ passport.use('ingreso-local', new LocalStrategy({
              
              var _credencial = {
                 'token' : credencial.token,
-                'uid' : credencial.email.split('@')[0],
+                'uid' : credencial.email,
                 'email' : credencial.email,
                 'perfil_completado' : !!credencial.perfil_completado               
              }; 
@@ -108,10 +108,11 @@ passport.use('ingreso-local', new LocalStrategy({
 
                Credencial.findOne(credencial).populate('_usuario').exec(function(err, credencial){
 
+            
 
                    var _credencial = {
                      'token' : credencial.token,
-                     'uid' : credencial.uid.split('@')[0],
+                     'uid' : credencial.uid.split,
                      'email' : credencial.email,
                      'perfil_completado' : true,
                      'usuario' : credencial._usuario 
@@ -125,10 +126,9 @@ passport.use('ingreso-local', new LocalStrategy({
                 });
 
              }              
-            else
-               {
+            else                              
                 return listo(null, _credencial);
-               }
+               
 
         });
         
