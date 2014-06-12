@@ -147,8 +147,11 @@ var auth = function(router, passport){
         
 
             if(err) return res.redirect(servicios.local.callbackURL + '/inicio');
+            if(!credencial) return res.redirect(servicios.local.callbackURL + '/ingresar');
 
-            // revocamos permisos al token 
+
+            // revocamos permisos al token si no es de larga vida (famoso recuerdame)
+            if(!credencial.token_larga_vida)
               credencial.token_time = Math.round( (new Date().getTime() - 3600) / 1000);
 
               credencial.save(function(err, credencial){
@@ -157,8 +160,7 @@ var auth = function(router, passport){
 
                  req.logout();
                  console.log('salimos');
-                 
-                 var servicios = require('../config/servicios');
+
             
                  res.redirect( servicios.local.callbackURL + '/ingresar');
 

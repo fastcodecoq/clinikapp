@@ -13,6 +13,7 @@ var credencialSchema = new Schema({
   token : {type : String, required : true},
   token_time  : { type : String, default :  new Date().getTime()},
   token_larga_vida : {type : Boolean, default : false},
+  token_autenticado : {type : Boolean, default : false},
   email : {type : String, required : true},
   uid : {type : String, required : true},  //id del usuario en el sistema de logueo (google, outlook o yahoo)
   fecha : {type : Date, default: Date.now},

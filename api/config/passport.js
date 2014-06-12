@@ -65,7 +65,7 @@ passport.use('ingreso-local', new LocalStrategy({
       if(!validar.mail(email)) listo(null, false, 'params_invalidos');
 
 
-      Credencial.findOne({ 'email' :  email , 'sistema_logueo' : servicios.local.sistema_logueo },function(err, credencial) {
+    Credencial.findOne({ 'email' :  email , 'sistema_logueo' : servicios.local.sistema_logueo },function(err, credencial) {
 
         console.log(credencial)
         
@@ -84,7 +84,8 @@ passport.use('ingreso-local', new LocalStrategy({
 
         var utils = require('../helpers/utils');
 
-        credencial.token_time = utils.strtotime('+2 hours');
+        credencial.token = utils.genToken( credencial._id + credencial.uid + credencial.token );
+        credencial.token_time = utils.strtotime('+1 hours');
       
 
         credencial.save(function(err, credencial){
@@ -95,9 +96,9 @@ passport.use('ingreso-local', new LocalStrategy({
              
              var _credencial = {
                 'token' : credencial.token,
-                '_uid' : credencial.uid.split('@')[0],
+                'uid' : credencial.email.split('@')[0],
                 'email' : credencial.email,
-                'perfil_completado' : credencial.perfil_completado               
+                'perfil_completado' : !!credencial.perfil_completado               
              }; 
 
              if(credencial.perfil_completado)
@@ -110,7 +111,7 @@ passport.use('ingreso-local', new LocalStrategy({
 
                    var _credencial = {
                      'token' : credencial.token,
-                     'uid' : credencial.uid,
+                     'uid' : credencial.uid.split('@')[0],
                      'email' : credencial.email,
                      'perfil_completado' : true,
                      'usuario' : credencial._usuario 
@@ -125,7 +126,9 @@ passport.use('ingreso-local', new LocalStrategy({
 
              }              
             else
-               return listo(null, _credencial);
+               {
+                return listo(null, _credencial);
+               }
 
         });
         

@@ -2,12 +2,25 @@
 var auth = {
  
  estaLogueado :function (req, res, next){
-
-
+    
      if (req.isAuthenticated())        
-        return next();
-   
-     res.json({error:true, message: 'no_autorizado'});
+        {
+
+           var usr = req.user;
+           var utils = require('../helpers/utils.js');
+
+           utils.validar_token(usr, function(err, credencial){
+
+              if(err) return nex(err);
+
+              next();
+
+           })
+
+
+        }
+        else
+        res.json({error:true, message: 'no_autorizado'});
 
    }
 

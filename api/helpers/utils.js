@@ -80,6 +80,27 @@ module.exports = {
 	  strtotime : require('./strtotime'),
 	  token_expirado : function(token_time){
 	  	  return !!this.time > token_time;
+	  },
+	  validar_token : function(usr, listo){
+
+	  	  var Credencial = require('../models/credenciales');          
+
+	  	   if(!usr.email || !usr.token)
+	  	   	  callback(true, false);
+
+           Credencial.findOneAndUpdate({email : usr.email , token : usr.token}, { token_time : this.strtotime('+1 hours')} ,function(err, credencial){
+
+				if(err) listo(true, false);                                       
+
+                var utils = require('../helpers/utils');
+
+                if(!utils.token_expirado)                
+	  	   	       listo(true, false);                                                   
+                else
+                   listo(null, credencial);
+
+           });
+
 	  }
 
 }
