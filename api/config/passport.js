@@ -65,24 +65,27 @@ passport.use('ingreso-local', new LocalStrategy({
       if(!validar.mail(email)) listo(null, false, 'params_invalidos');
 
 
-      Credencial.findOne({ 'email' :  email },function(err, credencial) {
+      Credencial.findOne({ 'email' :  email , 'sistema_logueo' : servicios.local.sistema_logueo },function(err, credencial) {
 
         console.log(credencial)
         
         if (err)
           return listo(err);
+
+        if(!credencial) 
+          return listo(null, false, 'credencial_invalida');
         
         if (!credencial)
-          return listo(null, false, "correo_no_existe");
+          return listo(null, false, 'correo_no_existe');
 
        
         if(! credencial.compararClaves(clave))
-          return listo(null, false, "contraseña_incorrecta");
+          return listo(null, false, 'contraseña_incorrecta');
 
+        var utils = require('../helpers/utils');
 
-        credencial.token_time = new Date().getTime();
-        credencial.token = credencial._usuario + credencial.clave + credencial.email + new Date().getTime();             
-        credencial.token = credencial.genHash(credencial.token);
+        credencial.token_time = utils.strtotime('+2 hours');
+      
 
         credencial.save(function(err, credencial){
            
@@ -91,25 +94,36 @@ passport.use('ingreso-local', new LocalStrategy({
              console.log('hemos ingresado');
              
              var _credencial = {
-                "token" : credencial.token,
-                "uid" : credencial.uid,
-                "email" : credencial.email,
-                "perfil_completado" : credencial.perfil_completado               
+                'token' : credencial.token,
+                '_uid' : credencial.uid.split('@')[0],
+                'email' : credencial.email,
+                'perfil_completado' : credencial.perfil_completado               
              }; 
 
              if(credencial.perfil_completado)
-                credencial.populate('_usuario').exec(function(err, credencial){
+             {
+
+              var Credencial = require('../models/credenciales');
+
+               Credencial.findOne(credencial).populate('_usuario').exec(function(err, credencial){
+
 
                    var _credencial = {
-                     "token" : credencial.token,
-                     "uid" : credencial.uid,
-                     "email" : credencial.email,
-                     "usuario" : credencial._user 
+                     'token' : credencial.token,
+                     'uid' : credencial.uid,
+                     'email' : credencial.email,
+                     'perfil_completado' : true,
+                     'usuario' : credencial._usuario 
                    }; 
+
+                  console.log(_credencial)
+
 
                    return listo(null, _credencial);
 
                 });
+
+             }              
             else
                return listo(null, _credencial);
 

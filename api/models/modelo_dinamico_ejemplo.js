@@ -11,7 +11,7 @@ function modelo_dinamico(prefijo){
 	ciudad : {type : String, required: true},   //la misma estructura que para los nombres ej. Acosta, Arteta	
 	cod_postal : {type : Number, required : true},
 	tipo_casa : {type : Schema.Types.ObjectId, required : true, ref : 'tipo_casa'},
-	_colores_casa : {type : Schema.Types.ObjectId, required : true, ref : prefijo + '.colores_casa'}
+	_colores_casa : {type : Schema.Types.ObjectId, required : true, ref : prefijo + '.colores_casa'},
 	ubicacion : {type : String, required : true},
 	telefono : String,
 	registered : {type : Date, default: Date.now }

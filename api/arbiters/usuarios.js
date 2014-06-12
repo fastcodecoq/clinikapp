@@ -4,7 +4,7 @@ var usuarios = function(req, res, next){
 	  // hacemos todos los controles de seguridad 
 
 	  
-	  console.log(req.url, "arbitro del modulo usuarios");
+	  console.log(req.url, 'arbitro del modulo usuarios');
 
 
 	  // si no queremos dar acceso, usamos:

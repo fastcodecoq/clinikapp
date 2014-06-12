@@ -14,7 +14,10 @@ var sanitizar = {
    
       hacer : function (valor){
                
-               if(typeof valor === "number" || typeof valor === "object" || typeof valor === "undefined")
+               if(typeof valor === "number" || 
+                  typeof valor === "object" ||
+                  typeof valor === "undefined" || 
+                  typeof valor === "boolean")
                	  return valor;
 
 

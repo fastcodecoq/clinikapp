@@ -22,7 +22,7 @@ var credencial = {
   },
 
   crear : function(datos, callback){
-    if(datos.should.type("object") && callback.should.be.type("function")) {
+    if(datos.should.type('object') && callback.should.be.type('function')) {
       datos = this.sanitizar(datos);
       console.log(datos);
       // ========== validamos si la credencial existe ====== //
@@ -42,7 +42,7 @@ var credencial = {
 
       eliminar : function(id, callback){
 
-            if(!id.should.type("string")) return false;
+            if(!id.should.type('string')) return false;
 
           	credenciales.remove({_id: mongoose.Types.ObjectId(id)}, callback);
 
@@ -51,16 +51,16 @@ var credencial = {
 
       },
 
-      actualizar : function(id, datos, callback){
-
-            if(!id.should.type("string")) return false;
-            if(!datos.should.type("object")) return false;
-            if(!callback.should.be.type("function")) return false;
+      actualizar : function(query, datos, callback){
+        
+            if(!query.should.type('object')) return false;            
+            if(!datos.should.type('object')) return false;
+            if(!callback.should.be.type('function')) return false;
 
             datos = this.sanitizar(datos);
 
 
-      	    credenciales.findOneAndUpdate({_id : mongoose.Types.ObjectId(id)}, datos, callback);
+      	    credenciales.findOneAndUpdate(query, datos, callback);
 
             return true;
 
@@ -72,7 +72,7 @@ var credencial = {
             if(typeof opts === 'function')
                {var callback = opts; var opts = undefined; }
 
-            if(!callback.should.be.type("function")) return false;
+            if(!callback.should.be.type('function')) return false;
 
 
             var sanitizar = require('../helpers/sanitizador');
@@ -102,8 +102,8 @@ var credencial = {
 
       buscarUno : function(id, callback){
 
-        if(!id.should.type("string")) return false;
-        if(!callback.should.be.type("function")) return false;
+        if(!id.should.type('string')) return false;
+        if(!callback.should.be.type('function')) return false;
 
         credenciales.findOne({_id : mongoose.Types.ObjectId(id)}, callback);  // usamos mongoose.Types.ObjectId para compilar el id, evitando que nos coloquen otro tipo de variable
 

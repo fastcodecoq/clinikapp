@@ -59,6 +59,9 @@ var validar = {
    	    	      && (num.length >= 12 && num.length <= 19);
    	    }
 
+   },
+   expired_token : function(token_time){
+        return !! this.time() > token_time;
    }
 
 }

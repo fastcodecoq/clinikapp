@@ -17,7 +17,7 @@ var auth = function(router, passport){
        registro.local(req.body, function(err, listo){
 
             delete global.user_agent;
-            
+
             if(err) console.log(err);
 
             res.redirect(servicios.local.callbackURL + '/ingresar');
@@ -94,18 +94,44 @@ var auth = function(router, passport){
   });
 
 
+ //completar registro listo
+
+  router.post('/completar-registro', authArb.estaLogueado, function(req, res){
+      
+
+      var datos = req.body;
+          datos.token = req.user.token;
+          datos.email = req.user.email;
+
+      
+     if(req.user.perfil_completado)
+        res.redirect( servicios.local.callbackURL + '/inicio');
+     else
+         require('../controllers/registro').completar(datos, function(err, usuario){
+
+            if(err) res.json({"error": true, message : 'no se pudo completar'});
+            else
+            res.redirect( servicios.local.callbackURL + '/inicio/' + req.user.uid + '/' + req.user.token );
+    
+
+         });
+     
+
+  });
+
+
   
 
   router.get('/logueado', authArb.estaLogueado, function(req, res){
       
-      console.log('ingresamos', req);
+      console.log('ingresamos');
 
       var servicios = require('../config/servicios');
 
       //verificamos si el perfil esta completado
 
       if(req.user.perfil_completado || req.user.usuario)
-      res.redirect( servicios.local.callbackURL + '/user/' + req.user.uid + '/' + req.user.token );
+      res.redirect( servicios.local.callbackURL + '/inicio/' + req.user.uid + '/' + req.user.token );
       else
       res.redirect( '/completar-registro' );      
         
@@ -114,11 +140,31 @@ var auth = function(router, passport){
 
   router.get('/auth/salir', authArb.estaLogueado, function(req, res){
 
-      req.logout();
+     var Credencial = require('../models/credenciales');
 
-      var servicios = require('../config/servicios');
 
-      res.redirect( servicios.local.callbackURL + '/ingresar');
+         Credencial.findOne({email : req.user.email , token : req.user.token}, function(err, credencial){
+        
+
+            if(err) return res.redirect(servicios.local.callbackURL + '/inicio');
+
+            // revocamos permisos al token 
+              credencial.token_time = Math.round( (new Date().getTime() - 3600) / 1000);
+
+              credencial.save(function(err, credencial){
+
+                if(err) return res.redirect(servicios.local.callbackURL + '/inicio');
+
+                 req.logout();
+                 console.log('salimos');
+                 
+                 var servicios = require('../config/servicios');
+            
+                 res.redirect( servicios.local.callbackURL + '/ingresar');
+
+             });
+
+         });
 
   });
 

@@ -9,7 +9,7 @@ var Schema  =  mongoose.Schema;
 var credencialSchema = new Schema({
   
   sistema_logueo : {type : Number, required : true},
-  _usuario : {type : Schema.Types.ObjectId, ref : 'usuarioSchema'},
+  _usuario : {type : Schema.Types.ObjectId, ref : 'usuarios'},
   token : {type : String, required : true},
   token_time  : { type : String, default :  new Date().getTime()},
   token_larga_vida : {type : Boolean, default : false},

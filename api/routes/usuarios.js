@@ -65,13 +65,13 @@ var usuarios = function(router){
 
 
         var delim = {};
-            delim["limit"] = req.params.limit || false;
-            delim["skip"] = req.params.skip || false;
+            delim['limit'] = req.params.limit || false;
+            delim['skip'] = req.params.skip || false;
        
 
-       if(!validar.int(delim["limit"]))   
+       if(!validar.int(delim['limit']))   
        {
-        res.json({error:true,message:"params_invalidos"});
+        res.json({error:true,message:'params_invalidos'});
         return;
        }
 
@@ -131,7 +131,7 @@ var usuarios = function(router){
          		if( ! usrCtrl.eliminar( id, function (err, rs){
 
          		  if(!err) 			 
-  			         res.json({error:false, message: "ok"});     
+  			         res.json({error:false, message: 'ok'});     
   				    else
 			       	   res.json({error:true, message: 'no_eliminado'}); 
 
@@ -155,7 +155,7 @@ var usuarios = function(router){
          		 if ( ! usrCtrl.actualizar( id, datos, function (err, rs){
 
          		    if(!err) 			 
-  			         res.json({error:false, message: "ok"});     
+  			         res.json({error:false, message: 'ok'});     
   				      else
 			       	   res.json({error:true, message: 'no_editable'}); 
 
@@ -182,7 +182,7 @@ var usuarios = function(router){
                    if(typeof llave_err  === 'string')       // verificamos si rs es un string, ya que se retorna un String en caso de que el error no sea de base de datos    
                      res.json({error:true, message : llave_err});
                    else if(!err)
-                          res.json({error:false,message:"ok"});
+                          res.json({error:false,message:'ok'});
                    else
                           res.json({error:true, message : 'params_invalidos'});                                     
 
@@ -205,7 +205,7 @@ var usuarios = function(router){
                    if(typeof llave_err  === 'string')       // verificamos si rs es un string, ya que se retorna un String en caso de que el error no sea de base de datos    
                      res.json({error:true, message : llave_err});
                    else if(!err)
-                          res.json({error:false,message:"ok"});
+                          res.json({error:false,message:'ok'});
                    else
                           res.json({error:true, message : 'params_invalidos'});                                     
 
@@ -262,7 +262,7 @@ var usuarios = function(router){
          		if( ! usrCtrl.eliminarTodos(function (err, rs){
 
          		    if(!err) 			 
-  			         res.json({error:false, message: "ok"});     
+  			         res.json({error:false, message: 'ok'});     
   				    else
 			       	   res.json({error:true, message: 'no_eliminable'}); 
 

@@ -9,8 +9,8 @@ var usuario = {
  
       crear : function(datos, callback){ 
 
-            if(!datos.should.type("object")) return false;            
-            if(!callback.should.be.type("function")) return false;
+            if(!datos.should.type('object')) return false;            
+            if(!callback.should.be.type('function')) return false;
 
       	     
             datos = this.sanitizar(datos); 
@@ -22,19 +22,15 @@ var usuario = {
 
               console.log(exist)
 
-              if(err)
-                {
-                  callback(err, exist);
-                  return;
-                }
-
- 
+              if(err) return callback(err, exist);
+            
+                
          // ==== verifiamos si no existe el usuario, sino existe, lo creamos ======= //
 
               if(!exist)
                new usuarios(datos).save( callback );
               else
-                callback({ message : "usuario_existe"}, null); 
+                callback({ message : 'usuario_existe'}, null); 
 
 
             });
@@ -48,7 +44,7 @@ var usuario = {
 
       eliminar : function(id, callback){  
 
-            if(!id.should.type("string")) return false;            
+            if(!id.should.type('string')) return false;            
             
             var sanitizar = require('../helpers/sanitizador');   
             id = sanitizar(id);   
@@ -59,15 +55,15 @@ var usuario = {
 
       },
 
-      actualizar : function(id, datos, callback){  
+      actualizar : function(query, datos, callback){  
 
-            if(!id.should.type("string")) return false;
-            if(!datos.should.type("object")) return false;
-            if(!callback.should.be.type("function")) return false;     
+            if(!query.should.type('object')) return false;
+            if(!datos.should.type('object')) return false;
+            if(!callback.should.be.type('function')) return false;     
 
             datos = this.sanitizar(datos);                                                               
       
-      	    usuarios.findOneAndUpdate({_id : mongoose.Types.ObjectId(id)}, datos, callback); 
+      	    usuarios.findOneAndUpdate(query, datos, callback); 
 
             return true;
             
@@ -80,7 +76,7 @@ var usuario = {
             if(typeof opts === 'function')
                {var callback = opts; var opts = undefined; }
 
-            if(!callback.should.be.type("function")) return false; 
+            if(!callback.should.be.type('function')) return false; 
 
             
             var sanitizar = require('../helpers/sanitizador');            
@@ -110,16 +106,16 @@ var usuario = {
 
       },
       
-      buscarUno : function(id, callback){
+      buscarUno : function(query, callback){
         
-        if(!id.should.type("string")) return false;        
-        if(!callback.should.be.type("function")) return false; 
+        if(!query.should.type('object')) return false;        
+        if(!callback.should.be.type('function')) return false; 
 
 
         var sanitizar = require('../helpers/sanitizador');   
             id = sanitizar(id);         
 
-        usuarios.findOne({_id : mongoose.Types.ObjectId(id)}, callback);  // usamos mongoose.Types.ObjectId para compilar el id, evitando que nos coloquen otro tipo de variable
+        usuarios.findOne(query, callback);  // usamos mongoose.Types.ObjectId para compilar el id, evitando que nos coloquen otro tipo de variable
 
        
        return true;
@@ -180,7 +176,7 @@ var usuario = {
               console.log(datos);  // valores sanitizados
               
               datos._tipo_doc = mongoose.Types.ObjectId(datos._tipo_doc);
-              datos._sexo = mongoose.Types.ObjectId(datos._sexo);
+        
 
               return datos;
 

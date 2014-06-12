@@ -3,7 +3,6 @@ var auth = {
  
  estaLogueado :function (req, res, next){
 
-    console.log(req.id)
 
      if (req.isAuthenticated())        
         return next();
