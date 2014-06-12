@@ -202,8 +202,7 @@ var usuario = {
 
           // contamos los usuarios existentes con el mismo numero de documento
 
-           usuarios.find({email : datos.email})
-            .or({_tipo_doc : mongoose.Types.ObjectId(tipo_doc)},{numero_doc : numero_doc })
+           usuarios.find({$or : [{email : datos.email},{_tipo_doc : mongoose.Types.ObjectId(tipo_doc)},{numero_doc : numero_doc }]})
             .count()
             .exec(function(err, count){
 
