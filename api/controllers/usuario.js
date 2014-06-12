@@ -192,6 +192,8 @@ var usuario = {
            var numero_doc = datos.numero_doc;
            var tipo_doc = datos._tipo_doc;
 
+           console.log(datos)
+
 
            if(!validar.cedula(numero_doc)) {             
              callback({ message : 'numero_doc_incorrecto'}, null);
@@ -200,7 +202,12 @@ var usuario = {
 
           // contamos los usuarios existentes con el mismo numero de documento
 
-           usuarios.count({ numero_doc : numero_doc, _tipo_doc : mongoose.Types.ObjectId(tipo_doc)}, function(err, count){
+           usuarios.find({email : datos.email})
+            .or({_tipo_doc : mongoose.Types.ObjectId(tipo_doc)},{numero_doc : numero_doc })
+            .count()
+            .exec(function(err, count){
+
+               console.log(count)
 
                 callback(err, count > 0);  //si count es igual a cero devolvemos false (no existe)
 
