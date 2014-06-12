@@ -11,6 +11,7 @@ var usuario = {
 
             if(!datos.should.type("object")) return false;            
             if(!callback.should.be.type("function")) return false;
+
       	     
             datos = this.sanitizar(datos); 
 
@@ -167,7 +168,7 @@ var usuario = {
 
       sanitizar : function(datos){
 
-                var sanitizar = require('../helpers/sanitizador');
+              var sanitizar = require('../helpers/sanitizador');
                                   
 
              // ... recorremos el objeto this que contiene las variables a enviar. 

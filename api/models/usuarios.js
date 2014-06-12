@@ -13,13 +13,13 @@ var usuarioSchema = new Schema({
 	apellidos : {type : String, required: true},   //la misma estructura que para los nombres ej. Acosta, Arteta	
 	sexo : {type : Number, required : true},
 	_tipo_doc : {type : Schema.Types.ObjectId, required : true, ref : 'tiposDocs'},
-	fecha_nac : {type : Date},
+	numero_doc : {type : Number, required: true},
+	fecha_nacimiento : {type : Date, require : true},
 	divipola : {type : String, required : true},
 	telefono : String,
 	email : { type : String , required : true},
 	email_verificado : { type : Boolean , default : false},
-	registro : {type : Date, default: Date.now },
-	local : { password : String},
+	registro : {type : Date, default: Date.now }
 
 });
 
@@ -46,7 +46,7 @@ var usuarioSchema = new Schema({
   
 
    if(this.email)
-    if(!validar.mail(this.email.dir)) return false;  //validamos el email
+    if(!validar.mail(this.email)) return false;  //validamos el email
 
 
 

@@ -7,12 +7,24 @@ var auth = function(router, passport){
 
   var authArb = require('../arbiters/auth.js');
   var servicios = require('../config/servicios');
+  var registro = require('../controllers/registro');
 
 
-  router.post('/registro/local', passport.authenticate('registro-local', {
-    successRedirect : '/auth/local', // creamos credenciales y usuario. Logueamos usuario
-    failureRedirect : '/registro' // redirigir a logueo en caso de fallo
-  }));
+  router.post('/registro/local', function(req, res){
+
+       global.user_agent = req.headers['user-agent'];
+
+       registro.local(req.body, function(err, listo){
+
+            delete global.user_agent;
+            
+            if(err) console.log(err);
+
+            res.redirect(servicios.local.callbackURL + '/ingresar');
+
+       });
+
+  });
 
 
   router.post('/auth/local', passport.authenticate('ingreso-local', {
@@ -73,12 +85,16 @@ var auth = function(router, passport){
       console.log('hacemos el registro', req);
 
       var user_raw = JSON.stringify(req.user);
+      console.log(req.body);
       var style = 'word-break: break-all;width: 466px;';
 
       res.send('<h1>Vista de completar registro en server</h1><br><p style="' + style +'">' + user_raw + '</p> <br><a href="/auth/salir">Cancelar</a>');
     
 
   });
+
+
+  
 
   router.get('/logueado', authArb.estaLogueado, function(req, res){
       

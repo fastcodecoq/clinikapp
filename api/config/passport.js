@@ -46,40 +46,7 @@ passport.serializeUser(function(credencial,listo) {
 }); 
 
 
-
-passport.use('registro-local', new LocalStrategy(
-  { 
-    usernameField : 'email',
-    passwordField : 'clave'
-
-  },
-  function(email, clave, listo){
-    
-    // TODO: checkear si el usuario existe
-    
-    credencialCtrl.existe({ email : email},
-      
-      function(err, exist){
-
-        if(exist)
-          return listo(null,false,'correro_existe'); //cada error lleva una llave que lo asocia con el json ubicado en /frontend/locales/es.json
-
-      var datos = {email : email, uid : email, _sistema_logueo : servicios.local.sistema_logueo ,clave : Credencial.schema.methods.genHash(clave)};
-          datos.token =  Credencial.schema.methods.genHash(datos.clave + datos.email + new Date().getTime());
-
-          console.log(datos);
-
-        credencialCtrl.crear(datos, function(err,nuevaCredencial) {
-          if (err) throw err;
-          listo(null,nuevaCredencial);
-          });
- 
-      });
-
-
-  }));
-
-
+// se elimino la parte de registro local, y se hace en el controlador registro
 
 
 passport.use('ingreso-local', new LocalStrategy({
@@ -171,11 +138,17 @@ passport.use('google', new GoogleStrategy({
            'email' : profile._json.email,
            'uid' : profile.id,
            'token' : token,
-           '_sistema_logueo' :  servicios.google.sistema_logueo
+           'sistema_logueo' :  servicios.google.sistema_logueo
         };
 
+        console.log(datos)
 
-      credencialCtrl.existe(datos.email, function(err, exist){
+
+      credencialCtrl.existe({ email : datos.email}, function(err, exist){
+
+         if(err) return listo(err, null);
+
+         console.log(exist)
 
           if(exist)
             {
@@ -204,7 +177,7 @@ passport.use('google', new GoogleStrategy({
             }
           else
             credencialCtrl.crear(datos, function(err, rs){
-                  profile['perfil_completado'] = false;
+
                   return listo(err, rs);
             });
 
@@ -236,7 +209,7 @@ passport.use('live', new liveStrategy({
            'email' : profile._json.emails.preferred,
            'uid' : profile.id,
            'token' : token,
-           '_sistema_logueo' : servicios.live.sistema_logueo
+           'sistema_logueo' : servicios.live.sistema_logueo
         };
 
 
@@ -304,7 +277,7 @@ passport.use('yahoo', new yahooStrategy({
            'email' : profile._json.emails.preferred,
            'uid' : profile.id,
            'token' : token,
-           '_sistema_logueo' : servicios.yahoo.sistema_logueo
+           'sistema_logueo' : servicios.yahoo.sistema_logueo
         };
 
 

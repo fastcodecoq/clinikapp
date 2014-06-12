@@ -8,7 +8,7 @@ var Schema  =  mongoose.Schema;
 
 var credencialSchema = new Schema({
   
-  _sistema_logueo : {type : Number, required : true},
+  sistema_logueo : {type : Number, required : true},
   _usuario : {type : Schema.Types.ObjectId, ref : 'usuarioSchema'},
   token : {type : String, required : true},
   token_time  : { type : String, default :  new Date().getTime()},

@@ -1,14 +1,106 @@
+var servicios = require('../config/servicios');
 
 var registro = {
  
-      hacer : function(datos, callback){ 
+      local : function(datos, callback){ 
         
-      var usrCtrl = require('./usuario');
+       var usrCtrl = require('./usuario');
+
 
       	    if(!datos)
       	    	return false;
+
+      	    var errors = [];      	       
+
+      	    if(typeof datos.clave === 'undefined')
+      	    	errors.push('error_clave');
+
+      	    if(typeof datos.tipo_doc === 'undefined')
+      	    	errors.push('error_tipo_doc');
+
+
+      	    if(typeof datos.nombres === 'undefined')
+      	    	errors.push('error_nombres');
+
+
+      	    if(typeof datos.apellidos === 'undefined')
+      	    	errors.push('error_apellidos');
+
+
+      	    if(typeof datos.email === 'undefined')
+      	    	errors.push('error_email');
+
+
+      	    if(typeof datos.numero_doc === 'undefined')
+      	    	errors.push('error_numero_doc');
+
+
+      	    if(typeof datos.sexo === 'undefined')
+      	    	errors.push('error_sexo');
+
+
+      	    if(typeof datos.tipo_doc === 'undefined')
+      	    	errors.push('error_depto');
+
+
+      	    if(typeof datos.tipo_doc === 'undefined')
+      	    	errors.push('error_mcpio');
+
+
+      	    if(typeof datos.fecha_nacimiento === 'undefined')
+      	    	errors.push('error_fecha_nacimiento');
+
+      	    if(errors.length > 0)
+      	    	return callback({ error: true, message : errors}, null);
         	
-        	 usrCtrl.crear(datos, callback);
+      	    var usuario = {};
+      	    usuario.nombres = datos.nombres;
+      	    usuario.apellidos = datos.apellidos;
+      	    usuario.email = datos.email;
+      	    usuario._tipo_doc = datos.tipo_doc;
+      	    usuario.numero_doc = datos.numero_doc;
+      	    usuario.sexo = datos.sexo;
+      	    usuario.divipola = datos.depto  + ',' + datos.mcpio;
+      	    usuario.fecha_nacimiento = datos.fecha_nacimiento;
+
+      	    if(usuario.telefono)
+      	    usuario.telefono = datos.telefono;
+
+
+
+        	 usrCtrl.crear(usuario, function(err, usuario){
+  					
+  				if(err) return callback(err, null);
+		        		        
+				var utils = require('../helpers/utils');
+  				
+  				var credencialCtrl = require('./credencial');
+  				var credencial = {};
+  					credencial.email = usuario.email;
+  					credencial._usuario =  usuario._id; //tomamos el _id del usuario que se acaba de crear
+  					credencial.uid = usuario.email;
+  					credencial.clave = utils.encrypt_pass(datos.clave);
+  					credencial.sistema_logueo = servicios.local.sistema_logueo;
+  					credencial.token = utils.genToken(credencial.email + credencial._usuario + credencial.clave);      
+
+
+  				credencialCtrl.crear(credencial, function(err, credencial){
+
+  					console.log(credencial);
+
+  				   if(err) return callback(err, null);  					
+
+  						 var _credencial = {};
+  						 	 _credencial.uid = credencial._id;
+  						 	 _credencial.token = credencial.token;
+  						 	 _credencial._id = credencial._id;
+
+
+  						 	 callback(null, _credencial);
+
+  				    });	
+
+        	 });
 
         	 return true;
 
@@ -17,4 +109,4 @@ var registro = {
 }
 
 
-module.exports = usuario;
+module.exports = registro;
