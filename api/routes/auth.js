@@ -131,7 +131,7 @@ var auth = function(router, passport){
       //verificamos si el perfil esta completado
 
       if(req.user.perfil_completado || req.user.usuario)
-      res.redirect( servicios.local.callbackURL + '/inicio/' + req.user.uid + '/' + req.user.token );
+      res.redirect( servicios.local.callbackURL + '/inicio/' + req.user.uid.''.split("@")[0] + '/' + req.user.token );
       else
       res.redirect( '/completar-registro' );      
         
