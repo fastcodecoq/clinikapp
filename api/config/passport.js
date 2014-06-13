@@ -112,7 +112,7 @@ passport.use('ingreso-local', new LocalStrategy({
 
                    var _credencial = {
                      'token' : credencial.token,
-                     'uid' : credencial.uid.split,
+                     'uid' : credencial.uid,
                      'email' : credencial.email,
                      'perfil_completado' : true,
                      'usuario' : credencial._usuario 
