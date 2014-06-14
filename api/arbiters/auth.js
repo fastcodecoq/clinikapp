@@ -14,7 +14,7 @@ var auth = {
 
               if(err){ 
                  req.logout();
-                 return nex(err);
+                 return next(err);
                }
 
               next();

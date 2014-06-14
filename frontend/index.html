@@ -104,13 +104,7 @@
 
 
             app.controller('appCtrl', function($scope, $http){
-                     
-                  $scope.box = 'hola';
-
-                  $scope.whoiam = function(e){
-                     e.preventDefault();
-                     alert('youuuu')
-                  }
+ 
 
             });
 
@@ -127,7 +121,9 @@
 
                  $http.get('http://localhost:8080/v1/users/me?token='+token+'&uid='+uid)
                  .success(function(rs){
-                     
+                  
+                     console.log(rs);
+
                       if(rs.error)
                       window.location = "#/";
                

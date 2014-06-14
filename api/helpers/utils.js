@@ -77,7 +77,10 @@ module.exports = {
 
 	  strtotime : require('./strtotime'),
 	  token_expirado : function(token_time){
-	  	  return !!this.time > token_time;
+
+	  	  console.log(this.time() - token_time);
+
+	  	  return !!this.time() < token_time;
 	  },
 	  validar_token : function(usr, listo){
 
@@ -86,17 +89,23 @@ module.exports = {
 	  	   if(!usr.uid || !usr.token)
 	  	   	  listo(true, false);
 
-           Credencial.findOneAndUpdate({uid : usr.uid , token : usr.token}, { token_time : this.strtotime('+1 hours')} ,function(err, credencial){
+	  	   	var self = this;
+
+
+           Credencial.findOne({uid : usr.uid , token : usr.token} ,function(err, credencial){
+
 
 				if(err) return listo(true, false);      
 				if(!credencial) return listo(true, false);                                 
 
-                var utils = require('../helpers/utils');
 
-                if(!utils.token_expirado)                
-	  	   	       return listo(true, false);                                                   
+                if(!self.token_expirado(credencial.token_time))                	  	   	   
+	  	   	       return listo(true, false)                             
                 else
-                   return listo(null, credencial);
+                   {
+                   	credencial.token_time = self.strtotime('+1 hours')
+                   	credencial.save(listo);                   	
+                   };
 
            });
 

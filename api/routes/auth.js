@@ -152,7 +152,7 @@ var auth = function(router, passport){
 
             // revocamos permisos al token si no es de larga vida (famoso recuerdame)
             if(!credencial.token_larga_vida)
-              credencial.token_time = Math.round( (new Date().getTime() - 3600) / 1000);
+              credencial.token_time = 0;
 
               credencial.save(function(err, credencial){
 
