@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lan="es-CO">
+<html lan="es-CO" ng-app='clinikapp'>
    <head>
    	  <meta charset="UTF-8">
-
+        <base href="/clinikapp/app/frontend">
    	  <style>
 
    	     *{
@@ -87,6 +87,73 @@
 
 
    	  </style>
+
+      <script type="text/javascript" src="/clinikapp/app/frontend/libs/angular/angular.js"></script>
+      <script type="text/javascript">
+
+        var app = angular.module('clinikapp', {});
+            
+
+
+
+            app.controller('loginCtrl', function($scope){
+                     
+
+
+            });
+
+
+            app.controller('appCtrl', function($scope, $http){
+                     
+                  $scope.box = 'hola';
+
+                  $scope.whoiam = function(e){
+                     e.preventDefault();
+                     alert('youuuu')
+                  }
+
+            });
+
+
+            app.config(function($routeProvider, $locationProvider){
+
+            var $router = $routeProvider;
+            var path = '/clinikapp/app/frontend/views';
+
+            var logueado = function($http, $routeParams){
+
+               window.uid = document.location.hash.split('/')[2];
+               window.token = document.location.hash.split('/')[3];
+
+                 $http.get('http://localhost:8080/v1/users/me?token='+token+'&uid='+uid)
+                 .success(function(rs){
+                     
+                      if(rs.error)
+                      window.location = "#/";
+               
+                 });
+
+            }
+
+            $router
+            .when('/', { templateUrl : path + '/ingresar.html'})
+            .when('/ingresar/:tipo/:logueo', { templateUrl : path + '/ingresar.html'})
+            .when('/ingresar', { templateUrl : path + '/ingresar.html'})
+            .when('/inicio/:uid/:token', { 
+                 templateUrl : path + '/app.html' , 
+                 resolve : { login : logueado},
+                 controller : 'appCtrl'
+              })
+            .when('*', { templateUrl : path + '/404.html'});
+            
+ //            $locationProvider.html5Mode(true);   
+
+             });
+         
+
+      </script>         
+
+
    </head>
     <body>
     	<br>
@@ -95,10 +162,12 @@
     	 <div class='contenido padded center n'>
     	   <h2 class="txl tc">Clinikapp</h2>
     	   <br>
-    	   <div class='box'></div>
+    	   <div ng-view class='box'></div>
+
     	 </div>
    	</body>
 
+      <script type="text/javascript" src="/clinikapp/app/frontend/libs/jquery/jquery.js"></script>      
    	<script type="text/javascript">
 
    	(function ini(w){
@@ -145,12 +214,129 @@
    		 	box.innerHTML = ''
                  + 'Usuario logueado con perfil completo. <br><br>'
                  + 'Este es el area de trabajo.<br><br>'
+                 + '<pre data-box></pre>'
+                 + '<br>'
+                 + '<a href="#" data-api-me>Quien soy?</a>&nbsp;&nbsp;'
+                 + '<a href="#" data-api-organizaciones>Mis organizaciones</a>&nbsp;&nbsp;'
+                 + '<a href="#" data-api-crea-org>Creemos una organizacion</a>&nbsp;&nbsp;'
    		 		  + '<a href="http://localhost:8080/auth/salir">Salir</a>';	
 
    		 		  } 
 
-   		 		  )(window);		    
-   		 
+   		 		  )(window);	
+
+
+function syntax(json) {
+                 if (typeof json != 'string') {
+                 json = JSON.stringify(json, undefined, 4);
+                 }
+                 json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                 return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                 var cls = 'number';
+                 if (/^"/.test(match)) {
+                 if (/:$/.test(match)) {
+                 cls = 'key';
+                 } else {
+                 cls = 'string';
+                 }
+                 } else if (/true|false/.test(match)) {
+                 cls = 'boolean';
+                 } else if (/null/.test(match)) {
+                 cls = 'null';
+                 }
+                 return '<span class="' + cls + '">' + match + '</span>';
+                 });
+                 }   
+          
+
+
+                 $(function(){
+
+                     $('[data-api-me]').live('click', function(e){
+
+                         e.preventDefault();
+
+                         var data = {
+                             token : token,
+                             uid : uid
+                         }
+
+                         console.log(data);
+
+                         $.ajax({
+                           url : 'http://localhost:8080/v1/users/me' , 
+                           type : 'GET', 
+                           data : data})
+                          .done(function(rs){ $('[data-box]').html(
+                           syntax(JSON.stringify(rs.message, undefined, 4)));
+                           })
+                          .fail(function(err){ console.log(err); });
+
+
+                       });
+
+                     $('[data-api-crea-org]').live('click', function(e){
+
+                         e.preventDefault();
+
+                        
+                         while(!nit)
+                           var nit = prompt('Dame un nit (ej. 12912781-1):');
+                        while(!nombre)
+                           var nombre = prompt('Ahora el nombre:');
+
+                         var data = {
+                             token : token,
+                             me : uid,
+                             nombre : nombre,
+                             nit : nit,
+                             direccion : 'calle 26 # 24 - 05',
+                             divipola : '05,005'
+                         };
+
+                         console.log(data);
+
+                         $.ajax({
+                           url : 'http://localhost:8080/v1/users/me/organizaciones/'+token , 
+                           type : 'POST', 
+                           data : data})
+                          .done(function(rs){ $('[data-box]').html(
+                           syntax(JSON.stringify(rs.message, undefined, 4)));
+                           })
+                          .fail(function(err){ console.log(err); });
+
+
+                       });
+
+
+                   $('[data-api-organizaciones]').live('click', function(e){
+
+                         e.preventDefault();
+
+
+                         var data = {
+                             token : token,
+                             uid : uid
+                         };
+
+                         console.log(data);
+
+                         $.ajax({
+                           url : 'http://localhost:8080/v1/users/me/organizaciones', 
+                           type : 'GET', 
+                           data : data})
+                          .done(function(rs){ $('[data-box]').html(
+                           syntax(JSON.stringify(rs.message, undefined, 4))); 
+                           })
+                          .fail(function(err){ console.log(err); });
+
+
+                       });
+
+                 });	 
+
+
+                 
 
    	</script>
 </html>

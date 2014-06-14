@@ -5,14 +5,15 @@ var Schema  =  mongoose.Schema;
 function get(particion){
 
 
+
  var organizacionesSchema = new Schema({
 
-	nombre : {type : String, required : true},  //quien inicia la relacion  
-	direccion : {type : String, required : true},  //quien acepta la relacion   
+	nombre : {type : String, required : true},    
+	direccion : {type : String, required : true},    
 	telefono : {type : String},
 	email : {type : String},
-	divipola : {type : String, required : true},  //solo estara presente cuando son relaciones preconfiguradas secretaria - medico 
-	nit : {type : String, required: true }
+	divipola : {type : String, required : true},  
+	nit : {type : String, required: true},
 	iniciada : {type : Date, default: Date.now }
 
    });

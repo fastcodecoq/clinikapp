@@ -17,6 +17,7 @@ var base = function(router,passport) {
   // ============================= incluimos las rutas basicas ===================
   router = require('./usuarios')(router); //iniciamos las rutas para los usuarios
   router = require('./auth')(router, passport);
+  router = require('./api')(router);
   // ================================= requires =================================
   //route.get('/registro',function(req,res){
   //});

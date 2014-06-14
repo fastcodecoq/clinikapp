@@ -33,7 +33,8 @@
 	"should" : "latest",
 	"sanitizer" : "latest",
 	"multer" : "latest",
-	"bcrypt-nodejs" : "latest"
+	"bcrypt-nodejs" : "latest",
+	"MD5" : "latest" 
     },
 
     "devDependencies" : {

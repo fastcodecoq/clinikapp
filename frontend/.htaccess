@@ -1,6 +1,7 @@
 RewriteEngine On
 
 RewriteBase /clinikapp/app/frontend/
+RewriteCond %{REQUEST_URI}  !(libs|assets|controllers|views|routes|locales) [NC]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 

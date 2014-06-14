@@ -53,6 +53,7 @@ app.use(multer());
 // testeamos mas rapido el api luego solo es cambiar bodyparser() por bodyparser.urlencoded()
 app.use(bodyparser.urlencoded());
 //le pasamos las routes al app express
+
 var pass = require('./config/passport');
 app.use(cookieParser());
 app.use(session({
@@ -65,6 +66,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use(require('./arbiters/cross-domain'));
 // ============ app.use ===========================
 
 var router = express.Router();

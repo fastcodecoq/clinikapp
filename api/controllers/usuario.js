@@ -28,7 +28,7 @@ var usuario = {
          // ==== verifiamos si no existe el usuario, sino existe, lo creamos ======= //
 
               if(!exist)
-               new usuarios(datos).save( callback );
+                new usuarios(datos).save( callback );
               else
                 callback({ message : 'usuario_existe'}, null); 
 
@@ -50,8 +50,7 @@ var usuario = {
             id = sanitizar(id);   
           	usuarios.remove({_id:mongoose.Types.ObjectId(id)}, callback); 
 
-            return true;
-            
+            return true;      
 
       },
 
@@ -67,7 +66,6 @@ var usuario = {
 
             return true;
             
-
       },
 
       buscar : function(opts, callback){  
@@ -90,7 +88,7 @@ var usuario = {
 
              //sanitizamos las variables del query
              for(x in query)
-                query[x] = sanitizar(query[x]);
+                query[x] = this.sanitizar(query[x]);
 
            
       	    usuarios.find(
@@ -121,7 +119,6 @@ var usuario = {
        return true;
          
 
-
       },
 
       // solo disponible para modo desarrollo 
@@ -144,10 +141,8 @@ var usuario = {
           this.crear(datos, function(err, rs){
 
              if(err)
-             {
-               callback(err,rs);
-               return;
-             }
+              return callback(err,rs);
+                            
 
              // _id_credencial debe ser pasado como parametro
 
@@ -213,7 +208,6 @@ var usuario = {
      }
 
       
-
 }
 
 

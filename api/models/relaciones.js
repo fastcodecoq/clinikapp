@@ -9,7 +9,7 @@ function get(particion){
 
 	_usuario_a : {type : Schema.Types.ObjectId, required : true, ref : 'usuarios'},  //quien inicia la relacion  
 	_usuario_b : {type : Schema.Types.ObjectId, required : true, ref : 'usuarios'},  //quien acepta la relacion   
-	permisos : {type : Object, required : true},
+	permisos : {type : Array, required : true},
 	_tipo_relacion : {type : Schema.Types.ObjectId, ref : 'relaciones'},  //solo estará presente cuando son relaciones preconfiguradas secretaria - medico 
 	iniciada : {type : Date, default: Date.now }
 

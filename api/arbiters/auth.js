@@ -2,6 +2,7 @@
 var auth = {
  
  estaLogueado :function (req, res, next){
+   
     
      if (req.isAuthenticated())        
         {
@@ -11,12 +12,30 @@ var auth = {
 
            utils.validar_token(usr, function(err, credencial){
 
-              if(err) return nex(err);
+              if(err){ 
+                 req.logout();
+                 return nex(err);
+               }
 
               next();
 
            })
 
+
+        }
+        else if((req.query.token && req.query.uid) || (req.body.token && req.body.uid) || (req.params.token && req.params.uid)){
+           
+            var utils = require('../helpers/utils.js');   
+            var query = { uid : req.body.me || req.query.uid || req.body.uid || req.params.uid, token : req.query.token || req.body.token || req.params.token};
+            console.log(query);
+
+            utils.validar_token(query, function(err, credencial){
+
+                if(err) return res.json({error:true, message: 'no_autorizado'});
+
+                next();
+
+            });
 
         }
         else

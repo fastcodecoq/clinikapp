@@ -1,10 +1,8 @@
 module.exports = {
 		
-		genToken : function(val){
+		genToken : function(val){	
 
-		var bcrypt = require('bcrypt-nodejs');		
-
-  		return bcrypt.hashSync(val + global.user_agent + new Date().getTime(), bcrypt.genSaltSync(5), null) + '--';
+  		return this.md5(val + global.user_agent + new Date().getTime()) + '--';
 
 		},
 		encrypt_pass :  function(pass){
@@ -85,22 +83,35 @@ module.exports = {
 
 	  	  var Credencial = require('../models/credenciales');          
 
-	  	   if(!usr.email || !usr.token)
-	  	   	  callback(true, false);
+	  	   if(!usr.uid || !usr.token)
+	  	   	  listo(true, false);
 
-           Credencial.findOneAndUpdate({email : usr.email , token : usr.token}, { token_time : this.strtotime('+1 hours')} ,function(err, credencial){
+           Credencial.findOneAndUpdate({uid : usr.uid , token : usr.token}, { token_time : this.strtotime('+1 hours')} ,function(err, credencial){
 
-				if(err) listo(true, false);                                       
+				if(err) return listo(true, false);      
+				if(!credencial) return listo(true, false);                                 
 
                 var utils = require('../helpers/utils');
 
                 if(!utils.token_expirado)                
-	  	   	       listo(true, false);                                                   
+	  	   	       return listo(true, false);                                                   
                 else
-                   listo(null, credencial);
+                   return listo(null, credencial);
 
            });
 
+	  },
+	  md5 : require('MD5'),
+	  valida_permisos : function(uids, permisos){
+	  	  // va y revisa si el usuario tiene permisos para acceder a su información basica
+	  	  // de momento no estamos validando ningún permiso	  	  
+	  	  // la idea es colocar aca un controlador para ello
+
+
+	  	  // return !! (permisos in relacion.permisos);
+	  	  // ... ver el modelo relaciones (/models/relaciones.js).
+
+	  	  return !! (uids.uid === uids._uid);
 	  }
 
 }

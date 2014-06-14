@@ -1,0 +1,17 @@
+                    
+                     <form class="full row" method="post" enctype="application/x-www-form-urlencoded" action="http://localhost:8080/auth/local" ng-controller='loginCtrl'>
+                     <br><span ng-model="error"  class="block" style="color:red">{{error || ''}}</span><br>
+                     <label class="block">Correo</label><br><input class="full" name="email" type="email" placeholder="Ingrese su correo"><br><br>
+                     <label class="block">Clave</label><br><input class="full" name="clave" type="password"><br><br>   		      
+                     <button class="padded no-padded-sides block full tm tfix">Ingresar</button>
+                     </form> <br>
+                     <div >
+                     No tiene una cuenta? <a href="http://localhost:8080/registro">Registrese</a>
+                     <br><br><div class="row s tc">Ó</div><br>
+                     Ingrese más rapido con tu cuenta de: <br><br>
+                     <a href="http://localhost:8080/auth/google">Correo Gmail</a>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   		 	 
+                     <a href="http://localhost:8080/auth/live">Correo Outlook o Hotmail</a>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   		 	 
+                     <a href="http://localhost:8080/auth/yahoo">Correo Yahoo</a>
+                     </div>
