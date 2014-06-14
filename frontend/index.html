@@ -280,6 +280,7 @@ function syntax(json) {
                            var nit = prompt('Dame un nit (ej. 12912781-1):');
                         while(!nombre)
                            var nombre = prompt('Ahora el nombre:');
+                     
 
                          var data = {
                              token : token,
@@ -287,7 +288,8 @@ function syntax(json) {
                              nombre : nombre,
                              nit : nit,
                              direccion : 'calle 26 # 24 - 05',
-                             divipola : '05,005'
+                             mcpio : '05',
+                             depto : '005'
                          };
 
                          console.log(data);

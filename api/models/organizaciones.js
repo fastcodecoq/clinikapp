@@ -14,6 +14,7 @@ function get(particion){
 	email : {type : String},
 	divipola : {type : String, required : true},  
 	nit : {type : String, required: true},
+	tipo : {type : Schema.Types.ObjectId , ref : 'tiposOrg'},
 	iniciada : {type : Date, default: Date.now }
 
    });

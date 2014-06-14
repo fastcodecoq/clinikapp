@@ -44,13 +44,52 @@ var organizacion = {
 		{
 			
 			var self = this;
+			var sanitizar = require('../../helpers/sanitizador');
+			var validar = require('../../helpers/validador');
+
+			for(x in data)
+				data[x] = sanitizar.hacer(data[x]);
+
+			var errors = [];
+
+			if(!data.nombre)
+				errors.push('nombre_incorrecto');
+
+			if(!data.direccion)
+				errors.push('direccion_incorrecta');
+
+			if(!data.nit)
+				errors.push('nit_incorrecto');
+
+			if(!data.mcpio)
+				errors.push('mcpio_incorrecto')
+
+		    if(!data.depto)
+				errors.push('depto_incorrecto')			
+
+			if(data.email)
+				if(!validar.mail(data.email))
+				errors.push('email_incorrecto')
+
+			if(data.telefono)
+				if(!validar.tel(data.telefono))
+				errors.push('tel_incorrecto')
+
+
+			if(errors.length > 0)
+				return listo(true, false, errors);
+
+			data.divipola = data.depto+','+data.mcpio;
+
+			delete data['depto'];
+			delete data['mcpio'];
 
 
 		  this.Organizacion.findOne({nit : data.nit}, function(err, organizacion){
 	
 
 		  	 if(err) return listo(err, false);
-		  	 	
+
 			 console.log('org', organizacion)
 
 		  	 if(organizacion) return listo(err, false, 'organizacion_existe');
@@ -89,6 +128,26 @@ var organizacion = {
 
      	this.init(uids.uid);
      	
+     	var sanitizar = require('../../helpers/sanitizador');
+		var validar = require('../../helpers/validador');
+		var errors = [];
+
+			for(x in data)
+				data[x] = sanitizar.hacer(data[x]);
+
+
+			if(data.email)
+				if(!validar.mail(data.email))
+				errors.push('email_incorrecto')
+
+			if(data.telefono)
+				if(!validar.tel(data.telefono))
+				errors.push('tel_incorrecto')
+
+
+			if(errors.length > 0)
+				return listo(true, false, errors);
+
 
      	  if(this.utils.valida_permisos(uids, ['organizaciones']))
 		{
