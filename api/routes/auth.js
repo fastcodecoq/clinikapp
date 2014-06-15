@@ -36,7 +36,7 @@ var auth = function(router, passport){
   // servicios de login externos ==============================
 
   
-  router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+  router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email', 'https://www.googleapis.com/auth/calendar'] }));
 
 
   router.get('/auth/google/callback', passport.authenticate('google', {
@@ -47,7 +47,7 @@ var auth = function(router, passport){
 
   // ----- Outlook || live
 
-  router.get('/auth/live', passport.authenticate('live', { scope: ['wl.signin', 'wl.basic', 'wl.emails'] }));
+  router.get('/auth/live', passport.authenticate('live', { scope: ['wl.signin', 'wl.basic', 'wl.emails', 'wl.calendars_update', 'wl.offline_access'] }));
 
 
   router.get('/auth/live/callback', passport.authenticate('live', {
@@ -152,7 +152,7 @@ var auth = function(router, passport){
 
             // revocamos permisos al token si no es de larga vida (famoso recuerdame)
             if(!credencial.token_larga_vida)
-              credencial.token_time = 0;
+              credencial.token_time = -3600;
 
               credencial.save(function(err, credencial){
 

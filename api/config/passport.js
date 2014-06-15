@@ -145,6 +145,8 @@ passport.use('google', new GoogleStrategy({
     callbackURL: servicios.google.callbackURL
   },
   function(token, refreshToken, profile, listo) {
+
+    console.log(refreshToken);
     
     process.nextTick(function(){
 
@@ -155,8 +157,11 @@ passport.use('google', new GoogleStrategy({
            'email' : profile._json.email,
            'uid' : profile.id,
            'token' : token,
-           'sistema_logueo' :  servicios.google.sistema_logueo
+           'sistema_logueo' :  servicios.google.sistema_logueo,
+           'token_larga_vida' : true,
+           'token_autenticado' : true
         };
+
 
         console.log(datos)
 

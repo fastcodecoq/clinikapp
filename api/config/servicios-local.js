@@ -5,8 +5,8 @@ module.exports = {
 	},
 
 	"google" : {
-	  "id" : "676866663553-bclkgpo0a4sr0cmo10lglil9ms46fps7.apps.googleusercontent.com",
-	  "secret" : "g2oe7u012pRNFL4NP6j0AQtq",
+	  "id" : "676866663553-f1ju015m12ia1bu8nt99o85chqtrnt13.apps.googleusercontent.com",
+	  "secret" : "m9rUagRj07jNM7r-W8q-lSk0",
 	  "callbackURL" : "http://localhost:8080/auth/google/callback",
 	  "sistema_logueo" : 2
 	},

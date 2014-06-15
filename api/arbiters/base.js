@@ -6,9 +6,10 @@ var base = function(req, esta, next){
 		  	  // de un app valida
 		  	  // Este arbitro se ejecuta primero que todos los demas
 
-		  	  console.log('arbitro base', req.url);
+		  	       console.log('arbitro base', req.url);
+					
+				   next();
 
-		  	  next();
 
 		  };
 

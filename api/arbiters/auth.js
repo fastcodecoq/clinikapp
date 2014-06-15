@@ -2,10 +2,17 @@
 var auth = {
  
  estaLogueado :function (req, res, next){
-   
     
-     if (req.isAuthenticated())        
-        {
+    console.log(req.url)
+    
+    var logger = require('../helpers/logs.js');
+
+        logger(req, function(err, log){
+
+          console.log(log);
+
+          if (req.isAuthenticated())        
+          {
 
            var usr = req.user;
            var utils = require('../helpers/utils.js');
@@ -19,8 +26,7 @@ var auth = {
 
               next();
 
-           })
-
+           });
 
         }
         else if((req.query.token && req.query.uid) || (req.body.token && req.body.uid) || (req.params.token && req.params.uid)){
@@ -41,15 +47,29 @@ var auth = {
         else
         res.json({error:true, message: 'no_autorizado'});
 
+    });    
+         
+
    }
 
   ,
 
   noLogueado : function (req, res, next){
-     if (!req.isAuthenticated())   
-       return next();
 
-     res.redirect('/logueado');
+    var logger = require('../helpers/logs.js');    
+
+      logger(req, function(err, log){
+
+        console.log(log);
+
+         if (!req.isAuthenticated())   
+          return next();
+
+         res.redirect('/logueado');
+
+      });    
+
+
    }
 
  }

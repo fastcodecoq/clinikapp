@@ -78,9 +78,9 @@ module.exports = {
 	  strtotime : require('./strtotime'),
 	  token_expirado : function(token_time){
 
-	  	  console.log(this.time() - token_time);
+	  	  console.log('restan',(token_time - this.time()) / 60,'mins de session');
 
-	  	  return !!this.time() < token_time;
+	  	  return (token_time - this.time()) > 0;
 	  },
 	  validar_token : function(usr, listo){
 
@@ -99,13 +99,14 @@ module.exports = {
 				if(!credencial) return listo(true, false);                                 
 
 
-                if(!self.token_expirado(credencial.token_time))                	  	   	   
+                if(!self.token_expirado(credencial.token_time) && !credencial.token_larga_vida)                	  	   	   
 	  	   	       return listo(true, false)                             
                 else
                    {
                    	credencial.token_time = self.strtotime('+1 hours')
                    	credencial.save(listo);                   	
                    };
+
 
            });
 
