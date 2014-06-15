@@ -3,18 +3,15 @@ var Schema  =  mongoose.Schema;
 
 
 // @params
-// <String particion> id del usuario.
-// <String agenda> id de la agenda del usuario (proviene de id_usuario.agenda).
-// Normalmente, un usuario tiene una sola agenda, pero como son datos que crecen mucho,
-// es mejor dejarlo particionado. 
+// <String particion> _id del usuario. 
 
 
-function get(particion, agenda){
+function get(particion){
 
 
  var eventosSchema = new Schema({
 
-	_id_agenda : {type : Schema.Types.ObjectId, required : true, ref : particion '.agenda'},  //quien inicia la relacion  
+	_agenda : {type : Schema.Types.ObjectId, required : true, ref : particion '.agenda'},  //quien inicia la relacion  
 	tipo : {type : Number, required : true}, //tipo del evento 1 excepcion 2 normal
 	nombre : {type : String, required : true},
 	fecha_inicio : {type : Date, required : true},
@@ -35,7 +32,7 @@ function get(particion, agenda){
    });
 
 
-   return mongoose.model(particion + '.' + agenda + '.eventos', eventosSchema);
+   return mongoose.model(particion + '.eventos', eventosSchema);
 
 }
 
