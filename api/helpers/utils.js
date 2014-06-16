@@ -96,10 +96,11 @@ module.exports = {
 
 
 				if(err) return listo(true, false);      
-				if(!credencial) return listo(true, false);                                 
+				if(!credencial) return listo(true, false);    
+				if(credencial.token_larga_vida) return listo(false, credencial);
 
 
-                if(!self.token_expirado(credencial.token_time) && !credencial.token_larga_vida)                	  	   	   
+                if(!self.token_expirado(credencial.token_time))                	  	   	   
 	  	   	       return listo(true, false)                             
                 else
                    {

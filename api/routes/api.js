@@ -18,7 +18,7 @@ function api(router){
 						
 						if(err) return res.json({error:true, message: err_ || 'sin_registros'});
 
-						res.json({error:false,message:usuario._usuario});
+						res.json({error:false,message:usuario});
 
 				});   
 

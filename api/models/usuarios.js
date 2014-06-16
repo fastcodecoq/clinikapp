@@ -19,7 +19,8 @@ var usuarioSchema = new Schema({
 	telefono : String,
 	email : { type : String , required : true},
 	email_verificado : { type : Boolean , default : false},
-	registro : {type : Date, default: Date.now }
+	organizaciones : {type : Schema.Types.ObjectId, ref : 'usuario_organizacion'},
+	fecha_registro : {type : Date}
 
 });
 
@@ -31,6 +32,18 @@ var usuarioSchema = new Schema({
 
 
 // ... esto nos sirve para validar los datos que se ingresarán a la base de datos
+
+ 
+usuarioSchema.pre('save', function(next){
+
+	usr = this;
+
+	usr.organizaciones = this._id;
+
+	next();
+
+}); 
+
 
  usuarioSchema.path('nombres').validate(function(datos){
 

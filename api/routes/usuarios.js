@@ -10,9 +10,6 @@ var usuarios = function(router){
       // ========== Hacemos todos los controles de seguridad necesarios
       // ========== usamos el arbitro de usuarios
 
-
-      router.use('^/usuarios', require('../arbiters/usuarios'));
-
        
        // ============== con el verbo HTTP Get Obtenemos todos los usuarios      
 

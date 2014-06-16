@@ -15,6 +15,9 @@ var organizacion = {
 
  		if(!this.Organizacion)  //no podemos compilar el modelo dos veces ... 
         this.Organizacion = require('../../models/organizaciones')(particion);
+
+    	if(!this.Usuario_organizacion)
+    	this.UsrOrg = require('../../models/usuario_organizacion');
  	  
  	  },
 
@@ -23,11 +26,36 @@ var organizacion = {
      	this.init(uids.uid);
 
 	  if(this.utils.valida_permisos(uids, ['organizaciones']))
-		{			
+		{		
+
+			var self = this;	
 			
 			this.Organizacion.find(uids.org ? {_id : uids.org} : {})
 			.sort({ iniciada : -1})
-		    .exec(listo); 		   
+		    .exec(function(err, organizaciones){
+
+		    	 if(err) return listo(err, null);		    	 
+
+		    	 var rs = {};
+		    	 	 rs.propias = organizaciones;
+
+		    	 var query = {};
+		    	     query._usuario = uids.uid;
+
+		    	  if(uids.org)
+		    	  	 query._organizacion = uids.org;
+
+		    	 self.UsrOrg.find(query, function(err, orgs){
+
+		    	 	    if(err) return listo(err, null);
+
+		    	 	    rs.todas = orgs;
+
+		    	 	    listo(err, rs);
+
+		    	 })
+
+		    }); 		   
 
 		}
 	  else
@@ -95,9 +123,23 @@ var organizacion = {
 		  	 if(organizacion) return listo(err, false, 'organizacion_existe');
 
 
-			
+				
 			 var organizacion = new self.Organizacion(data);			  	 
-			 organizacion.save(listo);		    
+			 organizacion.save(function(err, organizacion){
+
+			 	  if(err) return listo(err, false);
+
+			 	  //guardamos la relacion entre el usuario y la organizacion
+			 	  var datos = {
+			 	  	  _usuario : uids.uid,
+			 	  	  _organizacion : organizacion._id,
+			 	  	  particion : uids.uid
+			 	  }
+
+			 	  var usr_org = new self.Usuario_organizacion(datos);
+			 	  usr_org.save(listo);
+
+			 });		    
 
 
 		  });		
@@ -107,6 +149,8 @@ var organizacion = {
 	    return listo(true, false, 'no_autorizado');    	
 
      },
+
+     agregar_miembro :  function(uids, listo){},
 
      eliminar : function(uids, listo){
 
