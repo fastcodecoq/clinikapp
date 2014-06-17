@@ -82,36 +82,6 @@ module.exports = {
 
 	  	  return (token_time - this.time()) > 0;
 	  },
-	  validar_token : function(usr, listo){
-
-	  	  var Credencial = require('../models/credenciales');          
-
-	  	   if(!usr.uid || !usr.token)
-	  	   	  listo(true, false);
-
-	  	   	var self = this;
-
-
-           Credencial.findOne({uid : usr.uid , token : usr.token} ,function(err, credencial){
-
-
-				if(err) return listo(true, false);      
-				if(!credencial) return listo(true, false);    
-				if(credencial.token_larga_vida) return listo(false, credencial);
-
-
-                if(!self.token_expirado(credencial.token_time))                	  	   	   
-	  	   	       return listo(true, false)                             
-                else
-                   {
-                   	credencial.token_time = self.strtotime('+1 hours')
-                   	credencial.save(listo);                   	
-                   };
-
-
-           });
-
-	  },
 	  md5 : require('MD5'),
 	  valida_permisos : function(uids, permisos){
 	  	  // va y revisa si el usuario tiene permisos para acceder a su información basica
