@@ -10,12 +10,13 @@ var flash = require('express-flash');
 var bodyparser = require('body-parser');
 var mongoose = require('mongoose');
 var multer = require('multer');
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
 var cluster = require('cluster');
 var cores = require('os').cpus().length;  //numero de cpus
 var passport = require('passport');
 var MongoStore = require('connect-mongo')({ session: session });
 var servicios = require('./config/servicios');
+var vars = require('./config/vars');
 
 // ... incluir arriba todos los requires principales
 
@@ -61,7 +62,9 @@ app.use(session({
   store: new MongoStore({
       url: 'mongodb://' + servicios.db.url,
       auto_reconnect: true
-    })
+    }),
+  // duración de la sesión en caso de que use cookies
+  cookie : { maxAge : new Date(Date.now() + vars.ttl)}
 }));
 app.use(passport.initialize());
 app.use(passport.session());
