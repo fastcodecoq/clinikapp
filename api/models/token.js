@@ -1,12 +1,13 @@
 var mongoose  =  require('mongoose'),
     Schema  =  mongoose.Schema,
-    config = require('../config/var.js');
+    config = require('../config/vars.js');
 
 // Esquema de los tokens
 // =====================
 var tokenSchema = new Schema({
-   token : {type: String},
-   fecha_creacion : {type:Date, default: Date.now},
+   token : {type: String, required : true },
+   _credencial : {type : Schema.Types.ObjectId, ref : 'credenciales', required : true },
+   fecha : {type:Date, default: Date.now},
    expira : {type : Boolean, default : true}
 });
 

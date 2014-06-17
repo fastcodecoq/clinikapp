@@ -21,6 +21,7 @@
 	"express-flash" : "latest",
 	"cookie-parser" : "latest",
 	"connect-mongo" : "latest",
+	"node-uuid" : "latest",
 	"mongoose" : "latest",
 	"socket.io" : "latest",
 	"passport" : "latest",
