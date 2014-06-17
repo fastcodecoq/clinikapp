@@ -10,14 +10,16 @@ var credencialSchema = new Schema({
   
   sistema_logueo : {type : Number, required : true},
   _usuario : {type : Schema.Types.ObjectId, ref : 'usuarios'},
-  token : {type : String, required : true},
-  token_time  : { type : String, default :  new Date().getTime()},
-  token_larga_vida : {type : Boolean, default : false},
-  token_autenticado : {type : Boolean, default : false},
   email : {type : String, required : true},
   uid : {type : String, required : true},  //id del usuario en el sistema de logueo (google, outlook o yahoo)
   fecha : {type : Date, default: Date.now},
   clave : String,
+  auth  : {
+    google : {type: String},
+    local  : {type: String},
+    yahoo  : {type: String},
+    live   : {type: String},
+  },
   perfil_completado : {type : Boolean, default : false} // solo en la eventualidad de que el registro sea local, lo cambiaremos a true
 
 });
