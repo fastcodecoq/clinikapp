@@ -1,7 +1,7 @@
 module.exports = {
 	 ini : function(particion, modelos){
 
-	 	 if(typeof particion != 'object') return false;
+	 	 if(typeof particion != 'string') return false;
 
 
 		 if(!this.models)
@@ -39,6 +39,7 @@ module.exports = {
 	 	 	  case 'relaciones':
 	 	 	  		return require('../../models/relaciones')(particion);
 	 	 	  break;
+	 	 	  
 
 	 	 }
 
