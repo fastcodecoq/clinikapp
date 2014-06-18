@@ -11,7 +11,7 @@ module.exports = {
 		    	var modelos = modelos || ['organizaciones', 'agenda', 'eventos', 'relaciones'];
 
 		    	for(x in modelos)
-		    		this.models[x] = this.modelos(modelos[x], opts.particion);
+		    		this.models[x] = this.modelos(modelos[x], particion);
 
 		    	return this.models;
 
