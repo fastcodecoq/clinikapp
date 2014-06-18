@@ -1,5 +1,5 @@
 
-module.exports = function(){
+module.exports = {
 	// validar_token:
 	// ==============
 	// retorna si el token es válido, si esto es cierto entonces aumenta de
