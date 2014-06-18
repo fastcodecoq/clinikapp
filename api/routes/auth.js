@@ -1,4 +1,3 @@
-
 // ======= todas las rutas relacionadas con registro y login
 
 
@@ -175,6 +174,36 @@ var auth = function(router, passport){
 
       res.json({error:true, message:'session_invalida'});
 
+  });
+  // **/token/generar** retorna un nuevo token a pedido del usuario
+  router.get('/token/generar', authArb.estaLogueado, function(req,res){
+    tokenCtrl = require('../controllers/token');
+    tokenCtrl.crear(req.user._id, function(err,token){
+      if(err) {
+        res.json(err);
+      } else {
+        res.json(token);
+      }
+    });
+  });
+  // **/token/eliminar** elimina un nuevo token a pedido del usuario
+  // retorna { eliminado : `resultado` }
+  // resultado puede ser:
+  // true, false, "error"
+  router.post('/token/eliminar', function(req,res){
+    tokenCtrl = require('../controllers/token');
+    var token = req.body.token;
+    tokenCtrl.eliminar(token, authArb.estaLogueado, function(err,resultado){
+      if(err) {
+        res.json({eliminado : "error"});
+      } else {
+        if(resultado){
+          res.json({eliminado : true});
+        } else {
+          res.json({eliminado : false});
+        }
+      }
+    });
   });
 
   return router;
