@@ -5,7 +5,7 @@ module.exports = {
 	       particion : 'uid_del_usuario_que_creo_la_organizacion' ,  //no del usuario que solicita la info 
 	       organizacion : 'id_organizacion', 
 	       historia : 'id_historia',
-	       evento : 'id_del_evento'  // opcional solo se usa para obtener el modelo evoluciones 
+	       evento : 'id_del_evento'  // Opcional. Solo se usa para obtener el modelo evoluciones 
 	       }     */
 
 
