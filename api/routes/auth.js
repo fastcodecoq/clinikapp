@@ -142,6 +142,14 @@ var auth = function(router, passport){
      var Token = require('../models/token');
 
          console.log(req.user);
+         if(!req.user.local){
+            
+             req.logout();
+             console.log('salimos...');
+
+             res.redirect( servicios.local.callbackURL + '/ingresar');
+
+        }else if(req.user){
 
          Token.findOne({token : req.user.token}, function(err, token){
         
@@ -151,9 +159,7 @@ var auth = function(router, passport){
 
 
             // revocamos permisos al token si no es de larga vida (famoso recuerdame)
-            if(!token.expira)
-              token.token_time = -3600000;
-
+            if(token.expira)
               token.save(function(err, token){
 
                 if(err) return res.redirect(servicios.local.callbackURL + '/inicio');
@@ -166,6 +172,8 @@ var auth = function(router, passport){
              });
 
          });
+
+        }
 
   });
 

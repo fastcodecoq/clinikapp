@@ -102,7 +102,8 @@ function(req, email, clave, listo) {
         'token' : token.token,
         'uid' : credencial.email,
         'email' : credencial.email,
-        'perfil_completado' : !!credencial.perfil_completado               
+        'perfil_completado' : !!credencial.perfil_completado,
+        'local' : true              
       }; 
 
       if(credencial.perfil_completado)
@@ -119,7 +120,8 @@ function(req, email, clave, listo) {
               'uid' : credencial.uid,
               'email' : credencial.email,
               'perfil_completado' : true,
-              'usuario' : credencial._usuario 
+              'usuario' : credencial._usuario,
+              'local' : true                            
             }; 
 
             return listo(null, _credencial);
