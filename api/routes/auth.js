@@ -139,27 +139,27 @@ var auth = function(router, passport){
 
   router.get('/auth/salir', authArb.estaLogueado, function(req, res){
 
-     var Credencial = require('../models/credenciales');
+     var Token = require('../models/token');
 
+         console.log(req.user);
 
-         Credencial.findOne({email : req.user.email , token : req.user.token}, function(err, credencial){
+         Token.findOne({token : req.user.token}, function(err, token){
         
 
             if(err) return res.redirect(servicios.local.callbackURL + '/inicio');
-            if(!credencial) return res.redirect(servicios.local.callbackURL + '/ingresar');
+            if(!token) return res.redirect(servicios.local.callbackURL + '/ingresar');
 
 
             // revocamos permisos al token si no es de larga vida (famoso recuerdame)
-            if(!credencial.token_larga_vida)
-              credencial.token_time = -3600;
+            if(!token.expira)
+              token.token_time = -3600000;
 
-              credencial.save(function(err, credencial){
+              token.save(function(err, token){
 
                 if(err) return res.redirect(servicios.local.callbackURL + '/inicio');
 
                  req.logout();
                  console.log('salimos');
-
             
                  res.redirect( servicios.local.callbackURL + '/ingresar');
 

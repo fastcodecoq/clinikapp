@@ -83,19 +83,23 @@ function(req, email, clave, listo) {
       return listo(null, false, 'contraseña_incorrecta');
 
     var utils = require('../helpers/utils');
+    var Tokens = require('../models/token.js');    
+    var token  = {};
 
-    credencial.token = utils.genToken( credencial._id + credencial.uid + credencial.token );
-    credencial.token_time = utils.strtotime('+1 hours');
+    token.token = utils.genToken( credencial._id + credencial.uid + credencial.token );
+    token.time = utils.strtotime('+1 hours');
+    token._credencial = credencial._id;
 
+    token = new Token(token);
 
-    credencial.save(function(err, credencial){
+    token.save(function(err, token){
 
       if(err) return listo(err, {});
 
       console.log('hemos ingresado');
 
       var _credencial = {
-        'token' : credencial.token,
+        'token' : token.token,
         'uid' : credencial.email,
         'email' : credencial.email,
         'perfil_completado' : !!credencial.perfil_completado               
@@ -111,7 +115,7 @@ function(req, email, clave, listo) {
 
 
             var _credencial = {
-              'token' : credencial.token,
+              'token' : token.token,
               'uid' : credencial.uid,
               'email' : credencial.email,
               'perfil_completado' : true,

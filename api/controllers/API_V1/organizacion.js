@@ -136,7 +136,7 @@ var organizacion = {
 			 	  	  particion : uids.uid
 			 	  }
 
-			 	  var usr_org = new self.Usuario_organizacion(datos);
+			 	  var usr_org = new self.UsrOrg(datos);
 			 	  usr_org.save(listo);
 
 			 });		    

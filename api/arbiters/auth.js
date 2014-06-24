@@ -18,7 +18,7 @@ var auth = {
             uid : req.body.me || req.query.uid || req.body.uid || req.params.uid,
             token : req.query.token || req.body.token || req.params.token
           };
-          utils.validar_token(query, function(err, credencial){
+          token.validar_token(query, function(err, credencial){
             if(err)
               return res.json({error:true, message: 'no_autorizado'});
             next();
